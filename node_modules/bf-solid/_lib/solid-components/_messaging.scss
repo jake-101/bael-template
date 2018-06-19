@@ -1,0 +1,112 @@
+//
+// Messaging
+// --------------------------------------------------
+
+.page-message {
+  position: relative;
+  margin-top: $space-05;
+  padding: $space-2;
+  font-size: $text-4;
+  font-weight: $bold;
+  display: flex;
+  align-items: center;
+}
+
+.page-message__action {
+  text-decoration: underline;
+}
+
+.page-message__close {
+  position: absolute;
+  right: $space-05;
+  top: $space-1;
+  padding: $space-1;
+  cursor: pointer;
+}
+
+.page-message__icon{
+  height: $space-2;
+  border-radius: 50%;
+  margin-right: $space-2;
+  flex-shrink: 0;
+}
+
+.page-message__icon-close {
+  width: $space-3;
+}
+
+.page-message--error {
+  background-color: $fill-red-lighter;
+  color: $text-red;
+
+  .page-message__text,
+  .page-message__action {
+    color: $text-red;
+  }
+
+  .page-message__icon-close {
+    fill: darken($fill-red-lighter, 20%);
+  }
+
+  & .page-message__close:hover .page-message__icon-close {
+    fill: $fill-red;
+  }
+
+  .page-message__icon {
+  fill: $fill-red-lighter;
+  background-color: $fill-red;
+  }
+
+}
+
+.page-message--success {
+  background-color: $fill-green-lighter;
+  color: $text-green;
+
+  .page-message__text,
+  .page-message__action {
+    color: $text-green;
+  }
+
+  .page-message__icon-close {
+    fill: darken($fill-green-lighter, 20%);
+  }
+
+  & .page-message__close:hover .page-message__icon-close {
+    fill: $fill-green;
+  }
+
+  .page-message__icon {
+  fill: $fill-green-lighter;
+  background-color: $fill-green;
+  }
+
+}
+
+.page-message--warning {
+  background-color: lighten($fill-orange, 40%);
+  color: $text-orange;
+
+  .page-message__text,
+  .page-message__action {
+    color: $text-orange;
+  }
+
+    .page-message__icon-close {
+    fill: lighten($fill-orange, 20%)
+    }
+
+    & .page-message__close:hover .page-message__icon-close {
+      fill: $fill-orange;
+    }
+  .page-message__icon {
+  fill: lighten($fill-orange, 40%);
+  background-color: $fill-orange;
+
+  }
+
+}
+
+.page-message__action:hover {
+  color: $text-blue;
+}

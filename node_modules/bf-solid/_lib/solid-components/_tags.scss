@@ -1,0 +1,56 @@
+//
+// Tags
+// --------------------------------------------------
+
+//Base Tag Styling
+.tag {
+  background-color: $fill-white;
+  border: $border;
+  border-radius: $border-radius;
+  display: inline-block;
+  font-size: $text-6;
+  line-height: $line-height-form;
+}
+
+.tag__text,
+.tag__link,
+.tag__delete {
+  padding: 0 .5rem;
+}
+
+.tag__text,
+.tag__link {
+  float: left;
+}
+
+// Delete Icon Styling
+.tag__delete {
+  float: left;
+  border-right: $border;
+  cursor: pointer;
+}
+
+.tag__delete-icon {
+  width: .625rem;
+  fill: $fill-gray;
+  vertical-align: middle;
+  transition: 200ms;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: 50ms;
+  -webkit-transition-timing-function: ease-in;
+  // the svg is 1px off, despite numerous attempts at fixing the artboard. is this issue due to inline-block positioning?
+  margin-left: 1px;
+
+  &:hover {
+    fill: darken($fill-gray, 40%);
+  }
+}
+
+.tag__delete {
+	padding: 0 .3125rem;
+		&:hover {
+	  	.tag__delete-icon {
+	    	fill: darken($fill-gray, 40%);
+	  	}
+		}
+}

@@ -1,0 +1,26 @@
+//
+// Table Styles
+// --------------------------------------------------
+
+table {
+  @include tabular-figures;
+  border-collapse: separate;
+  border-spacing: 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  font-weight: $bold;
+  vertical-align: bottom;
+}
+
+th,
+td {
+  padding: $space-1;
+}
+
+td {
+  vertical-align: middle;
+}

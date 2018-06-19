@@ -1,0 +1,191 @@
+<template>
+<div class="zap-slideout xs-border"
+       :class="{ isOpen: isOpen }">
+    <div class="zap-slideout-opener"
+         @click="toggle"><div class="hamburger hamburger--spin js-hamburger">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div></div>
+    <ul class="zap-slideout-menu list-unstyled">
+      <li class="zap-slideout-menu-item">
+        BAEL TEMPLATE
+      </li>
+      <li class="zap-slideout-menu-item--small"><nuxt-link to="/" exact>Home</nuxt-link></li>
+             <li class="zap-slideout-menu-item--small"><a href="https://www.jake101.com">Jake101</a></li>
+       <li class="zap-slideout-menu-item--small"><a href="https://www.nuxtjs.org">Nuxt.js</a></li>
+
+       <li class="zap-slideout-menu-item--small"><a href="https://www.netlify.com">Netlify</a></li>
+    </ul>
+  </div>
+  </template>
+  <script>
+  export default {
+  data() {
+    return {
+    openerText: 'Open',
+    isOpen: false,
+    menu: [ 'Home', 'Work', 'Contact' ],
+    smallMenu: [ 'Tips', 'Resources', 'Shenanigans' ]
+  }},
+  methods: {
+    open() {
+      this.isOpen = true;
+    },
+    close() {
+      this.isOpen = false;
+    },
+    toggle() {
+     // Look for .hamburger
+  var hamburger = document.querySelector(".hamburger");
+  // On click
+
+    // Toggle class "is-active"
+    hamburger.classList.toggle("is-active");
+     
+      if (this.isOpen) {
+        this.close();
+      } else {
+        this.open();
+      }
+
+    }
+  }
+  }
+  </script>
+  <style lang="scss">
+  .hamburger {
+  padding: 15px 15px;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible; }
+  .hamburger:hover {
+    opacity: 0.7; }
+
+.hamburger-box {
+  width: 40px;
+  height: 24px;
+  display: inline-block;
+  position: relative; }
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px; }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease; }
+  .hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block; }
+  .hamburger-inner::before {
+    top: -10px; }
+  .hamburger-inner::after {
+    bottom: -10px; }
+
+    .hamburger--spin .hamburger-inner {
+  transition-duration: 0.22s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+  .hamburger--spin .hamburger-inner::before {
+    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in; }
+  .hamburger--spin .hamburger-inner::after {
+    transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+
+.hamburger--spin.is-active .hamburger-inner {
+  transform: rotate(225deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  .hamburger--spin.is-active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out; }
+  .hamburger--spin.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); }
+  .zap-slideout {
+  position: fixed;
+  right:0;
+  top:0;
+  width: 34vw;
+  height: 99vh;
+  z-index:99;
+  padding: 30px;
+  background-color: #fff;
+  transform: translate3D(100%,0,0);
+  transition: transform .6s;
+  
+  &.isOpen {
+    transform: translate3D(0,0,0);
+    transition: transform .6s;
+  }
+}
+
+.zap-slideout-opener {
+  position: absolute;
+  top: -4px;
+  right: 100%;
+  transform:scale(.5);
+  margin-right: 0px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #000;
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.zap-slideout-menu {
+  font-weight: 600;
+  transition: transform 1.6s ease(out-cubic);
+}
+
+.zap-slideout-menu-item,
+.zap-slideout-menu-item--small {
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.zap-slideout-menu-item {
+  
+  & + .zap-slideout-menu-item--small {
+    margin-top: 30px;
+  }
+}
+
+.zap-slideout-menu-item--small {
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* The famed Zap agency logo (TM) */
+.zap-emoji {
+  height: 120px;
+}
+</style>

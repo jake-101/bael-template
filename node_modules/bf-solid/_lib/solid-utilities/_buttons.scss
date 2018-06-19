@@ -1,0 +1,239 @@
+//
+// Button Classes
+// --------------------------------------------------
+
+
+// Reset Button
+// -------------------------
+// In an article on CSS-Tricks
+// (http://css-tricks.com/use-button-element/),
+// Chris Coyier explains that:
+// "if a button doesn’t have a meaningful
+// href, it’s a <button>"; which makes sense.
+//
+// This placeholder resets <button>'s
+// default styling, so we can use
+// <button>s where it makes without
+// worrying about the styling.
+
+@mixin button-reset {
+  cursor: pointer                             !important;
+  padding: 0                                  !important;
+  background-color: transparent               !important;
+  // Reset unusual Firefox-on-Android default style;
+  // https://github.com/necolas/normalize.css/issues/214
+  background-image: none                      !important;
+  border: 1px solid transparent               !important;
+  white-space: nowrap                         !important;
+  @include prefix((appearance: none), webkit);
+  @include prefix((user-select: none));
+
+  &:active {
+    outline: 0 !important;
+  }
+}
+
+// Button Style Mixin
+// -------------------------
+// generates every style needed for a new button
+// when passed the apropriate colors
+//
+// $fill-color     - background color for the button
+// $text-color     - button text color
+// $secondary-text-color       - text color used with secondary modifier class (defaults to fill color)
+// $secondary-hover-text-color - background color used with secondary modifier class (defaults to text color)
+
+@mixin button-style($fill-color, $text-color, $secondary-text-color:$fill-color, $secondary-hover-text-color:$text-color) {
+  //button state colors
+  $hover-background-color:  darken($fill-color, 20%);
+  $active-background-color: darken($fill-color, 35%);
+  $secondary-active-background-color: darken($fill-color, 35%);
+
+  //base style
+  background-color: $fill-color             !important;
+  color: $text-color                        !important;
+  border-color: $secondary-text-color       !important;
+  border: 1px solid transparent             !important;
+  transition: background-color .1s ease 0s  !important;
+
+  //only have hover styles if button is not disabled
+  &:not(.button--disabled):not(:disabled) {
+    &:hover {
+      background-color: $hover-background-color  !important;
+      transition: background-color .15s ease 0s  !important;
+    }
+
+    &:active { background-color: $active-background-color !important; }
+  }
+
+  //colored button + secondary button styles
+  &.button--secondary {
+    border: 1px solid $fill-color !important;
+    color: $secondary-text-color  !important;
+    background: none              !important;
+
+    &:hover {
+      transition: background-color .15s ease 0s  !important;
+    }
+  }
+
+  //only have hover styles if button is not disabled
+  &.button--secondary:not(.button--disabled):not(:disabled) {
+    &:hover {
+      background-color: $fill-color       !important;
+      color: $secondary-hover-text-color  !important;
+    }
+
+    &:active {
+      background-color: $secondary-active-background-color !important;
+      border-color:     $secondary-active-background-color !important;
+      color:            $secondary-hover-text-color        !important;
+    }
+  }
+
+  //colored button + secondary + icon button styles
+  &.button--secondary.button--icon {
+    >svg                               { fill: $fill-color  !important; }
+    &:not(.button--disabled):not(:disabled):hover svg { fill: $fill-white  !important; }
+  }
+}
+
+// Button
+// -------------------------
+.button {
+  @include button-reset;
+  font-family: inherit          !important;
+  padding: .5rem .875rem        !important;
+  font-size: $text-4            !important;
+  line-height: $line-height-form   !important;
+  border-radius: $border-radius !important;
+  text-decoration: none         !important;
+  cursor: pointer               !important;
+  display: inline-block         !important;
+  border: 1px solid transparent !important;
+  text-align: center            !important;
+
+  @include button-style($fill-blue, $text-white);
+}
+
+// Colored Buttons
+// -------------------------
+
+.button--negative {
+  @include button-style($fill-red, $text-white);
+}
+
+.button--white {
+  @include button-style($fill-white, $text-gray);
+
+  // white button has unique hover state
+  &:not(.button--disabled):not(:disabled):hover { 
+    background-color: rgba(255,255,255,.8) !important; 
+  }
+
+  &.button--secondary:not(.button--disabled):not(:disabled):active { background-color: rgba(255,255,255,.8) !important; }
+
+  &.button--icon {
+    >svg                               { fill: $fill-gray-darker  !important; }
+    &:not(.button--disabled):not(:disabled):hover svg { fill: $fill-gray-darker !important; }
+  }
+
+  &.button--secondary.button--icon {
+    >svg                               { fill: $fill-white  !important; }
+    &:not(.button--disabled):not(:disabled):hover svg { fill: $fill-gray-darker !important; }
+  }
+}
+
+// transparent button has unique fill rules
+.button--transparent {
+  background-color: transparent         !important;
+  color: $text-blue                     !important;
+  border-color: transparent             !important;
+  border: 1px solid transparent         !important;
+
+  &:not(.button--disabled):not(:disabled):hover {
+    background-color: transparent       !important;
+    color: darken($text-blue, 20%)      !important;
+  }
+}
+
+
+// Disabled Button
+// -------------------------
+
+.button--disabled,
+.button:disabled {
+  opacity: $opacity-disabled !important;
+
+  &:hover {
+    cursor: default  !important;
+    transition: none !important;
+  }
+}
+
+
+// Small Button
+// -------------------------
+
+.button--small {
+  padding: .3125rem .625rem            !important;
+  font-size: $text-5                   !important;
+  line-height: $line-height-form-small !important;
+}
+
+
+// Icon Button
+// -------------------------
+
+.button--icon {
+  >svg {
+    width: 1rem         !important;
+    height: 1rem        !important;
+    fill: $fill-white   !important;
+    position: relative  !important;
+    top: .125rem        !important;
+    margin-right: .5rem; // so it can be overwritten by solid classes if the button has no text
+  }
+
+  &.button--small >svg {
+    width: .875rem         !important;
+    height: .875rem        !important;
+    position: relative     !important;
+    margin-right: .3125rem;  // so it can be overwritten by solid classes if the button has no text
+  }
+}
+
+
+// Social Button
+// -------------------------
+
+@mixin social-button($color) {
+  background-color: $color !important;
+  color: $text-white       !important;
+
+  &:not(.button--disabled):not(:disabled):hover {
+    background-color: darken($color, 20%) !important;
+    color: $text-white                    !important;
+  }
+
+  &.button--disabled:hover,
+  &:disabled:hover {
+    color: $text-white !important;
+  }
+
+  &:not(.button--disabled):not(:disabled):active {
+    background-color: darken($color, 35%) !important;
+  }
+}
+
+.button--facebook     { @include social-button($fill-facebook); }
+.button--twitter      { @include social-button($fill-twitter); }
+.button--google       { @include social-button($fill-google); }
+.button--linkedin     { @include social-button($fill-linkedin); }
+.button--pinterest    { @include social-button($fill-pinterest); }
+.button--tumblr       { @include social-button($fill-tumblr); }
+.button--youtube      { @include social-button($fill-youtube); }
+.button--instagram    { @include social-button($fill-instagram); }
+.button--sms          { @include social-button($fill-green); }
+.button--rss          { @include social-button($fill-orange); }
+.button--apple-news   { @include social-button($fill-gray-darker); }

@@ -1,0 +1,26 @@
+---
+category: release-notes
+version: 2.8.0
+title: Update Deployment workflow.
+
+
+breaking-changes:
+
+potential-breaking-changes: removed the !important declaration on the .block-grid__item inline-block style
+
+fixed:
+- text-wrapping in the messaging component
+- moved deprecated messaging component into deprecated.scss
+
+added:
+- a prefixed version of the .flex class
+- icons for the Apple News and RSS social buttons
+
+deprecated:
+- docs - they have now been moved to the solid_docs project
+- dist files - these are now published with the package
+- flex - moved the non-prefixed version to deprecated.scss
+
+release-notes:
+  This release is the start of a new deployment process which sees the solid documentation moved to mono/solid_docs.
+---

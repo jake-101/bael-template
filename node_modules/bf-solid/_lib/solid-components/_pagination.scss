@@ -1,0 +1,101 @@
+//
+// Pagination
+// --------------------------------------------------
+
+.pagination {
+  display: flex;
+  align-items: center;
+
+
+  .pagination__text {
+    padding-right: $space-2;
+  }
+
+  .pagination__button {
+    position: relative;
+    border: $border;
+    text-decoration: none;
+    color: $text-blue;
+    background: $fill-white;
+    float: left;
+    transition: background-color .15s ease 0s;
+
+    &,&:active:focus {
+      outline: 0;
+    }
+
+    &:hover {
+      transition: background-color .15s ease 0s;
+      background-color: $fill-gray-lighter;
+    }
+
+    &:active {
+      transition: background-color .15s ease 0s;
+      background-color: darken($fill-gray-lighter, 5%);
+    }
+  }
+
+  .pagination__button {
+    padding: $space-1 .875rem;
+  }
+
+  .pagination__button--prev {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    border-right: none;
+  }
+
+  .pagination__button--next {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+
+
+
+  .pagination__button--prev-icon,
+  .pagination__button--next-icon {
+    width: .875rem;
+    fill: $fill-blue;
+    position: relative;
+    top: 2px;
+  }
+
+  .pagination__button--prev-icon {
+    right: 1px;
+  }
+
+  .pagination__button--next-icon {
+    left: 1px;
+  }
+
+  .pagination__button--disabled:hover {
+    cursor: auto;
+    background-color: $fill-white;
+  }
+
+  .pagination__button--disabled {
+    .pagination__button--prev-icon,
+    .pagination__button--next-icon  {
+      opacity: $opacity-disabled;
+    }
+  }
+}
+
+// Small Pagination
+.pagination--small {
+  .pagination__button--prev-icon,
+  .pagination__button--next-icon  {
+    width: .625rem;
+    top: 1px;
+  }
+
+  .pagination__button {
+    padding: 0.3125rem .625rem;
+    font-size: $text-5;
+    line-height: $line-height-form-small;
+  }
+
+  .pagination__text {
+    font-size: $text-5;
+  }
+}

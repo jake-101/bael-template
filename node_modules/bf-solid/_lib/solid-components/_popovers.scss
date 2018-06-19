@@ -1,0 +1,187 @@
+//
+// Popovers
+// --------------------------------------------------
+
+$popover-bg-caret-size: .5875rem;
+$popover-fg-caret-size: .525rem;
+
+.popover-right, .popover-left, .popover-bottom, .popover-top {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  padding: $space-1;
+  font-size: $text-5;
+  box-shadow: 0 1px 1px rgba(173, 168, 168, .1);
+  border: $border-lighter;
+  background-color: $fill-white;
+  border-radius: $border-radius;
+
+  // shared styles between right, left, bottom, and top caret for the popover
+  &:before, &:after {
+    content: " ";
+    pointer-events: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: solid transparent;
+    right: 100%;
+  }
+
+  // foreground caret styles for right, left, bottom, & top popover
+  &:before {
+    border-color: transparent;
+    border-width: $popover-bg-caret-size;
+  }
+
+  // background caret styles for right, left, bottom, & top popover
+  &:after {
+    border-color: transparent;
+    border-width: $popover-fg-caret-size;
+  }
+}
+
+.popover-right, .popover-left {
+
+  // foreground caret styles for right & left popover
+  &:before {
+    margin-top: -($popover-bg-caret-size);
+  }
+
+  // background caret styles for between right & left popover
+  &:after {
+    margin-top: -($popover-fg-caret-size);
+  }
+}
+
+.popover-right {
+
+  // caret styles for the right popover
+  &:before, &:after {
+    right: 100%;
+    top: 50%;
+  }
+
+  &:before {
+    border-right-color: lighten($fill-gray, 20%);
+  }
+
+  &:after {
+    border-right-color: $fill-white;
+  }
+
+  &--gray {
+    background-color: $fill-gray-darker;
+    border: none;
+    color: white;
+    &:before {
+      border-right-color: $fill-gray-darker;
+    }
+
+    &:after {
+      border-right-color: $fill-gray-darker;
+    }
+  }
+}
+
+.popover-left {
+
+  // caret styles for the left popover
+  &:before, &:after {
+    left: 100%;
+    top: 50%;
+  }
+
+  &:before {
+    border-left-color: lighten($fill-gray, 20%);
+  }
+
+  &:after {
+    border-left-color: $fill-white;
+  }
+
+  &--gray {
+    background-color: $fill-gray-darker;
+    border: none;
+    color: white;
+    &:before {
+      border-left-color: $fill-gray-darker;
+    }
+
+    &:after {
+      border-left-color: $fill-gray-darker;
+    }
+  }
+}
+
+.popover-top, .popover-bottom {
+
+  // foreground caret styles shared between top and bottom popover
+  &:before {
+    margin-left: -($popover-bg-caret-size);
+  }
+
+  // background caret styles shared between top and bottom popover
+  &:after {
+    margin-left: -($popover-fg-caret-size);
+  }
+}
+
+.popover-bottom {
+
+  &:before, &:after {
+    left: 50%;
+    bottom: 100%;
+  }
+
+  &:before {
+    border-bottom-color: lighten($fill-gray, 20%);
+  }
+
+  &:after {
+    border-bottom-color: $fill-white;
+  }
+
+  &--gray {
+    background-color: $fill-gray-darker;
+    border: none;
+    color: white;
+
+    &:before {
+      border-bottom-color: $fill-gray-darker;
+    }
+
+    &:after {
+      border-bottom-color: $fill-gray-darker;
+    }
+  }
+}
+
+.popover-top {
+
+  &:before, &:after {
+    left: 50%;
+    top: 100%;
+  }
+
+  &:before {
+    border-top-color: lighten($fill-gray, 20%);
+  }
+
+  &:after {
+    border-top-color: $fill-white;
+  }
+
+  &--gray {
+    background-color: $fill-gray-darker;
+    border: none;
+    color: white;
+
+    &:before {
+      border-top-color: $fill-gray-darker;
+    }
+
+    &:after {
+      border-top-color: $fill-gray-darker;
+    }
+  }
+}

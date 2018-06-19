@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+// Show logs
+process.env.DEBUG = process.env.DEBUG || 'nuxt:*'
+
+const { join } = require('path')
+const semver = require('semver')
+
+const { Utils } = require('..')
+const { name, engines } = require('../package.json')
+
+// Global error handler
+process.on('unhandledRejection', _error => {
+  Utils.printError(_error)
+})
+
+if (!semver.satisfies(process.version, engines.node)) {
+  Utils.fatalError(
+    `The engine "node" is incompatible with ${name}. Expected version "${
+      engines.node
+    }".`
+  )
+}
+
+const defaultCommand = 'dev'
+const commands = new Set([defaultCommand, 'init', 'build', 'start', 'generate'])
+
+var cmd = process.argv[2]
+
+if (commands.has(cmd)) {
+  process.argv.splice(2, 1)
+} else {
+  cmd = defaultCommand
+}
+
+const bin = join(__dirname, 'nuxt-' + cmd)
+
+require(bin)

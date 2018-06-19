@@ -1,0 +1,9 @@
+---
+category: release-notes
+version: 2.4.0-alpha
+title: Flexbox Alpha
+
+added:
+  - Flexbox classes. This is an alpha release, final implementation may change.
+
+---

@@ -1,0 +1,247 @@
+//
+// Forms Base Styles
+// --------------------------------------------------
+
+// Option Input Style
+// -------------------------
+// Adds some base custom styles to radio buttons and checkboxes.
+// In order to specify shape, border radius is applied
+// in class name for the element.
+
+@mixin option-input-style {
+  &:before {
+    content: ""                   !important;
+    display: inline-block         !important;
+    width: .75rem                 !important;
+    height: .75rem                !important;
+    margin-right: .375rem         !important;
+    position: relative            !important;
+    bottom: -1px                  !important;
+    background-color: $fill-white !important;
+    border: $border               !important;
+  }
+}
+
+.text-input,
+.text-input--small,
+.textarea,
+.textarea--small,
+.select,
+.select--small {
+  font-family: inherit           !important;
+  background: $fill-white        !important;
+  font-size: $text-4             !important;
+  line-height: $line-height-form !important;
+  padding: .5rem .75rem          !important;
+  border: $border                !important;
+
+  &:disabled {
+    opacity: $opacity-disabled   !important;
+  }
+}
+
+.select {
+  background-image: svg-background($down-caret) !important;
+  background-repeat: no-repeat                  !important;
+  background-position: calc(100% - 1rem) center !important;
+  background-size: .6875rem                     !important;
+  -webkit-appearance: none                      !important;
+  -moz-appearance: none                         !important;
+  border-radius: 0                              !important;
+  padding-right: 2.5rem                         !important;
+}
+
+// Hide select arrow in IE 10+
+select::-ms-expand,
+.select::-ms-expand {
+  display: none;
+}
+
+.select--small,
+.text-input--small {
+  font-size: $text-5                   !important;
+  line-height: $line-height-form-small !important;
+  padding: 0.3125rem .625rem           !important;
+}
+
+
+.select--small {
+  padding-right: 2rem                               !important;
+  background-position: calc(100% - .875rem) center !important;
+  background-size: .5rem                            !important;
+}
+
+.textarea {
+  display: block           !important;
+  min-height: $space-5 * 2 !important;
+  padding: .5rem .75rem    !important;
+}
+
+.textarea--small {
+  display: block                       !important;
+  min-height: 2rem * 2.5               !important;
+  padding: .375rem .625rem             !important;
+  font-size: $text-5                   !important;
+  line-height: $line-height-form-small !important;
+}
+
+// hide system radio button in order to use custom style
+.radio {
+  @include visuallyhidden;
+
+  // Override for Chrome bug where height collapses on toggle
+  height: 0px;
+
+  + label {
+    font-size: $text-5          !important;
+    cursor: pointer             !important;
+    line-height: $line-height-form;
+    display: block;
+    @include option-input-style;
+
+    &:before { border-radius: 50% !important; }
+  }
+
+  &:disabled + label {
+    opacity: $opacity-disabled    !important;
+  }
+}
+
+.radio:checked + label:before {
+  background-color: $fill-white !important;
+  border: 4px solid $fill-blue  !important;
+}
+
+// hide system checkbox in order to use custom style
+.checkbox {
+  @include visuallyhidden;
+
+  // Override for Chrome bug where height collapses on toggle
+  height: 0px;
+
+  + label {
+    font-size: $text-5            !important;
+    cursor: pointer               !important;
+    line-height: $line-height-form;
+    display: block;
+    @include option-input-style;
+
+    &:before { border-radius: 30% !important; }
+  }
+
+  &:disabled + label {
+    opacity: $opacity-disabled   !important;
+  }
+}
+
+.checkbox:checked + label:before {
+  background-image: svg-background($checkmark) !important;
+  background-repeat: no-repeat                 !important;
+  background-position: center                  !important;
+  background-color: $fill-blue                 !important;
+  background-size: .5rem                       !important;
+  border-style: none                           !important;
+ }
+
+// labels, etc
+// -------------------------
+
+.form-label {
+  display: block;
+  font-weight: $bold      !important;
+  margin-bottom: $space-1 !important;
+}
+
+// form label small has less margin bottom than default size form labels
+// in order for the entire unit to scale down proportionately
+.form-label--small {
+  font-size: $text-5    !important;
+  margin-bottom: .25rem !important;
+}
+
+.form-label--optional {
+  color: $text-gray-lightest  !important;
+  font-weight: $regular       !important;
+}
+
+.form-label--required {
+  color: $text-red      !important;
+  font-weight: $regular !important;
+}
+
+.form-helper {
+  color: $text-gray-lightest  !important;
+  display: block              !important;
+  margin-top: $space-1        !important;
+  font-size: $text-5          !important;
+}
+
+.form-feedback {
+  display: block       !important;
+  margin-top: $space-1 !important;
+  font-size: $text-5   !important;
+}
+
+.form-fieldset--warning {
+  .form-feedback,
+  .form-label {
+    color: $text-orange !important;
+  }
+
+  .text-input,
+  .text-input--small,
+  .textarea,
+  .textarea--small,
+  .select,
+  .select--small {
+    border-color: $fill-orange !important;
+  }
+}
+
+.form-fieldset--success {
+  .form-feedback,
+  .form-label {
+    color: $text-green !important;
+  }
+
+  .form-feedback:before {
+    content: ""                                  !important;
+    height: .875rem                              !important;
+    width: .875rem                               !important;
+    display: inline-block                        !important;
+    background-image: svg-background($checkmark) !important;
+    background-repeat: no-repeat                 !important;
+    background-size: .5rem                       !important;
+    background-color: $fill-green                !important;
+    border-radius: 50%                           !important;
+    background-position: center                  !important;
+    margin-right: .375rem                        !important;
+    position: relative                           !important;
+    bottom: -2px                                 !important;
+  }
+
+  .text-input,
+  .text-input--small,
+  .textarea,
+  .textarea--small,
+  .select,
+  .select--small {
+    border-color: $fill-green !important;
+  }
+}
+
+.form-fieldset--error {
+  .form-feedback,
+  .form-label {
+    color: $text-red !important;
+  }
+
+  .text-input,
+  .text-input--small,
+  .textarea,
+  .textarea--small,
+  .select,
+  .select--small {
+    border-color: $fill-red !important;
+  }
+}
