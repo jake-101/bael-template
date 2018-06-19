@@ -11,7 +11,7 @@
         
         </p>
         <ul class="xs-absolute results" v-if="results.length">
-          <li class="xs-border xs-p1 fill-white" v-for="r in results" :key="r._path"><nuxt-link :to="r._path" exact>{{r.title}}</nuxt-link></li>
+          <li class="xs-border xs-p1 fill-white" v-for="r in results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
         </ul>
       </div>
          <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
