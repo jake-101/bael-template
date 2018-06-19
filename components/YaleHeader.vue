@@ -35,13 +35,13 @@ export default {
     // Using webpacks context to gather all files from a folder
     const context = require.context('~/content/blog/posts/', false, /\.json$/);
 
-    const posts = context.keys().map(key => ({
+    const searchposts = context.keys().map(key => ({
       ...context(key),
       _path: `/blog/${key.replace('.json', '').replace('./', '')}`
     }));
-    console.log(posts);
+    console.log(searchposts);
 
-    return { searchposts: posts,
+    return { searchposts: searchposts,
           results: [], 
        keys: ["title", "body"],
        navbarheight: '60' };

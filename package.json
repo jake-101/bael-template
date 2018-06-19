@@ -14,11 +14,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.1",
     "bf-solid": "^2.10.6",
     "node-sass": "^4.9.0",
     "nuxt": "^1.0.0",
+    "nuxtent": "^1.4.1",
     "sass-loader": "^7.0.3",
-    "vue-fuse": "^1.5.2"
+    "vue-fuse": "^1.5.2",
+    "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
