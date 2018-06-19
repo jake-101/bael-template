@@ -47,11 +47,9 @@ export default {
        navbarheight: '60' };
   },
 
- created () {
-    this.$on('fuseResultsUpdated', results => {
-      this.results = results
-    })
-  },
+
+
+
     methods: {
      navHeight() {
             var height = this.$refs.navBar.clientHeight;
@@ -61,6 +59,9 @@ export default {
         }
   },
   mounted() {
+        this.$on('fuseResultsUpdated', results => {
+      this.results = results
+    })
      this.navHeight()
     
   }
