@@ -1,5 +1,6 @@
 {
-  "title": "Zweiter Blog",
+  "title": "Seattle",
   "date": "2018-05-06T21:45:16+02:00",
-  "body": "Lorem ipsum Test"
+  "thumbnail": "/images/uploads/seattle.jpg",
+  "body": "It was fun visiting the Museum of Pop Culture."
 }
