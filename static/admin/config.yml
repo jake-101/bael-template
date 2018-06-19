@@ -1,6 +1,8 @@
 backend:
-  name: github
-  repo: jake-101/bael-template
+  name: git-gateway
+  accept_roles: #optional - accepts all users if left out
+    - admin
+    - editor
 media_folder: "static/images/uploads" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
 collections:
