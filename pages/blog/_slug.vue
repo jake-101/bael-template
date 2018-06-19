@@ -5,7 +5,7 @@
 <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);;margin-top:${navbarheight}px`">
   <div class=" xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
-       <img v-if="thumbnail" :src="thumbnail" :alt="title">
+       <div v-if="thumbnail"><img :src="thumbnail" :alt="title"></div>
   <h1 class="xs-py3">{{title}}</h1>
    <div class="xs-mt-5 bold">{{ date }}</div>
      <div class="xs-py3">{{ body }}</div>

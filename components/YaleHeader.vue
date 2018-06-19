@@ -7,11 +7,11 @@
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
-        <p class="item xs-flex sm-border-left"> <vue-fuse placeholder="Search" :keys="keys" :list="posts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
+        <p class="item xs-flex sm-border-left"> <vue-fuse placeholder="Search" :keys="keys" :list="searchposts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
         
         </p>
         <ul class="xs-absolute results" v-if="results.length">
-          <li class="xs-border xs-p1 fill-white" v-for="r in results" :key="r._path"><nuxt-link :to="r._path">{{r.title}}</nuxt-link></li>
+          <li class="xs-border xs-p1 fill-white" v-for="r in results" :key="r._path"><nuxt-link :to="r._path" exact>{{r.title}}</nuxt-link></li>
         </ul>
       </div>
          <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
@@ -41,7 +41,7 @@ export default {
     }));
     console.log(posts);
 
-    return { posts: posts,
+    return { searchposts: posts,
           results: [], 
        keys: ["title", "body"],
        navbarheight: '60' };
