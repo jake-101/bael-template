@@ -1,6 +1,6 @@
 {
   "title": "Hello world",
-  "date": "2018-02-13T19:32:44.767Z",
-  "thumbnail": "/images/uploads/patrickbeelaert-gras-mit-hintergrund.jpg",
-  "body": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea **takimata sanctus** est \n\nLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\n\n\n\nEnd"
+  "date": "2018-06-18T11:32:44-07:00",
+  "thumbnail": "/images/uploads/bael-template.jpg",
+  "body": "**Bael is a free template that gives you an easy way to start a blog that uses modern technologies like static-site JAMstack architecture, CSS grid layout, responsive design, fuzzy search, and all wrapped up in a brutalist aesthetic. **\n\nBael runs using Nuxt.js, Vue.js, Netlify CMS, and is hosted by Netlify. It uses Buzzfeed's Solid CSS style guide for atomic, immutable styling."
 }
