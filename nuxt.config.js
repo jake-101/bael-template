@@ -10,6 +10,7 @@ var dynamicRoutes = getDynamicPaths({
 
 
 module.exports = {
+  mode: "universal",
   /*
   ** Headers of the page
   */
@@ -18,7 +19,6 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'robots', content: 'noindex,nofollow' },
       { hid: 'description', name: 'description', content: 'A fashionable open source template using netlify cms and nuxt.js.' }
 
     ],
@@ -31,7 +31,7 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/markdownit'],
   /*
   ** Route config for pre-rendering
   */
@@ -43,6 +43,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    extractCSS: true
     /*
     ** Run ESLint on save
     */

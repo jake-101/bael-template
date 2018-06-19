@@ -8,7 +8,7 @@
        <div v-if="thumbnail"><img :src="thumbnail" :alt="title"></div>
   <h1 class="xs-py3">{{title}}</h1>
    <div class="xs-mt-5 bold">{{ date }}</div>
-     <div class="xs-py3"><vue-markdown>{{body}}</vue-markdown></div>
+     <div class="xs-py3"><MdWrapper :body="body"/></div>
         </div>
         </div>
 
@@ -24,7 +24,7 @@
   import SlideOut from '~/components/SlideOut'
   import YaleFooter from '~/components/YaleFooter'
     import YaleHeader from '~/components/YaleHeader'
-    import VueMarkdown from 'vue-markdown'
+        import MdWrapper from '~/components/MdWrapper'
 
 export default {
   async asyncData({ params,app,payload,route }) {
@@ -44,7 +44,7 @@ export default {
        }
   },
     components: {
-    SlideOut,YaleFooter,YaleHeader,VueMarkdown
+    SlideOut,YaleFooter,YaleHeader,MdWrapper
   }
 };
 </script>

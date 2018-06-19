@@ -1,8 +1,8 @@
 {
-  "name": "nuxt-netlify-cms-starter-template",
+  "name": "bael-cms-template",
   "version": "1.0.0",
-  "description": "Nuxt.js + Netlify CMS project",
-  "author": "markWicht <38689912+markWicht@users.noreply.github.com>",
+  "description": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js",
+  "author": "jake101 <hello@jake101.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -14,14 +14,12 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/markdownit": "^1.2.1",
     "bf-solid": "^2.10.6",
     "node-sass": "^4.9.0",
     "nuxt": "^1.0.0",
-    "nuxtent": "^1.4.1",
     "sass-loader": "^7.0.3",
-    "vue-fuse": "^1.5.2",
-    "vue-markdown": "^2.2.4"
+    "vue-fuse": "^1.5.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
