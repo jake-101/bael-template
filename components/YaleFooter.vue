@@ -15,7 +15,7 @@
        <form netlify>
   <label class="form-label form-label--small">Sign up on our newsletter</label>
   <input type="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
-  <button class="button button--transparent button--small">Submit</button>
+  <button type="submit" class="button button--transparent button--small">Submit</button>
 </form></div>
        </div>
              <div class="c-25 xs-text-left xs-p2 xs-border">
