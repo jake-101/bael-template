@@ -12,7 +12,7 @@
        </div>
              <div class="c-25 xs-text-left xs-p2 xs-border">
             <div class="item"><div class="footer__heading xs-mb2">Newsletter</div>
-       <form netlify>
+       <form method="POST" name="mailinglist" netlify>
   <label class="form-label form-label--small">Sign up on our newsletter</label>
   <input type="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
   <button type="submit" class="button button--transparent button--small">Submit</button>
@@ -40,3 +40,6 @@
        </div>
 </footer>
 </template>
+<style scoped>
+.text-input {max-width:100%;}
+</style>
