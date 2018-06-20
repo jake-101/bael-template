@@ -29,7 +29,14 @@ const createStore = () =>
        getSiteInfo ({ state, commit }) {
         const info = require('~/content/setup/info.json');
         const connect = require('~/content/setup/connect.json');
-        
+        const context = require.context('~/content/blog/posts/', false, /\.json$/);
+
+        const searchposts = context.keys().map(key => ({
+          ...context(key),
+          _path: `/blog/${key.replace('.json', '').replace('./', '')}`
+        }));
+    
+         commit('SET_POSTS', searchposts)
          commit('SET_INFO', info)
          commit('SET_CONNECT', connect)
       
