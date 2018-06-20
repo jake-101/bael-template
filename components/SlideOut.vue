@@ -16,20 +16,7 @@
     </ul>
   </div>
   </template>
-  <script>
 
-
-export default {
-computed: {
-  menuLinks() {
-    return this.$store.state.siteInfo.menu
-  },
-    menuSiteName() {
-    return this.$store.state.siteInfo.sitename
-  }
-}
-};
-</script>
   <script>
   export default {
   data() {
@@ -39,6 +26,14 @@ computed: {
     menu: [ 'Home', 'Work', 'Contact' ],
     smallMenu: [ 'Tips', 'Resources', 'Shenanigans' ]
   }},
+  computed: {
+  menuLinks() {
+    return this.$store.state.siteInfo.menu
+  },
+    menuSiteName() {
+    return this.$store.state.siteInfo.sitename
+  }
+},
   methods: {
     open() {
       this.isOpen = true;
