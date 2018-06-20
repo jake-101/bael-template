@@ -18,8 +18,8 @@ collections:
       - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
   - label: "Setup"
-  name: "setup"
-  files:
+    name: "setup"
+    files:
     - label: "Site Info"
       name: "info"
       file: "content/setup/info.yml"
