@@ -7,7 +7,7 @@
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
-        <p class="item xs-flex"> <vue-fuse placeholder="Search" :keys="keys" :list="allBlogPosts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
+        <p class="item xs-flex"> <vue-fuse v-if="allBlogPosts" placeholder="Search" :keys="keys" :list="allBlogPosts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
         
         </p>
         <ul class="xs-absolute results" v-if="results.length">
