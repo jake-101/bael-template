@@ -17,3 +17,29 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Setup"
+  name: "setup"
+  files:
+    - label: "Site Info"
+      name: "info"
+      file: "content/setup/info.yml"
+      fields:
+        - {label: Site Name, name: sitename, widget: string}
+        - {label: Site Description, name: sitedescription, widget: string}
+        - label: Menu
+          name: menu
+          widget: list
+          fields:
+            - {label: Name, name: name, widget: string}
+            - {label: Position, name: position, widget: string}
+            - {label: Link, name: link, widget: string}
+    - label: "Connect"
+      name: "connect"
+      file: "content/setup/connect.yml"
+      fields:
+        - label: Links
+          name: connectlinks
+          widget: list
+          fields:
+            - {label: Link Name, name: name, widget: string}
+            - {label: URL, name: url, widget: string}

@@ -31,14 +31,23 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
-  modules: ['@nuxtjs/markdownit'],
+  modules: ['@nuxtjs/markdownit', '@nuxtjs/pwa'],
+  markdownit: {
+    injected: true,
+    preset: 'default',
+    breaks: true,
+    html: true
+  },
   /*
   ** Route config for pre-rendering
   */
   generate: {
     routes: dynamicRoutes
   },
-  plugins: [{ssr: false, src:'~/plugins/vuefuse'}],
+  plugins: [{ssr: false, src:'~/plugins/vuefuse'},{
+    src: "~/plugins/moment",
+    ssr: "false"
+  }],
   /*
   ** Build configuration
   */

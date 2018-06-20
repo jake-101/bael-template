@@ -7,8 +7,8 @@
     <div class="item xs-block xs-full-height">
        <div v-if="thumbnail"><img :src="thumbnail" :alt="title"></div>
   <h1 class="xs-py3">{{title}}</h1>
-   <div class="xs-mt-5 bold">{{ date }}</div>
-     <div class="xs-py3"><MdWrapper :body="body"/></div>
+   <div class="xs-mt-5 bold">{{ date | moment('dddd MMMM Do, YYYY') }}</div>
+     <div class="xs-py3"><div v-html="$md.render(body)"></div></div>
         </div>
         </div>
 
@@ -42,6 +42,9 @@ export default {
     return {
    navbarheight: '60'
        }
+  },
+  computed:{
+
   },
     components: {
     SlideOut,YaleFooter,YaleHeader,MdWrapper

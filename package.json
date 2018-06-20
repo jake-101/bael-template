@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@nuxtjs/markdownit": "^1.2.1",
+    "@nuxtjs/pwa": "^2.0.8",
     "bf-solid": "^2.10.6",
     "node-sass": "^4.9.0",
     "nuxt": "^1.0.0",
     "sass-loader": "^7.0.3",
-    "vue-fuse": "^1.5.2"
+    "vue-fuse": "^1.5.2",
+    "vue-moment": "^4.0.0-0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

@@ -1,9 +1,9 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
     <SlideOut></SlideOut>
-   <YaleHeader :posts="posts" />
+   <YaleHeader />
 <div class="r full-height browse" :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
-   <div v-if="posts" v-for="p in posts" :key="p.slug" class="xs-border xs-p2 bcg-item">
+   <div v-if="allBlogPosts" v-for="p in allBlogPosts" :key="p.slug" class="xs-border xs-p2 bcg-item">
     <div class="item xs-block xs-full-height xs-flex">
       <nuxt-link class="xs-text-center xs-flex xs-full-height xs-flex-align-center xs-flex-justify-center xs-text-center" :to="p._path">
         {{p.title}}
@@ -28,11 +28,8 @@
   import YaleFooter from '~/components/YaleFooter'
     import YaleHeader from '~/components/YaleHeader'
 
-export default {
-  components: {
-    SlideOut,YaleFooter,YaleHeader
-  },
-  data() {
+export default {     asyncData({ store,params }) {
+  
   
     // Using webpacks context to gather all files from a folder
     const context = require.context('~/content/blog/posts/', false, /\.json$/);
@@ -43,9 +40,23 @@ export default {
     }));
     console.log(posts);
 
-    return { posts: posts,
+  
+ store.commit('SET_POSTS',posts)
+},
+  components: {
+    SlideOut,YaleFooter,YaleHeader
+  },
+  data() {
+
+
+    return { 
        navbarheight: '60' };
+  },
+    computed: {
+  allBlogPosts() {
+    return this.$store.state.blogPosts;
   }
+},
 };
 </script>
 
