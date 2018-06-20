@@ -21,10 +21,7 @@
   export default {
   data() {
     return {
-    openerText: 'Open',
     isOpen: false,
-    menu: [ 'Home', 'Work', 'Contact' ],
-    smallMenu: [ 'Tips', 'Resources', 'Shenanigans' ]
   }},
   computed: {
   menuLinks() {
@@ -129,7 +126,7 @@
   right:0;
   top:0;
   width: 34vw;
-  height: 99vh;
+  height: 100vh;
   z-index:99;
   padding: 30px;
   background-color: #fff;
@@ -167,6 +164,7 @@
 .zap-slideout-menu-item,
 .zap-slideout-menu-item--small {
   cursor: pointer;
+  text-transform: uppercase;
   
   &:hover {
     text-decoration: underline;
