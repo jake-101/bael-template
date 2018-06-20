@@ -28,21 +28,7 @@
   import BaelFooter from '~/components/BaelFooter'
     import BaelHeader from '~/components/BaelHeader'
 
-export default {     asyncData({ store,params }) {
-  
-  
-    // Using webpacks context to gather all files from a folder
-    const context = require.context('~/content/blog/posts/', false, /\.json$/);
-
-    const posts = context.keys().map(key => ({
-      ...context(key),
-      _path: `/blog/${key.replace('.json', '').replace('./', '')}`
-    }));
-    console.log(posts);
-
-  
- store.commit('SET_POSTS',posts)
-},
+export default {    
   components: {
     SlideOut,BaelFooter,BaelHeader
   },
