@@ -9,16 +9,27 @@
       </div></div>
     <ul class="zap-slideout-menu list-unstyled">
       <li class="zap-slideout-menu-item">
-        BAEL TEMPLATE
+       {{menuSiteName}}
       </li>
       <li class="zap-slideout-menu-item--small"><nuxt-link to="/" exact>Home</nuxt-link></li>
-             <li class="zap-slideout-menu-item--small"><a href="https://www.jake101.com">Jake101</a></li>
-       <li class="zap-slideout-menu-item--small"><a href="https://www.nuxtjs.org">Nuxt.js</a></li>
-
-       <li class="zap-slideout-menu-item--small"><a href="https://www.netlify.com">Netlify</a></li>
+             <li v-if="menuLinks" v-for="m in menuLinks" :key="m.position" class="zap-slideout-menu-item--small"><a :href="m.link">{{m.name}}</a></li>
     </ul>
   </div>
   </template>
+  <script>
+
+
+export default {
+computed: {
+  menuLinks() {
+    return this.$store.state.siteInfo.menu
+  },
+    menuSiteName() {
+    return this.$store.state.siteInfo.sitename
+  }
+}
+};
+</script>
   <script>
   export default {
   data() {

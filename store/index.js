@@ -7,9 +7,14 @@ const createStore = () =>
     state: {
       menuIsActive: false,
       menuInitial: true,
-      blogPosts: []
+      blogPosts: [],
+      siteInfo: [],
+      connect: []
     },
     actions: {
+      async nuxtServerInit({ dispatch }) {
+        await dispatch('getSiteInfo')
+      },
       async getBlogPosts ({ state, commit }) {
         const context = require.context('~/content/blog/posts/', false, /\.json$/);
 
@@ -20,11 +25,25 @@ const createStore = () =>
     
          commit('SET_POSTS', searchposts)
       
+      },
+       getSiteInfo ({ state, commit }) {
+        const info = require('~/content/setup/info.json');
+        const connect = require('~/content/setup/connect.json');
+        
+         commit('SET_INFO', info)
+         commit('SET_CONNECT', connect)
+      
       }
     },
     mutations: {
       SET_POSTS(state, data) {
         state.blogPosts = data
+      },
+      SET_INFO(state, data) {
+        state.siteInfo = data
+      },
+      SET_CONNECT(state, data) {
+        state.connect = data
       },
 
       toggleMenuState(state) {

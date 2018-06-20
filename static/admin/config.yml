@@ -22,7 +22,8 @@ collections:
     files:
     - label: "Site Info"
       name: "info"
-      file: "content/setup/info.yml"
+      format: 'json'
+      file: "content/setup/info.json"
       fields:
         - {label: Site Name, name: sitename, widget: string}
         - {label: Site Description, name: sitedescription, widget: string}
@@ -35,7 +36,8 @@ collections:
             - {label: Link, name: link, widget: string}
     - label: "Connect"
       name: "connect"
-      file: "content/setup/connect.yml"
+      format: 'json'
+      file: "content/setup/connect.json"
       fields:
         - label: Links
           name: connectlinks

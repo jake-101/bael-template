@@ -6,8 +6,8 @@
               <p class="item bold">&nbsp;</p>
        </div>
            <div class="c-25 xs-text-left xs-p2 xs-border">
-              <div class="item"><div class="footer__heading xs-mb2">About</div>
-<p>A fashionable brutalist blog template using Netlify CMS and Nuxt.js.</p>
+              <div class="item"><div v-if="siteDescription" class="footer__heading xs-mb2">About</div>
+<p v-if="siteDescription">{{siteDescription}}</p>
 </div>
        </div>
              <div class="c-25 xs-text-left xs-p2 xs-border">
@@ -19,11 +19,9 @@
 </form></div>
        </div>
              <div class="c-25 xs-text-left xs-p2 xs-border">
-               <div class="item"><div class="footer__heading xs-mb2">Connect</div>
+               <div class="item"><div v-if="connectData" class="footer__heading xs-mb2">Connect</div>
                <ul class="list-unstyled">
-  <li><a href="https://instagram.com/jasperketone">Instagram</a></li>
-  <li><a href="https://twitter.com/jasperketone">Twitter</a></li>
-  <li><a href="https://github.com/jake101">Github</a></li>
+  <li v-if="connectData" v-for="(c,i) in connectData" :key="i"><a :href="c.url">{{c.name}}</a></li>
 </ul></div>
        </div>
              <div class="c-25 xs-text-left xs-p2 xs-border">
@@ -40,6 +38,20 @@
        </div>
 </footer>
 </template>
+<script>
+
+
+export default {
+computed: {
+  connectData() {
+    return this.$store.state.connect.connectlinks
+  },
+  siteDescription() {
+    return this.$store.state.siteInfo.sitedescription
+  }
+}
+};
+</script>
 <style scoped>
 .text-input {max-width:100%;}
 </style>

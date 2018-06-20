@@ -3,7 +3,7 @@
     <div class="r">
 
       <div class="c-4 xs-text-left xs-p2 sm-border-right">
-        <p class="item bold sitename"><nuxt-link to="/" exact>Bael</nuxt-link></p>
+        <p class="item bold sitename"><nuxt-link to="/" exact>{{headerSiteName}}</nuxt-link></p>
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
@@ -24,9 +24,6 @@
   </nav>
 </template>
 <script>
-  import SlideOut from '~/components/SlideOut'
-  import YaleFooter from '~/components/YaleFooter'
-    import YaleHeader from '~/components/YaleHeader'
 
 export default {
   props: ['blogtitle'],
@@ -41,6 +38,9 @@ export default {
   computed: {
   allBlogPosts() {
     return this.$store.state.blogPosts;
+  },
+      headerSiteName() {
+    return this.$store.state.siteInfo.sitename
   }
 },
 
