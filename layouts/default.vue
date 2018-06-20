@@ -5,8 +5,8 @@
 </template>
 <script>
   import SlideOut from '~/components/SlideOut'
-  import YaleFooter from '~/components/YaleFooter'
-    import YaleHeader from '~/components/YaleHeader'
+  import BaelFooter from '~/components/BaelFooter'
+    import BaelHeader from '~/components/BaelHeader'
 
 export default {
 

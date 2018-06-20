@@ -5,10 +5,8 @@
 <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);;margin-top:${navbarheight}px`">
   <div class=" xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
-       <div v-if="thumbnail"><img class="featured-image" :src="thumbnail" :alt="title"></div>
-  <h1 class="xs-py3 main-title">{{title}}</h1>
-   <div class="xs-mt-5 bold">{{ date | moment('dddd MMMM Do, YYYY') }}</div>
-     <div class="xs-py3 post-content"><div v-html="$md.render(body)"></div></div>
+     
+  <h1 class="xs-py3 main-title">Thank you for signing up</h1>
         </div>
         </div>
 
@@ -27,22 +25,12 @@
         import MdWrapper from '~/components/MdWrapper'
 
 export default {
-  async asyncData({ params,app,payload,route }) {
-    // const postPromise = process.BROWSER_BUILD
-    //   ? import('~/content/blog/posts/' + params.slug + '.json')
-    //   : Promise.resolve(
-    //       require('~/content/blog/posts/' + params.slug + '.json')
-    //     );
 
-    let post = await import('~/content/blog/posts/' + params.slug + '.json');
-    console.log(post)
-    return post;
-  },
     head() {
     return {
       title:
-        this.title + 
-        " | " + this.$store.state.siteInfo.sitename,
+       
+        "Thanks! | " + this.$store.state.siteInfo.sitename,
       
     };
   },

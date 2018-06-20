@@ -1,7 +1,7 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
     <SlideOut></SlideOut>
-   <YaleHeader />
+   <BaelHeader />
 <div class="r full-height browse" :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
    <div v-if="allBlogPosts" v-for="p in allBlogPosts" :key="p.slug" class="xs-border xs-p2 bcg-item">
     <div class="item xs-block xs-full-height xs-flex">
@@ -19,14 +19,14 @@
     </div>
   
 </div>
-<YaleFooter/>
+<BaelFooter/>
   </section>
 </template>
 
 <script>
   import SlideOut from '~/components/SlideOut'
-  import YaleFooter from '~/components/YaleFooter'
-    import YaleHeader from '~/components/YaleHeader'
+  import BaelFooter from '~/components/BaelFooter'
+    import BaelHeader from '~/components/BaelHeader'
 
 export default {     asyncData({ store,params }) {
   
@@ -44,7 +44,7 @@ export default {     asyncData({ store,params }) {
  store.commit('SET_POSTS',posts)
 },
   components: {
-    SlideOut,YaleFooter,YaleHeader
+    SlideOut,BaelFooter,BaelHeader
   },
   data() {
 
