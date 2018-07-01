@@ -36,9 +36,7 @@ export default {
        navbarheight: '60' };
   },
   computed: {
-  allBlogPosts() {
-    return this.$store.state.blogPosts;
-  },
+
       headerSiteName() {
     return this.$store.state.siteInfo.sitename
   }

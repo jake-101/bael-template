@@ -1,7 +1,7 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
     <SlideOut></SlideOut>
-   <BaelHeader :blogtitle="title" />
+   <BaelHeader :posts="allBlogPosts" :blogtitle="title" />
 <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);;margin-top:${navbarheight}px`">
   <div class=" xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
@@ -40,7 +40,9 @@ export default {
        }
   },
   computed:{
-
+allBlogPosts() {
+    return this.$store.state.blogPosts;
+  }
   },
     components: {
     SlideOut,BaelFooter,BaelHeader,MdWrapper
