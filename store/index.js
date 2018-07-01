@@ -8,6 +8,8 @@ const createStore = () =>
       menuIsActive: false,
       menuInitial: true,
       blogPosts: [],
+      navheight: 60,
+      blogTitle: '',
       siteInfo: [],
       connect: []
     },
@@ -46,6 +48,12 @@ const createStore = () =>
     mutations: {
       SET_POSTS(state, data) {
         state.blogPosts = data
+      },
+      SET_TITLE(state, data) {
+        state.blogTitle = data
+      },
+      SET_NAVHEIGHT(state, data) {
+        state.navheight = data
       },
       SET_INFO(state, data) {
         state.siteInfo = data

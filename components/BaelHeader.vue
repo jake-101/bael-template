@@ -49,8 +49,7 @@ export default {
      navHeight() {
             var height = this.$refs.navBar.clientHeight;
             console.log(height);
-            this.navbarheight = height
-            this.$parent.navbarheight = height
+           this.$store.commit('SET_NAVHEIGHT', height)
         }
   },
   mounted() {

@@ -27,6 +27,7 @@ module.exports = {
     ]
   },
   css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],
+
   /*
   ** Customize the progress bar color
   */
@@ -44,6 +45,10 @@ module.exports = {
   /*
   ** Route config for pre-rendering
   */
+ router: {
+
+  middleware: 'title',
+ },
   generate: {
     routes: dynamicRoutes
   },

@@ -1,7 +1,5 @@
 <template>
-  <section class="container xs-border xs-text-6 md-text-5">
-    <SlideOut></SlideOut>
-   <BaelHeader :posts="allBlogPosts" />
+<div>
 <div class="r full-height browse" :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
    <div v-if="allBlogPosts" v-for="p in allBlogPosts" :key="p.slug" class="xs-border xs-p2 bcg-item">
     <div class="item xs-block xs-full-height xs-flex">
@@ -20,7 +18,7 @@
   
 </div>
 <BaelFooter/>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -36,11 +34,14 @@ export default {
 
 
     return { 
-       navbarheight: '60' };
+      };
   },
     computed: {
   allBlogPosts() {
     return this.$store.state.blogPosts;
+  },
+  navbarheight() {
+    return this.$store.state.navheight;
   }
 },
 };

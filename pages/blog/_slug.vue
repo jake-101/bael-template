@@ -1,9 +1,7 @@
 <template>
-  <section class="container xs-border xs-text-6 md-text-5">
-    <SlideOut></SlideOut>
-   <BaelHeader :posts="allBlogPosts" :blogtitle="title" />
-<div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);;margin-top:${navbarheight}px`">
-  <div class=" xs-p2 bcg-item"> 
+<section>
+<div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
+  <div class="xs-mt2 xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
        <div v-if="thumbnail"><img class="featured-image" :src="thumbnail" :alt="title"></div>
   <h1 class="xs-py3 main-title">{{title}}</h1>
@@ -27,7 +25,7 @@
         import MdWrapper from '~/components/MdWrapper'
 
 export default {
-  async asyncData({ params,app,payload,route }) {
+  async asyncData({ params,app,payload,route,store }) {
     // const postPromise = process.BROWSER_BUILD
     //   ? import('~/content/blog/posts/' + params.slug + '.json')
     //   : Promise.resolve(
@@ -36,6 +34,7 @@ export default {
 
     let post = await import('~/content/blog/posts/' + params.slug + '.json');
     console.log(post)
+    store.commit('SET_TITLE', post.title)
     return post;
   },
     head() {
@@ -48,12 +47,14 @@ export default {
   },
     data() {
     return {
-   navbarheight: '60'
        }
   },
   computed:{
 allBlogPosts() {
     return this.$store.state.blogPosts;
+  },
+    navbarheight() {
+    return this.$store.state.navheight;
   }
   },
     components: {
