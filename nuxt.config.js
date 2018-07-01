@@ -38,6 +38,9 @@ module.exports = {
     breaks: true,
     html: true
   },
+  modifyUrlPrefix: {
+    '': '/_nuxt/'
+  },
   /*
   ** Route config for pre-rendering
   */

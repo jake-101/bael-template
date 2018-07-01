@@ -27,9 +27,10 @@
              <div class="c-25 xs-text-left xs-p2 xs-border">
                <div class="item"><div class="footer__heading xs-mb2">Deploy</div>
                <ul class="list-unstyled">
-  <li><a href="https://app.netlify.com/start/deploy?repository=https://github.com/jake-101/bael-template">
-  <img src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify">
+  <li class="xs-inline-block xs-mr1 xs-mb1"><a href="https://app.netlify.com/start/deploy?repository=https://github.com/jake-101/bael-template">
+  <img style="height:29px;width:auto;" src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify">
 </a></li>
+
 </ul></div>
        </div>
       <div class="c-12 xs-text-left xs-p2 xs-border">
