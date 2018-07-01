@@ -17,9 +17,9 @@ const createStore = () =>
         await dispatch('getBlogPosts')
       },
       async getBlogPosts ({ state, commit }) {
-        const context = require.context('~/content/blog/posts/', false, /\.json$/);
+        const context = await require.context('~/content/blog/posts/', false, /\.json$/);
 
-        const searchposts = context.keys().map(key => ({
+        const searchposts = await context.keys().map(key => ({
           ...context(key),
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));

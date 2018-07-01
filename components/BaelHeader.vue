@@ -53,13 +53,6 @@ export default {
             this.$parent.navbarheight = height
         }
   },
-    created() {
-        this.$on('fuseResultsUpdated', results => {
-      this.results = results
-    })
-     this.navHeight()
-    
-  },
   mounted() {
         this.$on('fuseResultsUpdated', results => {
       this.results = results
