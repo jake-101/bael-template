@@ -14,6 +14,7 @@ const createStore = () =>
     actions: {
       async nuxtServerInit({ dispatch }) {
         await dispatch('getSiteInfo')
+        await dispatch('getBlogPosts')
       },
       async getBlogPosts ({ state, commit }) {
         const context = require.context('~/content/blog/posts/', false, /\.json$/);
