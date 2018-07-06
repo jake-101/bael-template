@@ -1,12 +1,12 @@
 <template>
-
+<no-ssr>
   <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
-
+</no-ssr>
 </template>
 
 <script>
 if (process.browser) {
-  var Fuse = require('fuse.js')
+    var Fuse = require('fuse.js')
 }
 export default {
   data() {
@@ -59,7 +59,6 @@ export default {
   methods: {
     initFuse() {
       if (process.browser) {
-          var Fuse = require('fuse.js')
 
       this.fuse = new Fuse(this.list, this.options);
       if (this.defaultAll) {

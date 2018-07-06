@@ -11,15 +11,16 @@
               <VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
 
         </div>
+        <no-ssr>
         <div>
           <ul class="xs-absolute results">
-            <li class="xs-border xs-p1 fill-white" v-for="xx in compResults" :key="xx._path">
-              <nuxt-link :to="`${xx._path}/`">
+            <li class="xs-border xs-p1 fill-white" v-for="(xx,i) in compResults" :key="i">
+              <a :href="`${xx._path}/`">
                 {{xx.title}}
-              </nuxt-link>
+              </a>
             </li>
           </ul>
-          </div>
+          </div>  </no-ssr>
 
       </div>
          <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
@@ -67,11 +68,7 @@ export default {
 
   }
 },
- watch: {
 
-
-      
-  },
 
 
 
@@ -81,19 +78,9 @@ export default {
             console.log(height);
            this.$store.commit('SET_NAVHEIGHT', height)
         }
-  },
-  updated() {
-
-    if (process.browser) {
-
-     
- 
-}
-   
-    
   },  mounted() {
 
-    if (process.browser) {
+  
      this.$on("searchChanged", results => {
       this.compResults = results;
 
@@ -103,7 +90,7 @@ export default {
 }
    
     
-  }
+  
 }
 </script>
 <style>
