@@ -26,8 +26,8 @@ export default {
 
     let post = await import('~/content/blog/posts/' + params.slug + '.json');
     console.log(post)
-    store.commit('SET_TITLE', post.title)
-    store.commit('SET_NAVHEIGHT', 102)
+    await store.commit('SET_TITLE', post.title)
+   await store.commit('SET_NAVHEIGHT', 102)
     return post;
   },
     head() {
