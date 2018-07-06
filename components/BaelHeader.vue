@@ -3,20 +3,19 @@
     <div class="r">
 
       <div class="c-4 xs-text-left xs-p2 sm-border-right">
-        <p class="item bold sitename"><nuxt-link to="/" exact>{{headerSiteName}}</nuxt-link></p>
+        <div class="item bold sitename"><nuxt-link to="/" exact>{{headerSiteName}}</nuxt-link></div>
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
-        <div class="item xs-flex"><vue-fuse placeholder="Search" :keys="keys" :list="posts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
-        
+        <div class="item xs-flex"><vue-fuse placeholder="Search" :keys="keys" :list="posts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>        
         </div>
-        <ul class="xs-absolute results" v-if="results.length">
-          <li class="xs-border xs-p1 fill-white" v-for="r in results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
-        </ul>
+       <no-ssr> <ul class="xs-absolute results" v-if="this.$store.state.results.length">
+          <li class="xs-border xs-p1 fill-white" v-for="r in this.$store.state.results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
+        </ul></no-ssr>
       </div>
          <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
-        <p class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; > {{blogtitle}}
-        </p>
+        <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; > {{blogtitle}}
+        </div>
       </div>
  
 
@@ -66,7 +65,7 @@ export default {
 
     if (process.browser) {
         this.$on('fuseResultsUpdated', results => {
-      this.results = results
+           this.$store.commit('SET_RESULTS', results)
     })
       this.navHeight()
  

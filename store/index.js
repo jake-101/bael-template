@@ -12,6 +12,7 @@ const createStore = () =>
       blogTitle: '',
       siteInfo: [],
       connect: [],
+      results: [],
       menuIsActive: false,
       menuInitial: true,
     },
@@ -62,6 +63,9 @@ const createStore = () =>
       },
       SET_CONNECT(state, data) {
         state.connect = data
+      },
+      SET_RESULTS(state, data) {
+        state.results = data
       },
 
       setMenuState(state, menuIsActive) {
