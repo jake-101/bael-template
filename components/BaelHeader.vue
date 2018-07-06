@@ -8,8 +8,6 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2">
         <div class="item xs-flex">
-              <VueFuse placeholder="Search" :compResults="compResults" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
-        
     
          </div>
 
@@ -24,7 +22,6 @@
   </nav>
 </template>
 <script>
-import VueFuse from "~/components/VueFuse";
 
 export default {
   props: ['blogtitle','posts'],
@@ -48,9 +45,13 @@ export default {
       methodResults: [],
        };
   },
-  components: {VueFuse},
+  components: {},
   computed: {
-
+allPosts() {
+  var a = this.$store.state.blogPosts
+  return objArray.map(a => a.title);
+  
+},
       headerSiteName() {
     return this.$store.state.siteInfo.sitename
   },

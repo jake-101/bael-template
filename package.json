@@ -21,7 +21,8 @@
     "node-sass": "^4.9.1",
     "nuxt-edge": "^2.0.0-25513462.d31aeaa",
     "sass-loader": "^7.0.3",
-    "vue-moment": "^4.0.0"
+    "vue-moment": "^4.0.0",
+    "wade": "^0.3.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
