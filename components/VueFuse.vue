@@ -1,5 +1,14 @@
 <template>
+<div>
   <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
+      <ul class="xs-absolute results">
+            <li class="xs-border xs-p1 fill-white" v-for="(xx,i) in compResults" :key="i">
+              <a :href="`${xx._path}/`">
+                {{xx.title}}
+              </a>
+            </li>
+          </ul>
+          </div>
 </template>
 
 <script>
@@ -86,8 +95,16 @@ export default {
    */
   mounted() {
     this.initFuse();
+     this.$on("searchChanged", results => {
+      this.compResults = results;
+
+
+    });
   },
   props: {
+     compResults:  {
+      type: Array
+    },
     placeholder: {
       type: String,
       default: ""

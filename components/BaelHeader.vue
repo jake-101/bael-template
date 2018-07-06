@@ -8,15 +8,9 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2">
         <div class="item xs-flex">
-              <VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
+              <VueFuse placeholder="Search" :compResults="compResults" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
         
-          <ul class="xs-absolute results">
-            <li class="xs-border xs-p1 fill-white" v-for="(xx,i) in compResults" :key="i">
-              <a :href="`${xx._path}/`">
-                {{xx.title}}
-              </a>
-            </li>
-          </ul>
+    
          </div>
 
       </div>
@@ -77,12 +71,19 @@ export default {
         }
   },  mounted() {
 
-  
-     this.$on("searchChanged", results => {
+  if (process.browser) {
+  window.onNuxtReady((app) => {
+     this.$nextTick(() => { 
+       this.$on("searchChanged", results => {
       this.compResults = results;
 
 
     });
+     })
+
+  })
+}
+
  
 }
    

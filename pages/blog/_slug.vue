@@ -27,7 +27,6 @@ export default {
     let post = await import('~/content/blog/posts/' + params.slug + '.json');
     console.log(post)
     await store.commit('SET_TITLE', post.title)
-   await store.commit('SET_NAVHEIGHT', 102)
     return post;
   },
     head() {
@@ -43,6 +42,9 @@ export default {
        }
   },
    methods: {
+     onResize(event) {
+this.navHeight()
+  },
           navHeight() {
             var height = document.getElementById('navbar').clientHeight
             console.log(height);
@@ -50,15 +52,37 @@ export default {
         }
 
   },
+  updated() {
+    if (process.browser) {
+     
+         this.$nextTick(() => { 
+             this.navHeight() 
+     
+ })
+   
+     
+}
+  },
   mounted() {
 
-this.navHeight()
-    
-  },
-    updated() {
+  if (process.browser) {
+   
+         this.$nextTick(() => { 
+             this.navHeight() 
+               window.addEventListener('resize', this.onResize)
 
+         })
+
+   
+     
+}
     
   },
+  beforeDestroy() {
+  // Unregister the event listener before destroying this Vue instance
+  window.removeEventListener('resize', this.onResize)
+},
+
   computed:{
 allBlogPosts() {
     return this.$store.state.blogPosts;

@@ -1,6 +1,7 @@
 export default function ({ store }) {
     store.commit('SET_TITLE', '')
     store.commit('SET_RESULTS', null)
+    store.commit('SET_NAVHEIGHT', 0)
     if (store.state.menuIsActive === !false) {
       console.log('menu')
      

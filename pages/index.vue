@@ -24,7 +24,6 @@ export default {
 
 
   
-    store.commit('SET_NAVHEIGHT', 50)
   },  
   components: {
   
@@ -36,24 +35,44 @@ export default {
       };
   },
      methods: {
+        onResize(event) {
+this.navHeight()
+  },
      navHeight() {
        if (process.browser) {
             var height = document.getElementById('navbar').clientHeight
             console.log(height);
-            if (height > 0) {
+         
            this.$store.commit('SET_NAVHEIGHT', height)
-            }
+            
        }
         }
   },
+    updated() {
+         this.$nextTick(() => { 
+             this.navHeight() 
+         })
+  },
   mounted() {
   if (process.browser) {
-     this.navHeight()
+    
+             this.$nextTick(() => { 
+    this.navHeight() 
+  window.addEventListener('resize', this.onResize)
+
+
+
+ })
+   
      
 }
 
     
   },
+  beforeDestroy() {
+  // Unregister the event listener before destroying this Vue instance
+  window.removeEventListener('resize', this.onResize)
+},
     computed: {
   allBlogPosts() {
     return this.$store.state.blogPosts;
