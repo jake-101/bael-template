@@ -10,6 +10,7 @@
   import BaelFooter from '~/components/BaelFooter'
     import BaelHeader from '~/components/BaelHeader'
 
+
 export default {
    data() {
     return {

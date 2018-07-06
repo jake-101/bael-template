@@ -7,11 +7,22 @@
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
-        <div class="item xs-flex"><vue-fuse placeholder="Search" :keys="keys" :list="posts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>        
+        <div class="item xs-flex">
+                  <VueFuse v-model="query" placeholder="Search" :keys="keys" :list="posts" event-name="custChanged" input-Change-Event-Name="custSearchInputChanged"></VueFuse>
+
         </div>
-       <no-ssr> <ul class="xs-absolute results" v-if="this.$store.state.results.length">
-          <li class="xs-border xs-p1 fill-white" v-for="r in this.$store.state.results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
-        </ul></no-ssr>
+        <div id="list">
+          <transition-group name="list" tag="ul" class="xs-absolute results">
+            <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
+              <a :href="xx._path">
+                <span v-html="xx.title"></span>
+              </a>
+            </li>
+          </transition-group>
+        </div>
+       <!-- <no-ssr> <ul class="" v-if="this.$store.state.results.length">
+          <li class="" v-for="r in this.$store.state.results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
+        </ul></no-ssr> -->
       </div>
          <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
         <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; > {{blogtitle}}
@@ -23,6 +34,7 @@
   </nav>
 </template>
 <script>
+import VueFuse from "~/components/VueFuse";
 
 export default {
   props: ['blogtitle','posts','navheight'],
@@ -32,15 +44,38 @@ export default {
     return { 
           results: [], 
        keys: ["title", "body"],
-       navbarheight: '60' };
+       navbarheight: '60',
+         prodsupport: [],
+      allitems: [],
+      query:'',
+      term: "",
+      termtwo: "",
+      type: [],
+        options: {
+         keys: ["title", "body"]
+      },
+      defaultAllToggle: true,
+      componentResults: [],
+      methodResults: [],
+       };
   },
+  components: {VueFuse},
   computed: {
 
       headerSiteName() {
     return this.$store.state.siteInfo.sitename
   }
 },
+ watch: {
 
+    term() {
+      this.$search(this.term, this.allitems, this.options).then(results => {
+        this.methodResults = results;
+
+      })
+    },
+      
+  },
 
 
 
@@ -64,9 +99,10 @@ export default {
   },  mounted() {
 
     if (process.browser) {
-        this.$on('fuseResultsUpdated', results => {
-           this.$store.commit('SET_RESULTS', results)
-    })
+     this.$on("custChanged", results => {
+      this.componentResults = results;
+
+    });
       this.navHeight()
  
 }
