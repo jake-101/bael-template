@@ -1,7 +1,7 @@
 <template>
-<no-ssr>
+
   <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
-</no-ssr>
+
 </template>
 
 <script>
@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     initFuse() {
+      if (process.browser) {
       this.fuse = new Fuse(this.list, this.options);
       if (this.defaultAll) {
         this.result = this.list;
@@ -65,8 +66,10 @@ export default {
       if (this.search) {
         this.value = this.search;
       }
+      }
     },
     fuseSearch() {
+      if (process.browser) {
       if (this.value.trim() === "")
         if (this.defaultAll) {
           this.result = this.list;
@@ -74,14 +77,13 @@ export default {
           this.result = [];
         }
       else this.result = this.fuse.search(this.value.trim());
+      }
     }
   },
   /**
    * Vue 1.x
    */
-  ready() {
-    this.initFuse();
-  },
+
   /**
    * Vue 2.x
    */
