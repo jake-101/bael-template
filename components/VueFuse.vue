@@ -1,7 +1,7 @@
 <template>
-
+<no-ssr>
   <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
-
+</no-ssr>
 </template>
 
 <script>

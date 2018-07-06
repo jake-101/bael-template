@@ -8,7 +8,7 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
         <div class="item xs-flex">
-                  <no-ssr><VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse></no-ssr>
+              <VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
 
         </div>
           <transition-group name="list" tag="ul" class="xs-absolute results">
