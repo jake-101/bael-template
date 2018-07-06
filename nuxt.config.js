@@ -49,10 +49,7 @@ module.exports = {
   middleware: 'title',
  },
   generate: {
-    routes: dynamicRoutes,
-    minify: {
-      collapseWhitespace: false
-    }
+    routes: dynamicRoutes
   },
   plugins: [{ssr: false, src:'~/plugins/vuefuse'},{
     src: "~/plugins/moment",
