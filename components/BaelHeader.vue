@@ -8,18 +8,16 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
         <div class="item xs-flex">
-                  <VueFuse v-model="query" placeholder="Search" :keys="keys" :list="posts" event-name="custChanged" input-Change-Event-Name="custSearchInputChanged"></VueFuse>
+                  <VueFuse v-if="posts" placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
 
         </div>
-        <div id="list">
-          <transition-group name="list" tag="ul" class="xs-absolute results">
+          <transition-group v-if="componentResults" name="list" tag="ul" class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
-              <a :href="xx._path">
+              <nuxt-link :to="xx._path">
                 <span v-html="xx.title"></span>
-              </a>
+              </nuxt-link>
             </li>
           </transition-group>
-        </div>
        <!-- <no-ssr> <ul class="" v-if="this.$store.state.results.length">
           <li class="" v-for="r in this.$store.state.results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
         </ul></no-ssr> -->
@@ -55,7 +53,7 @@ export default {
          keys: ["title", "body"]
       },
       defaultAllToggle: true,
-      componentResults: [],
+      compResults: [],
       methodResults: [],
        };
   },
@@ -64,16 +62,15 @@ export default {
 
       headerSiteName() {
     return this.$store.state.siteInfo.sitename
+  },
+  componentResults() {
+        return this.$store.state.results
+
   }
 },
  watch: {
 
-    term() {
-      this.$search(this.term, this.allitems, this.options).then(results => {
-        this.methodResults = results;
 
-      })
-    },
       
   },
 
@@ -99,8 +96,10 @@ export default {
   },  mounted() {
 
     if (process.browser) {
-     this.$on("custChanged", results => {
-      this.componentResults = results;
+     this.$on("searchChanged", results => {
+      this.compResults = results;
+                 this.$store.commit('SET_RESULTS', results)
+
 
     });
       this.navHeight()
