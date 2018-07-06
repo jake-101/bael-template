@@ -7,9 +7,9 @@
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
-        <p class="item xs-flex"> <vue-fuse v-if="posts" placeholder="Search" :keys="keys" :list="posts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
+        <div class="item xs-flex"><vue-fuse placeholder="Search" :keys="keys" :list="posts" :defaultAll="false" class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0"></vue-fuse>
         
-        </p>
+        </div>
         <ul class="xs-absolute results" v-if="results.length">
           <li class="xs-border xs-p1 fill-white" v-for="r in results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
         </ul>
@@ -54,22 +54,20 @@ export default {
         }
   },
   updated() {
-        this.$on('fuseResultsUpdated', results => {
-      this.results = results
-    })
+
     if (process.browser) {
 
-      this.navHeight()
+     
  
 }
    
     
   },  mounted() {
+
+    if (process.browser) {
         this.$on('fuseResultsUpdated', results => {
       this.results = results
     })
-    if (process.browser) {
-
       this.navHeight()
  
 }

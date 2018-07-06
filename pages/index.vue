@@ -38,14 +38,14 @@ export default {
   },
      methods: {
      navHeight() {
-            var height = this.$refs.navBar
+            var height = document.getElementById('navbar').clientHeight
             console.log(height);
            this.$store.commit('SET_NAVHEIGHT', height)
         }
   },
   mounted() {
 
-     
+     this.navHeight()
      
 
 
