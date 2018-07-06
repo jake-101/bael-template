@@ -9,11 +9,7 @@
         </div>
         </div> 
           <div class="xs-border xs-p2 bcg-item">
-    <!-- <div class="item xs-block xs-full-height xs-flex" v-if="this.totalpages > this.page">
-      <nuxt-link to="page/2" class="xs-text-center xs-flex xs-full-height xs-flex-align-center xs-flex-justify-center xs-text-center">
-        Next page
-        </nuxt-link>
-        </div> -->
+
     </div>
   
 </div>

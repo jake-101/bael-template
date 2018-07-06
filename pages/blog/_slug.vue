@@ -24,11 +24,6 @@
 
 export default {
   async asyncData({ params,app,payload,route,store }) {
-    // const postPromise = process.BROWSER_BUILD
-    //   ? import('~/content/blog/posts/' + params.slug + '.json')
-    //   : Promise.resolve(
-    //       require('~/content/blog/posts/' + params.slug + '.json')
-    //     );
 
     let post = await import('~/content/blog/posts/' + params.slug + '.json');
     console.log(post)
