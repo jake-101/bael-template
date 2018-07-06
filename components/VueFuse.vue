@@ -59,6 +59,8 @@ export default {
   methods: {
     initFuse() {
       if (process.browser) {
+          var Fuse = require('fuse.js')
+
       this.fuse = new Fuse(this.list, this.options);
       if (this.defaultAll) {
         this.result = this.list;
