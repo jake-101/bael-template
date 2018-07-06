@@ -38,16 +38,18 @@ export default {
   },
      methods: {
      navHeight() {
+       if (process.browser) {
             var height = document.getElementById('navbar').clientHeight
             console.log(height);
            this.$store.commit('SET_NAVHEIGHT', height)
+       }
         }
   },
   mounted() {
-
+  if (process.browser) {
      this.navHeight()
      
-
+}
 
     
   },
