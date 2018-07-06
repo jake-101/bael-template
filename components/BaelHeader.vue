@@ -13,7 +13,7 @@
         </div>
         <div>
           <ul class="xs-absolute results">
-            <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
+            <li class="xs-border xs-p1 fill-white" v-for="xx in compResults" :key="xx._path">
               <nuxt-link :to="`${xx._path}`">
                 {{xx.title}}
               </nuxt-link>
@@ -96,7 +96,6 @@ export default {
     if (process.browser) {
      this.$on("searchChanged", results => {
       this.compResults = results;
-                 this.$store.commit('SET_RESULTS', results)
 
 
     });
