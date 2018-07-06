@@ -10,7 +10,7 @@ var dynamicRoutes = getDynamicPaths({
 
 
 module.exports = {
-  mode: "spa",
+  mode: "universal",
   /*
   ** Headers of the page
   */
@@ -39,7 +39,9 @@ module.exports = {
     breaks: true,
     html: true
   },
-  workbox: {dev: true},
+  workbox: {
+    fetch: true,
+    dev: true},
 
   /*
   ** Route config for pre-rendering
