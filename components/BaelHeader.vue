@@ -11,17 +11,19 @@
               <VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
 
         </div>
-          <transition-group name="list" tag="ul" class="xs-absolute results">
+        <div>
+          <ul class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
               <nuxt-link :to="`${xx._path}`">
                 {{xx.title}}
               </nuxt-link>
             </li>
-          </transition-group>
+          </ul>
+          </div>
 
       </div>
          <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
-        <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; > {{blogtitle}}
+        <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; - {{blogtitle}}
         </div>
       </div>
  
@@ -76,8 +78,7 @@ export default {
 
     methods: {
      navHeight() {
-       var nav = this.$refs.navBar
-            var height = nav.clientHeight;
+           var height = document.getElementById('navbar').clientHeight
             console.log(height);
            this.$store.commit('SET_NAVHEIGHT', height)
         }
