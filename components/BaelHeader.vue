@@ -1,18 +1,15 @@
 <template>
-  <nav ref="navBar" id="navbar" class="sm-border-bottom">
+<nav ref="navBar" id="navbar" class="sm-border-bottom">
     <div class="r">
 
       <div class="c-4 xs-text-left xs-p2 sm-border-right">
         <div class="item bold sitename"><nuxt-link to="/" exact>{{headerSiteName}}</nuxt-link></div>
       </div>
 
-      <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
+      <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2">
         <div class="item xs-flex">
               <VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
-
-        </div>
-        <no-ssr>
-        <div>
+        
           <ul class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="(xx,i) in compResults" :key="i">
               <a :href="`${xx._path}/`">
@@ -20,10 +17,10 @@
               </a>
             </li>
           </ul>
-          </div>  </no-ssr>
+         </div>
 
       </div>
-         <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
+         <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
         <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; - {{blogtitle}}
         </div>
       </div>
