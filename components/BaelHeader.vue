@@ -14,7 +14,7 @@
         <div>
           <ul class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="xx in compResults" :key="xx._path">
-              <nuxt-link :to="`${xx._path}`">
+              <nuxt-link :to="`${xx._path}/`">
                 {{xx.title}}
               </nuxt-link>
             </li>
