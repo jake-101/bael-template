@@ -1,7 +1,7 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
     <SlideOut></SlideOut>
-   <BaelHeader :navheight="navbarheightdefault" :blogtitle="blogtitle" :posts="blogposts" />
+   <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
     <nuxt/>
   </section>
 </template>

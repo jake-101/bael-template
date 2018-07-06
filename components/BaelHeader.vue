@@ -35,14 +35,13 @@
 import VueFuse from "~/components/VueFuse";
 
 export default {
-  props: ['blogtitle','posts','navheight'],
+  props: ['blogtitle','posts'],
     data() {
   
     
     return { 
           results: [], 
        keys: ["title", "body"],
-       navbarheight: '60',
          prodsupport: [],
       allitems: [],
       query:'',
@@ -101,7 +100,6 @@ export default {
 
 
     });
-      this.navHeight()
  
 }
    

@@ -26,7 +26,13 @@
   import BaelFooter from '~/components/BaelFooter'
     import BaelHeader from '~/components/BaelHeader'
 
-export default {    
+export default {  
+    async asyncData({ params,app,payload,route,store }) {
+
+
+  
+    store.commit('SET_NAVHEIGHT', 50)
+  },  
   components: {
     SlideOut,BaelFooter,BaelHeader
   },
@@ -41,7 +47,9 @@ export default {
        if (process.browser) {
             var height = document.getElementById('navbar').clientHeight
             console.log(height);
+            if (height > 0) {
            this.$store.commit('SET_NAVHEIGHT', height)
+            }
        }
         }
   },
