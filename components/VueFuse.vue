@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     initFuse() {
-      if (process.browser) {
 
       this.fuse = new Fuse(this.list, this.options);
       if (this.defaultAll) {
@@ -65,10 +64,9 @@ export default {
       if (this.search) {
         this.value = this.search;
       }
-      }
+      
     },
     fuseSearch() {
-      if (process.browser) {
       if (this.value.trim() === "")
         if (this.defaultAll) {
           this.result = this.list;
@@ -77,7 +75,7 @@ export default {
         }
       else this.result = this.fuse.search(this.value.trim());
       }
-    }
+    
   },
   /**
    * Vue 1.x
