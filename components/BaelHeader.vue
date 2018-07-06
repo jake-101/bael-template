@@ -8,19 +8,19 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
         <div class="item xs-flex">
-                  <VueFuse v-show="posts" placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
+                  <no-ssr><VueFuse placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse></no-ssr>
 
         </div>
-          <transition-group v-show="componentResults" name="list" tag="ul" class="xs-absolute results">
+          <transition-group name="list" tag="ul" class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
-              <nuxt-link :to="xx._path">
+              <nuxt-link :to="`${xx._path}`">
                 {{xx.title}}
               </nuxt-link>
             </li>
           </transition-group>
 
       </div>
-         <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
+         <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
         <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; > {{blogtitle}}
         </div>
       </div>
