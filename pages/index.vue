@@ -17,14 +17,11 @@
     </div>
   
 </div>
-<BaelFooter/>
+
   </div>
 </template>
 
 <script>
-  import SlideOut from '~/components/SlideOut'
-  import BaelFooter from '~/components/BaelFooter'
-    import BaelHeader from '~/components/BaelHeader'
 
 export default {  
     async asyncData({ params,app,payload,route,store }) {
@@ -34,7 +31,7 @@ export default {
     store.commit('SET_NAVHEIGHT', 50)
   },  
   components: {
-    SlideOut,BaelFooter,BaelHeader
+  
   },
   data() {
 

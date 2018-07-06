@@ -1,8 +1,10 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
-    <SlideOut></SlideOut>
+
    <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
     <nuxt/>
+        <SlideOut></SlideOut>
+        <BaelFooter/>
   </section>
 </template>
 <script>
@@ -18,9 +20,7 @@ export default {
        }
   },
     computed:{
-        navbarheightdefault() {
-    return this.$store.state.navheight;
-  },
+
 
   blogposts() {
     return this.$store.state.blogPosts;
@@ -30,7 +30,7 @@ export default {
   }
   },
       components: {
-    SlideOut,BaelHeader
+    SlideOut,BaelHeader,BaelFooter
   }
 }
 

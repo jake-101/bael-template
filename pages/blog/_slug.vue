@@ -19,9 +19,7 @@
 
 
 <script>
-  import SlideOut from '~/components/SlideOut'
-  import BaelFooter from '~/components/BaelFooter'
-    import BaelHeader from '~/components/BaelHeader'
+
         import MdWrapper from '~/components/MdWrapper'
 
 export default {
@@ -76,7 +74,7 @@ allBlogPosts() {
   }
   },
     components: {
-    SlideOut,BaelFooter,BaelHeader,MdWrapper
+    MdWrapper
   }
 };
 </script>
