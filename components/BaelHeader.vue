@@ -8,10 +8,10 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right  xs-p2">
         <div class="item xs-flex">
-                  <VueFuse v-if="posts" placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
+                  <VueFuse v-show="posts" placeholder="Search" :keys="keys" :list="posts" event-name="searchChanged"></VueFuse>
 
         </div>
-          <transition-group v-if="componentResults" name="list" tag="ul" class="xs-absolute results">
+          <transition-group v-show="componentResults" name="list" tag="ul" class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
               <nuxt-link :to="xx._path">
                 <span v-html="xx.title"></span>
