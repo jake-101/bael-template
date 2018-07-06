@@ -14,13 +14,11 @@
           <transition-group v-show="componentResults" name="list" tag="ul" class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="xx in componentResults" :key="xx._path">
               <nuxt-link :to="xx._path">
-                <span v-html="xx.title"></span>
+                {{xx.title}}
               </nuxt-link>
             </li>
           </transition-group>
-       <!-- <no-ssr> <ul class="" v-if="this.$store.state.results.length">
-          <li class="" v-for="r in this.$store.state.results" :key="r._path"><a :href="r._path">{{r.title}}</a></li>
-        </ul></no-ssr> -->
+
       </div>
          <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
         <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; > {{blogtitle}}
