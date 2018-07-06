@@ -200,6 +200,42 @@ var Gradient = function (_Value) {
     };
 
     /**
+     * Look for at word
+     */
+
+
+    Gradient.prototype.isRadial = function isRadial(params) {
+        var state = 'before';
+        for (var _iterator2 = params, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+            var _ref2;
+
+            if (_isArray2) {
+                if (_i2 >= _iterator2.length) break;
+                _ref2 = _iterator2[_i2++];
+            } else {
+                _i2 = _iterator2.next();
+                if (_i2.done) break;
+                _ref2 = _i2.value;
+            }
+
+            var param = _ref2;
+
+            if (state === 'before' && param.type === 'space') {
+                state = 'at';
+            } else if (state === 'at' && param.value === 'at') {
+                state = 'after';
+            } else if (state === 'after' && param.type === 'space') {
+                return true;
+            } else if (param.type === 'div') {
+                break;
+            } else {
+                state = 'before';
+            }
+        }
+        return false;
+    };
+
+    /**
      * Change new direction to old
      */
 
@@ -210,7 +246,7 @@ var Gradient = function (_Value) {
                 this.fixDirection(params);
             } else if (params[0].value.indexOf('deg') !== -1) {
                 this.fixAngle(params);
-            } else if (params[2] && params[2].value === 'at') {
+            } else if (this.isRadial(params)) {
                 this.fixRadial(params);
             }
         }
@@ -225,19 +261,19 @@ var Gradient = function (_Value) {
     Gradient.prototype.fixDirection = function fixDirection(params) {
         params.splice(0, 2);
 
-        for (var _iterator2 = params, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-            var _ref2;
+        for (var _iterator3 = params, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+            var _ref3;
 
-            if (_isArray2) {
-                if (_i2 >= _iterator2.length) break;
-                _ref2 = _iterator2[_i2++];
+            if (_isArray3) {
+                if (_i3 >= _iterator3.length) break;
+                _ref3 = _iterator3[_i3++];
             } else {
-                _i2 = _iterator2.next();
-                if (_i2.done) break;
-                _ref2 = _i2.value;
+                _i3 = _iterator3.next();
+                if (_i3.done) break;
+                _ref3 = _i3.value;
             }
 
-            var param = _ref2;
+            var param = _ref3;
 
             if (param.type === 'div') {
                 break;
@@ -267,12 +303,28 @@ var Gradient = function (_Value) {
 
 
     Gradient.prototype.fixRadial = function fixRadial(params) {
-        var first = params[0];
+        var first = [];
         var second = [];
-        var i = void 0;
+        var a = void 0,
+            b = void 0,
+            c = void 0,
+            i = void 0,
+            next = void 0;
+
+        for (i = 0; i < params.length - 2; i++) {
+            a = params[i];
+            b = params[i + 1];
+            c = params[i + 2];
+            if (a.type === 'space' && b.value === 'at' && c.type === 'space') {
+                next = i + 3;
+                break;
+            } else {
+                first.push(a);
+            }
+        }
 
         var div = void 0;
-        for (i = 4; i < params.length; i++) {
+        for (i = next; i < params.length; i++) {
             if (params[i].type === 'div') {
                 div = params[i];
                 break;
@@ -281,7 +333,7 @@ var Gradient = function (_Value) {
             }
         }
 
-        params.splice.apply(params, [0, i].concat(second, [div, first]));
+        params.splice.apply(params, [0, i].concat(second, [div], first));
     };
 
     Gradient.prototype.revertDirection = function revertDirection(word) {
@@ -318,31 +370,7 @@ var Gradient = function (_Value) {
         }
 
         var params = [[]];
-        for (var _iterator3 = nodes, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-            var _ref3;
-
-            if (_isArray3) {
-                if (_i3 >= _iterator3.length) break;
-                _ref3 = _iterator3[_i3++];
-            } else {
-                _i3 = _iterator3.next();
-                if (_i3.done) break;
-                _ref3 = _i3.value;
-            }
-
-            var i = _ref3;
-
-            params[params.length - 1].push(i);
-            if (i.type === 'div' && i.value === ',') {
-                params.push([]);
-            }
-        }
-
-        this.oldDirection(params);
-        this.colorStops(params);
-
-        node.nodes = [];
-        for (var _iterator4 = params, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+        for (var _iterator4 = nodes, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
             var _ref4;
 
             if (_isArray4) {
@@ -354,7 +382,31 @@ var Gradient = function (_Value) {
                 _ref4 = _i4.value;
             }
 
-            var param = _ref4;
+            var i = _ref4;
+
+            params[params.length - 1].push(i);
+            if (i.type === 'div' && i.value === ',') {
+                params.push([]);
+            }
+        }
+
+        this.oldDirection(params);
+        this.colorStops(params);
+
+        node.nodes = [];
+        for (var _iterator5 = params, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+            var _ref5;
+
+            if (_isArray5) {
+                if (_i5 >= _iterator5.length) break;
+                _ref5 = _iterator5[_i5++];
+            } else {
+                _i5 = _iterator5.next();
+                if (_i5.done) break;
+                _ref5 = _i5.value;
+            }
+
+            var param = _ref5;
 
             node.nodes = node.nodes.concat(param);
         }
@@ -377,19 +429,19 @@ var Gradient = function (_Value) {
             return params.unshift([{ type: 'word', value: this.oldDirections.bottom }, div]);
         } else {
             var _words = [];
-            for (var _iterator5 = params[0].slice(2), _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-                var _ref5;
+            for (var _iterator6 = params[0].slice(2), _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+                var _ref6;
 
-                if (_isArray5) {
-                    if (_i5 >= _iterator5.length) break;
-                    _ref5 = _iterator5[_i5++];
+                if (_isArray6) {
+                    if (_i6 >= _iterator6.length) break;
+                    _ref6 = _iterator6[_i6++];
                 } else {
-                    _i5 = _iterator5.next();
-                    if (_i5.done) break;
-                    _ref5 = _i5.value;
+                    _i6 = _iterator6.next();
+                    if (_i6.done) break;
+                    _ref6 = _i6.value;
                 }
 
-                var node = _ref5;
+                var node = _ref6;
 
                 if (node.type === 'word') {
                     _words.push(node.value.toLowerCase());
@@ -410,19 +462,19 @@ var Gradient = function (_Value) {
 
 
     Gradient.prototype.cloneDiv = function cloneDiv(params) {
-        for (var _iterator6 = params, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-            var _ref6;
+        for (var _iterator7 = params, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+            var _ref7;
 
-            if (_isArray6) {
-                if (_i6 >= _iterator6.length) break;
-                _ref6 = _iterator6[_i6++];
+            if (_isArray7) {
+                if (_i7 >= _iterator7.length) break;
+                _ref7 = _iterator7[_i7++];
             } else {
-                _i6 = _iterator6.next();
-                if (_i6.done) break;
-                _ref6 = _i6.value;
+                _i7 = _iterator7.next();
+                if (_i7.done) break;
+                _ref7 = _i7.value;
             }
 
-            var i = _ref6;
+            var i = _ref7;
 
             if (i.type === 'div' && i.value === ',') {
                 return i;

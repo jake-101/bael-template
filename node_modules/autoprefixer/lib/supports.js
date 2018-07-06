@@ -90,8 +90,12 @@ var Supports = function () {
             return rule.nodes;
         }
 
+        var result = { warn: function warn() {
+                return null;
+            } };
+
         var prefixer = this.prefixer().add[rule.first.prop];
-        prefixer && prefixer.process && prefixer.process(rule.first);
+        prefixer && prefixer.process && prefixer.process(rule.first, result);
 
         for (var _iterator = rule.nodes, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
             var _ref;

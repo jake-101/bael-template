@@ -14,9 +14,13 @@ var startServer = function () {
         _ref2$logger = _ref2.logger,
         logger = _ref2$logger === undefined ? new Logger() : _ref2$logger,
         _ref2$defaultSizes = _ref2.defaultSizes,
-        defaultSizes = _ref2$defaultSizes === undefined ? 'parsed' : _ref2$defaultSizes;
+        defaultSizes = _ref2$defaultSizes === undefined ? 'parsed' : _ref2$defaultSizes,
+        _ref2$excludeAssets = _ref2.excludeAssets,
+        excludeAssets = _ref2$excludeAssets === undefined ? null : _ref2$excludeAssets;
 
-    var chartData = getChartData(logger, bundleStats, bundleDir);
+    var analyzerOpts = { logger, excludeAssets };
+
+    var chartData = getChartData(analyzerOpts, bundleStats, bundleDir);
 
     if (!chartData) return;
 
@@ -73,7 +77,7 @@ var startServer = function () {
     };
 
     function updateChartData(bundleStats) {
-      var newChartData = getChartData(logger, bundleStats, bundleDir);
+      var newChartData = getChartData(analyzerOpts, bundleStats, bundleDir);
 
       if (!newChartData) return;
 
@@ -134,9 +138,11 @@ function generateReport(bundleStats, opts) {
       _ref3$logger = _ref3.logger,
       logger = _ref3$logger === undefined ? new Logger() : _ref3$logger,
       _ref3$defaultSizes = _ref3.defaultSizes,
-      defaultSizes = _ref3$defaultSizes === undefined ? 'parsed' : _ref3$defaultSizes;
+      defaultSizes = _ref3$defaultSizes === undefined ? 'parsed' : _ref3$defaultSizes,
+      _ref3$excludeAssets = _ref3.excludeAssets,
+      excludeAssets = _ref3$excludeAssets === undefined ? null : _ref3$excludeAssets;
 
-  var chartData = getChartData(logger, bundleStats, bundleDir);
+  var chartData = getChartData({ logger, excludeAssets }, bundleStats, bundleDir);
 
   if (!chartData) return;
 
@@ -165,22 +171,24 @@ function getAssetContent(filename) {
   return fs.readFileSync(`${projectRoot}/public/${filename}`, 'utf8');
 }
 
-function getChartData(logger) {
+function getChartData(analyzerOpts) {
   var chartData = void 0;
+  var logger = analyzerOpts.logger;
+
 
   try {
     for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       args[_key - 1] = arguments[_key];
     }
 
-    chartData = analyzer.getViewerData.apply(analyzer, args.concat([{ logger }]));
+    chartData = analyzer.getViewerData.apply(analyzer, args.concat([analyzerOpts]));
   } catch (err) {
     logger.error(`Could't analyze webpack bundle:\n${err}`);
     logger.debug(err.stack);
     chartData = null;
   }
 
-  if (_.isEmpty(chartData)) {
+  if (_.isPlainObject(chartData) && _.isEmpty(chartData)) {
     logger.error("Could't find any javascript bundles in provided stats file");
     chartData = null;
   }

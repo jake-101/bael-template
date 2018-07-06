@@ -17,14 +17,16 @@ var names = {
     and_uc: 'UC for Android'
 };
 
-var prefix = function prefix(name, prefixes) {
-    var out = '  ' + name + ': ';
+function prefix(name, prefixes, note) {
+    var out = '  ' + name;
+    if (note) out += ' *';
+    out += ': ';
     out += prefixes.map(function (i) {
         return i.replace(/^-(.*)-$/g, '$1');
     }).join(', ');
     out += '\n';
     return out;
-};
+}
 
 module.exports = function (prefixes) {
     if (prefixes.browsers.selected.length === 0) {
@@ -107,10 +109,13 @@ module.exports = function (prefixes) {
 
     var values = '';
     var props = '';
+    var hadGrid = false;
     for (var _name in prefixes.add) {
         var _data = prefixes.add[_name];
         if (_name[0] !== '@' && _data.prefixes) {
-            props += prefix(_name, _data.prefixes);
+            var grid = _name.indexOf('grid-') === 0;
+            if (grid) hadGrid = true;
+            props += prefix(_name, _data.prefixes, grid);
         }
 
         if (!_data.values) {
@@ -130,7 +135,9 @@ module.exports = function (prefixes) {
 
             var value = _ref3;
 
-            var string = prefix(value.name, value.prefixes);
+            var _grid = value.name.indexOf('grid') !== -1;
+            if (_grid) hadGrid = true;
+            var string = prefix(value.name, value.prefixes, _grid);
             if (values.indexOf(string) === -1) {
                 values += string;
             }
@@ -142,6 +149,9 @@ module.exports = function (prefixes) {
     }
     if (values !== '') {
         out += '\nValues:\n' + values;
+    }
+    if (hadGrid) {
+        out += '\n* - Prefixes will be added only on grid: true option.\n';
     }
 
     if (atrules === '' && selectors === '' && props === '' && values === '') {

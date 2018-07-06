@@ -65,9 +65,14 @@ module.exports = postcss.plugin('autoprefixer', function () {
         options.grid = false;
     }
 
+    var brwlstOpts = {
+        ignoreUnknownVersions: options.ignoreUnknownVersions,
+        stats: options.stats
+    };
+
     var loadPrefixes = function loadPrefixes(opts) {
         var data = module.exports.data;
-        var browsers = new Browsers(data.browsers, reqs, opts, options.stats);
+        var browsers = new Browsers(data.browsers, reqs, opts, brwlstOpts);
         var key = browsers.selected.join(', ') + JSON.stringify(options);
 
         if (!cache[key]) {

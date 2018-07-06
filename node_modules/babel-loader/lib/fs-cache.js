@@ -73,16 +73,16 @@ var write = function write(filename, result, callback) {
  * @return {String}
  */
 var filename = function filename(source, identifier, options) {
-  var hash = crypto.createHash("SHA1");
+  var hash = crypto.createHash("md4");
   var contents = JSON.stringify({
     source: source,
     options: options,
     identifier: identifier
   });
 
-  hash.end(contents);
+  hash.update(contents);
 
-  return hash.read().toString("hex") + ".json.gz";
+  return hash.digest("hex") + ".json.gz";
 };
 
 /**

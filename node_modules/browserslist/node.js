@@ -1,3 +1,4 @@
+var region = require('caniuse-lite/dist/unpacker/region').default
 var path = require('path')
 var fs = require('fs')
 
@@ -6,6 +7,8 @@ var BrowserslistError = require('./error')
 var IS_SECTION = /^\s*\[(.+)\]\s*$/
 var CONFIG_PATTERN = /^browserslist-config-/
 var SCOPED_CONFIG__PATTERN = /@[^./]+\/browserslist-config(-|$)/
+var FORMAT = 'Browserslist config should be a string or an array ' +
+             'of strings with browser queries'
 
 var filenessCache = { }
 var configCache = { }
@@ -46,6 +49,18 @@ function eachParent (file, callback) {
   return undefined
 }
 
+function check (section) {
+  if (Array.isArray(section)) {
+    for (var i = 0; i < section.length; i++) {
+      if (typeof section[i] !== 'string') {
+        throw new BrowserslistError(FORMAT)
+      }
+    }
+  } else if (typeof section !== 'string') {
+    throw new BrowserslistError(FORMAT)
+  }
+}
+
 function pickEnv (config, opts) {
   if (typeof config !== 'object') return config
 
@@ -57,7 +72,7 @@ function pickEnv (config, opts) {
   } else if (process.env.NODE_ENV) {
     name = process.env.NODE_ENV
   } else {
-    name = 'development'
+    name = 'production'
   }
 
   return config[name] || config.defaults
@@ -70,9 +85,14 @@ function parsePackage (file) {
       '`browserlist` key instead of `browserslist` in ' + file)
   }
   var list = config.browserslist
-  if (typeof list === 'object' && list.length) {
+  if (Array.isArray(list)) {
     list = { defaults: list }
   }
+
+  for (var i in list) {
+    check(list[i])
+  }
+
   return list
 }
 
@@ -80,7 +100,7 @@ module.exports = {
   loadQueries: function loadQueries (context, name) {
     if (!context.dangerousExtend) checkExtend(name)
     // eslint-disable-next-line security/detect-non-literal-require
-    var queries = require(name)
+    var queries = require(require.resolve(name, { paths: ['.'] }))
     if (!Array.isArray(queries)) {
       throw new BrowserslistError(
         '`' + name + '` config exports not an array of queries')
@@ -109,6 +129,10 @@ module.exports = {
       }
     }
 
+    if (stats && 'dataByBrowser' in stats) {
+      stats = stats.dataByBrowser
+    }
+
     return stats
   },
 
@@ -129,9 +153,24 @@ module.exports = {
     }
   },
 
+  loadCountry: function loadCountry (usage, country) {
+    var code = country.replace(/[^\w-]/g, '')
+    if (!usage[code]) {
+      // eslint-disable-next-line security/detect-non-literal-require
+      var compressed = require('caniuse-lite/data/regions/' + code + '.js')
+      var data = region(compressed)
+      usage[country] = { }
+      for (var i in data) {
+        for (var j in data[i]) {
+          usage[country][i + ' ' + j] = data[i][j]
+        }
+      }
+    }
+  },
+
   parseConfig: function parseConfig (string) {
     var result = { defaults: [] }
-    var section = 'defaults'
+    var sections = ['defaults']
 
     string.toString()
       .replace(/#[^\n]*/g, '')
@@ -144,10 +183,18 @@ module.exports = {
       })
       .forEach(function (line) {
         if (IS_SECTION.test(line)) {
-          section = line.match(IS_SECTION)[1].trim()
-          result[section] = result[section] || []
+          sections = line.match(IS_SECTION)[1].trim().split(' ')
+          sections.forEach(function (section) {
+            if (result[section]) {
+              throw new BrowserslistError(
+                'Dublicate section ' + section + ' in Browserslist config')
+            }
+            result[section] = []
+          })
         } else {
-          result[section].push(line)
+          sections.forEach(function (section) {
+            result[section].push(line)
+          })
         }
       })
 

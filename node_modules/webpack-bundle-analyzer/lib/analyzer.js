@@ -12,6 +12,9 @@ var Folder = require('./tree/Folder').default;
 var _require = require('./parseUtils'),
     parseBundle = _require.parseBundle;
 
+var _require2 = require('./utils'),
+    createAssetsFilter = _require2.createAssetsFilter;
+
 var FILENAME_QUERY_REGEXP = /\?.*$/;
 
 module.exports = {
@@ -22,11 +25,13 @@ module.exports = {
 function getViewerData(bundleStats, bundleDir, opts) {
   var _ref = opts || {},
       _ref$logger = _ref.logger,
-      logger = _ref$logger === undefined ? new Logger() : _ref$logger;
+      logger = _ref$logger === undefined ? new Logger() : _ref$logger,
+      _ref$excludeAssets = _ref.excludeAssets,
+      excludeAssets = _ref$excludeAssets === undefined ? null : _ref$excludeAssets;
+
+  var isAssetIncluded = createAssetsFilter(excludeAssets);
 
   // Sometimes all the information is located in `children` array (e.g. problem in #10)
-
-
   if (_.isEmpty(bundleStats.assets) && !_.isEmpty(bundleStats.children)) {
     bundleStats = bundleStats.children[0];
   }
@@ -37,7 +42,7 @@ function getViewerData(bundleStats, bundleDir, opts) {
     // See #22
     asset.name = asset.name.replace(FILENAME_QUERY_REGEXP, '');
 
-    return _.endsWith(asset.name, '.js') && !_.isEmpty(asset.chunks);
+    return _.endsWith(asset.name, '.js') && !_.isEmpty(asset.chunks) && isAssetIncluded(asset.name);
   });
 
   // Trying to parse bundle assets and get real module sizes if `bundleDir` is provided
@@ -62,14 +67,9 @@ function getViewerData(bundleStats, bundleDir, opts) {
         try {
           bundleInfo = parseBundle(assetFile);
         } catch (err) {
-          bundleInfo = null;
-        }
-
-        if (!bundleInfo) {
-          logger.warn(`\nCouldn't parse bundle asset "${assetFile}".\n` + 'Analyzer will use module sizes from stats file.\n');
-          parsedModules = null;
-          bundlesSources = null;
-          break;
+          var msg = err.code === 'ENOENT' ? 'no such file' : err.message;
+          logger.warn(`Error parsing bundle asset "${assetFile}": ${msg}`);
+          continue;
         }
 
         bundlesSources[statAsset.name] = bundleInfo.src;
@@ -89,18 +89,25 @@ function getViewerData(bundleStats, bundleDir, opts) {
         }
       }
     }
+
+    if (_.isEmpty(bundlesSources)) {
+      bundlesSources = null;
+      parsedModules = null;
+      logger.warn('\nNo bundles were parsed. Analyzer will show only original module sizes from stats file.\n');
+    }
   }
 
+  var modules = getBundleModules(bundleStats);
   var assets = _.transform(bundleStats.assets, function (result, statAsset) {
     var asset = result[statAsset.name] = _.pick(statAsset, 'size');
 
-    if (bundlesSources) {
+    if (bundlesSources && _.has(bundlesSources, statAsset.name)) {
       asset.parsedSize = bundlesSources[statAsset.name].length;
       asset.gzipSize = gzipSize.sync(bundlesSources[statAsset.name]);
     }
 
     // Picking modules from current bundle script
-    asset.modules = _(bundleStats.modules).filter(function (statModule) {
+    asset.modules = _(modules).filter(function (statModule) {
       return assetHasModule(statAsset, statModule);
     }).each(function (statModule) {
       if (parsedModules) {
@@ -117,7 +124,8 @@ function getViewerData(bundleStats, bundleDir, opts) {
       // Not using `asset.size` here provided by Webpack because it can be very confusing when `UglifyJsPlugin` is used.
       // In this case all module sizes from stats file will represent unminified module sizes, but `asset.size` will
       // be the size of minified bundle.
-      statSize: asset.tree.size,
+      // Using `asset.size` only if current asset doesn't contain any modules (resulting size equals 0)
+      statSize: asset.tree.size || asset.size,
       parsedSize: asset.parsedSize,
       gzipSize: asset.gzipSize,
       groups: _.invokeMap(asset.tree.children, 'toChartData')
@@ -129,7 +137,12 @@ function readStatsFromFile(filename) {
   return JSON.parse(fs.readFileSync(filename, 'utf8'));
 }
 
+function getBundleModules(bundleStats) {
+  return _(bundleStats.chunks).map('modules').concat(bundleStats.modules).compact().flatten().uniqBy('id').value();
+}
+
 function assetHasModule(statAsset, statModule) {
+  // Checking if this module is the part of asset chunks
   return _.some(statModule.chunks, function (moduleChunk) {
     return _.includes(statAsset.chunks, moduleChunk);
   });

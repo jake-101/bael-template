@@ -9,7 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var Declaration = require('../declaration');
-var shorthand = require('./grid-shorthand');
+var utils = require('./grid-utils');
 
 var GridRowColumn = function (_Declaration) {
     _inherits(GridRowColumn, _Declaration);
@@ -26,25 +26,18 @@ var GridRowColumn = function (_Declaration) {
     GridRowColumn.prototype.insert = function insert(decl, prefix, prefixes) {
         if (prefix !== '-ms-') return _Declaration.prototype.insert.call(this, decl, prefix, prefixes);
 
-        var values = shorthand.parse(decl);
+        var values = utils.parse(decl);
 
-        var _shorthand$translate = shorthand.translate(values, 0, 1),
-            start = _shorthand$translate[0],
-            span = _shorthand$translate[1];
+        var _utils$translate = utils.translate(values, 0, 1),
+            start = _utils$translate[0],
+            span = _utils$translate[1];
 
-        if (start) {
-            decl.cloneBefore({
-                prop: '-ms-' + decl.prop,
-                value: start.toString()
-            });
-        }
+        [[decl.prop, start], [decl.prop + '-span', span]].forEach(function (_ref) {
+            var prop = _ref[0],
+                value = _ref[1];
 
-        if (span) {
-            decl.cloneBefore({
-                prop: '-ms-' + decl.prop + '-span',
-                value: span.toString()
-            });
-        }
+            utils.insertDecl(decl, prop, value);
+        });
 
         return undefined;
     };

@@ -43,7 +43,7 @@ allBlogPosts() {
   }
   },
     components: {
-    SlideOut,BaelFooter,MdWrapper
+    BaelFooter,MdWrapper
   }
 };
 </script>

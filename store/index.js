@@ -11,7 +11,9 @@ const createStore = () =>
       navheight: 60,
       blogTitle: '',
       siteInfo: [],
-      connect: []
+      connect: [],
+      menuIsActive: false,
+      menuInitial: true,
     },
     actions: {
       async nuxtServerInit({ dispatch }) {
@@ -62,12 +64,12 @@ const createStore = () =>
         state.connect = data
       },
 
+      setMenuState(state, menuIsActive) {
+        state.menuIsActive = menuIsActive
+      },
       toggleMenuState(state) {
         state.menuIsActive = !state.menuIsActive
       },
-      toggleMenuInitial(state) {
-        state.menuInitial = !state.menuInitial
-      }
 
     }
   })

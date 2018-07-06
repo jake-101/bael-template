@@ -43,12 +43,12 @@ var Browsers = function () {
         return this.prefixesRegexp.test(value);
     };
 
-    function Browsers(data, requirements, options, stats) {
+    function Browsers(data, requirements, options, browserslistOpts) {
         _classCallCheck(this, Browsers);
 
         this.data = data;
         this.options = options || {};
-        this.stats = stats;
+        this.browserslistOpts = browserslistOpts || {};
         this.selected = this.parse(requirements);
     }
 
@@ -58,11 +58,13 @@ var Browsers = function () {
 
 
     Browsers.prototype.parse = function parse(requirements) {
-        return browserslist(requirements, {
-            stats: this.stats,
-            path: this.options.from,
-            env: this.options.env
-        });
+        var opts = {};
+        for (var i in this.browserslistOpts) {
+            opts[i] = this.browserslistOpts[i];
+        }
+        opts.path = this.options.from;
+        opts.env = this.options.env;
+        return browserslist(requirements, opts);
     };
 
     /**

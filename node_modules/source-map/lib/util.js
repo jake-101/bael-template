@@ -66,43 +66,6 @@ function urlGenerate(aParsedUrl) {
 }
 exports.urlGenerate = urlGenerate;
 
-const MAX_CACHED_INPUTS = 32;
-
-/**
- * Takes some function `f(input) -> result` and returns a memoized version of
- * `f`.
- *
- * We keep at most `MAX_CACHED_INPUTS` memoized results of `f` alive. The
- * memoization is a dumb-simple, linear least-recently-used cache.
- */
-function lruMemoize(f) {
-  const cache = [];
-
-  return function (input) {
-    for (var i = 0; i < cache.length; i++) {
-      if (cache[i].input === input) {
-        var temp = cache[0];
-        cache[0] = cache[i];
-        cache[i] = temp;
-        return cache[0].result;
-      }
-    }
-
-    var result = f(input);
-
-    cache.unshift({
-      input,
-      result,
-    });
-
-    if (cache.length > MAX_CACHED_INPUTS) {
-      cache.pop();
-    }
-
-    return result;
-  };
-}
-
 /**
  * Normalizes a path, or the path portion of a URL:
  *
@@ -114,7 +77,7 @@ function lruMemoize(f) {
  *
  * @param aPath The path or url to normalize.
  */
-var normalize = lruMemoize(function normalize(aPath) {
+function normalize(aPath) {
   var path = aPath;
   var url = urlParse(aPath);
   if (url) {
@@ -125,25 +88,7 @@ var normalize = lruMemoize(function normalize(aPath) {
   }
   var isAbsolute = exports.isAbsolute(path);
 
-  // Split the path into parts between `/` characters. This is much faster than
-  // using `.split(/\/+/g)`.
-  var parts = [];
-  var start = 0;
-  var i = 0;
-  while (true) {
-    start = i;
-    i = path.indexOf("/", start);
-    if (i === -1) {
-      parts.push(path.slice(start));
-      break;
-    } else {
-      parts.push(path.slice(start, i));
-      while (i < path.length && path[i] === "/") {
-        i++;
-      }
-    }
-  }
-
+  var parts = path.split(/\/+/);
   for (var part, up = 0, i = parts.length - 1; i >= 0; i--) {
     part = parts[i];
     if (part === '.') {
@@ -174,7 +119,7 @@ var normalize = lruMemoize(function normalize(aPath) {
     return urlGenerate(url);
   }
   return path;
-});
+}
 exports.normalize = normalize;
 
 /**

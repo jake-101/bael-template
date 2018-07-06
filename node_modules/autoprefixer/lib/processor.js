@@ -6,6 +6,8 @@ var Value = require('./value');
 
 var OLD_LINEAR = /(^|[^-])linear-gradient\(\s*(top|left|right|bottom)/i;
 var OLD_RADIAL = /(^|[^-])radial-gradient\(\s*\d+(\w*|%)\s+\d+(\w*|%)\s*,/i;
+var RADIAL_BLOCK = /\(((?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*)\)/i;
+var IGNORE_NEXT = /(!\s*)?autoprefixer:\s*ignore\s+next/i;
 
 var SIZES = ['width', 'height', 'min-width', 'max-width', 'min-height', 'max-height', 'inline-size', 'min-inline-size', 'max-inline-size', 'block-size', 'min-block-size', 'max-block-size'];
 
@@ -64,35 +66,71 @@ var Processor = function () {
         css.walkDecls(function (decl) {
             if (_this.disabledDecl(decl, result)) return undefined;
 
-            if (decl.prop === 'display' && decl.value === 'box') {
+            var prop = decl.prop;
+            var value = decl.value;
+
+            if (prop === 'grid-row-span') {
+                result.warn('grid-row-span is not part of final Grid Layout. ' + 'Use grid-row.', { node: decl });
+                return undefined;
+            } else if (prop === 'grid-column-span') {
+                result.warn('grid-column-span is not part of final Grid Layout. ' + 'Use grid-column.', { node: decl });
+                return undefined;
+            } else if (prop === 'display' && value === 'box') {
                 result.warn('You should write display: flex by final spec ' + 'instead of display: box', { node: decl });
                 return undefined;
-            }
-            if (decl.value.indexOf('linear-gradient') !== -1) {
-                if (OLD_LINEAR.test(decl.value)) {
-                    result.warn('Gradient has outdated direction syntax. ' + 'New syntax is like `to left` instead of `right`.', { node: decl });
-                }
-            }
-            if (decl.value.indexOf('radial-gradient') !== -1) {
-                if (OLD_RADIAL.test(decl.value)) {
-                    result.warn('Gradient has outdated direction syntax. ' + 'New syntax is like `closest-side at 0 0` ' + 'instead of `0 0, closest-side`.', { node: decl });
-                } else if (/[^-]cover/.test(decl.value)) {
-                    result.warn('Gradient has outdated direction syntax. ' + 'Replace `cover` to `farthest-corner`.', { node: decl });
-                } else if (/[^-]contain/.test(decl.value)) {
-                    result.warn('Gradient has outdated direction syntax. ' + 'Replace `contain` to `closest-side`.', { node: decl });
-                }
-            }
-            if (decl.prop === 'text-emphasis-position') {
-                if (decl.value === 'under' || decl.value === 'over') {
+            } else if (prop === 'text-emphasis-position') {
+                if (value === 'under' || value === 'over') {
                     result.warn('You should use 2 values for text-emphasis-position ' + 'For example, `under left` instead of just `under`.', { node: decl });
+                }
+            } else {
+                var grid = _this.prefixes.add['grid-area'];
+                if (_this.prefixes.options.grid && grid && grid.prefixes) {
+                    if (prop === 'grid-auto-columns') {
+                        result.warn('grid-auto-columns is not supported by IE', { node: decl });
+                        return undefined;
+                    } else if (prop === 'grid-auto-rows') {
+                        result.warn('grid-auto-rows is not supported by IE', { node: decl });
+                        return undefined;
+                    } else if (prop === 'grid-auto-flow') {
+                        result.warn('grid-auto-flow is not supported by IE', { node: decl });
+                        return undefined;
+                    } else if (value.indexOf('auto-fit') !== -1) {
+                        result.warn('auto-fit value is not supported by IE', { node: decl, word: 'auto-fit' });
+                        return undefined;
+                    } else if (value.indexOf('auto-fill') !== -1) {
+                        result.warn('auto-fill value is not supported by IE', { node: decl, word: 'auto-fill' });
+                        return undefined;
+                    }
+                }
+                if (value.indexOf('radial-gradient') !== -1) {
+                    if (OLD_RADIAL.test(decl.value)) {
+                        result.warn('Gradient has outdated direction syntax. ' + 'New syntax is like `closest-side at 0 0` ' + 'instead of `0 0, closest-side`.', { node: decl });
+                    } else {
+                        var match = value.match(RADIAL_BLOCK);
+
+                        if (match) {
+                            if (/cover/.test(match[1])) {
+                                result.warn('Gradient has outdated direction syntax. ' + 'Replace `cover` to `farthest-corner`.', { node: decl });
+                            } else if (/contain/.test(match[1])) {
+                                result.warn('Gradient has outdated direction syntax. ' + 'Replace `contain` to `closest-side`.', { node: decl });
+                            }
+                        }
+                    }
+                }
+                if (value.indexOf('linear-gradient') !== -1) {
+                    if (OLD_LINEAR.test(value)) {
+                        result.warn('Gradient has outdated direction syntax. ' + 'New syntax is like `to left` instead of `right`.', { node: decl });
+                    }
                 }
             }
 
             if (SIZES.indexOf(decl.prop) !== -1) {
-                if (decl.value.indexOf('fill-available') !== -1) {
-                    result.warn('Replace fill-available to stretch, ' + 'because spec had been changed', { node: decl });
-                } else if (decl.value.indexOf('fill') !== -1) {
-                    result.warn('Replace fill to stretch, ' + 'because spec had been changed', { node: decl });
+                if (decl.value.indexOf('-fill-available') === -1) {
+                    if (decl.value.indexOf('fill-available') !== -1) {
+                        result.warn('Replace fill-available to stretch, ' + 'because spec had been changed', { node: decl });
+                    } else if (decl.value.indexOf('fill') !== -1) {
+                        result.warn('Replace fill to stretch, ' + 'because spec had been changed', { node: decl });
+                    }
                 }
             }
 
@@ -330,10 +368,21 @@ var Processor = function () {
 
     Processor.prototype.disabled = function disabled(node, result) {
         if (!node) return false;
+
         if (node._autoprefixerDisabled !== undefined) {
             return node._autoprefixerDisabled;
         }
 
+        if (node.parent) {
+            var p = node.prev();
+            if (p && p.type === 'comment' && IGNORE_NEXT.test(p.text)) {
+                node._autoprefixerDisabled = true;
+                node._autoprefixerSelfDisabled = true;
+                return true;
+            }
+        }
+
+        var value = null;
         if (node.nodes) {
             var status = undefined;
             node.each(function (i) {
@@ -347,19 +396,24 @@ var Processor = function () {
                 }
             });
 
-            var value = false;
             if (status !== undefined) {
                 value = !status;
-            } else if (node.parent) {
-                value = this.disabled(node.parent, result);
             }
-
-            node._autoprefixerDisabled = value;
-            return node._autoprefixerDisabled;
-        } else {
-            node._autoprefixerDisabled = this.disabled(node.parent, result);
-            return node._autoprefixerDisabled;
         }
+        if (!node.nodes || value === null) {
+            if (node.parent) {
+                var isParentDisabled = this.disabled(node.parent, result);
+                if (node.parent._autoprefixerSelfDisabled === true) {
+                    value = false;
+                } else {
+                    value = isParentDisabled;
+                }
+            } else {
+                value = false;
+            }
+        }
+        node._autoprefixerDisabled = value;
+        return value;
     };
 
     /**

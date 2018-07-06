@@ -10,47 +10,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Declaration = require('../declaration');
 
-var DOTS = /^\.+$/;
+var _require = require('./grid-utils'),
+    parseGridAreas = _require.parseGridAreas,
+    insertAreas = _require.insertAreas,
+    prefixTrackProp = _require.prefixTrackProp,
+    prefixTrackValue = _require.prefixTrackValue,
+    getGridGap = _require.getGridGap,
+    warnGridGap = _require.warnGridGap;
 
-function track(start, end) {
-    return { start: start, end: end, span: end - start };
-}
-
-function getRows(tpl) {
+function getGridRows(tpl) {
     return tpl.trim().slice(1, -1).split(/['"]\s*['"]?/g);
-}
-
-function getColumns(line) {
-    return line.trim().split(/\s+/g);
-}
-
-function parseGridAreas(tpl) {
-    return getRows(tpl).reduce(function (areas, line, rowIndex) {
-        if (line.trim() === '') return areas;
-        getColumns(line).forEach(function (area, columnIndex) {
-            if (DOTS.test(area)) return;
-            if (typeof areas[area] === 'undefined') {
-                areas[area] = {
-                    column: track(columnIndex + 1, columnIndex + 2),
-                    row: track(rowIndex + 1, rowIndex + 2)
-                };
-            } else {
-                var _areas$area = areas[area],
-                    column = _areas$area.column,
-                    row = _areas$area.row;
-
-
-                column.start = Math.min(column.start, columnIndex + 1);
-                column.end = Math.max(column.end, columnIndex + 2);
-                column.span = column.end - column.start;
-
-                row.start = Math.min(row.start, rowIndex + 1);
-                row.end = Math.max(row.end, rowIndex + 2);
-                row.span = row.end - row.start;
-            }
-        });
-        return areas;
-    }, {});
 }
 
 var GridTemplateAreas = function (_Declaration) {
@@ -62,64 +31,73 @@ var GridTemplateAreas = function (_Declaration) {
         return _possibleConstructorReturn(this, _Declaration.apply(this, arguments));
     }
 
-    GridTemplateAreas.prototype.getRoot = function getRoot(parent) {
-        if (parent.type === 'atrule' || !parent.parent) {
-            return parent;
-        }
-        return this.getRoot(parent.parent);
-    };
-
     /**
      * Translate grid-template-areas to separate -ms- prefixed properties
      */
-
-
     GridTemplateAreas.prototype.insert = function insert(decl, prefix, prefixes, result) {
         if (prefix !== '-ms-') return _Declaration.prototype.insert.call(this, decl, prefix, prefixes);
 
-        var areas = parseGridAreas(decl.value);
-        var missed = Object.keys(areas);
+        var hasColumns = false;
+        var hasRows = false;
+        var parent = decl.parent;
+        var gap = getGridGap(decl);
 
-        this.getRoot(decl.parent).walkDecls('grid-area', function (gridArea) {
-            var value = gridArea.value;
-            var area = areas[value];
-
-            missed = missed.filter(function (e) {
-                return e !== value;
-            });
-
-            if (area) {
-                gridArea.parent.walkDecls(/-ms-grid-(row|column)/, function (d) {
-                    d.remove();
-                });
-
-                gridArea.cloneBefore({
-                    prop: '-ms-grid-row',
-                    value: String(area.row.start)
-                });
-                if (area.row.span > 1) {
-                    gridArea.cloneBefore({
-                        prop: '-ms-grid-row-span',
-                        value: String(area.row.span)
-                    });
-                }
-                gridArea.cloneBefore({
-                    prop: '-ms-grid-column',
-                    value: String(area.column.start)
-                });
-                if (area.column.span > 1) {
-                    gridArea.cloneBefore({
-                        prop: '-ms-grid-column-span',
-                        value: String(area.column.span)
-                    });
-                }
-            }
-            return undefined;
+        // remove already prefixed rows and columns
+        // without gutter to prevent doubling prefixes
+        parent.walkDecls(/-ms-grid-(rows|columns)/, function (i) {
+            return i.remove();
         });
 
-        if (missed.length > 0) {
-            decl.warn(result, 'Can not find grid areas: ' + missed.join(', '));
+        // add empty tracks to rows and columns
+        parent.walkDecls(/grid-template-(rows|columns)/, function (trackDecl) {
+            if (trackDecl.prop === 'grid-template-rows') {
+                hasRows = true;
+                var prop = trackDecl.prop,
+                    value = trackDecl.value;
+
+                trackDecl.cloneBefore({
+                    prop: prefixTrackProp({ prop: prop, prefix: prefix }),
+                    value: prefixTrackValue({ value: value, gap: gap.row })
+                });
+            } else {
+                hasColumns = true;
+                var _prop = trackDecl.prop,
+                    _value = trackDecl.value;
+
+                trackDecl.cloneBefore({
+                    prop: prefixTrackProp({ prop: _prop, prefix: prefix }),
+                    value: prefixTrackValue({ value: _value, gap: gap.column })
+                });
+            }
+        });
+
+        var gridRows = getGridRows(decl.value);
+
+        if (hasColumns && !hasRows && gap.row && gridRows.length > 1) {
+            decl.cloneBefore({
+                prop: '-ms-grid-rows',
+                value: prefixTrackValue({
+                    value: 'repeat(' + gridRows.length + ', auto)',
+                    gap: gap.row
+                }),
+                raws: {}
+            });
         }
+
+        // warnings
+        warnGridGap({
+            gap: gap,
+            hasColumns: hasColumns,
+            decl: decl,
+            result: result
+        });
+
+        var areas = parseGridAreas({
+            rows: gridRows,
+            gap: gap
+        });
+
+        insertAreas(areas, decl, result);
 
         return decl;
     };

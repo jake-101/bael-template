@@ -1,6 +1,63 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 8.6.5
+* Do not show Grid warnings if IE was not selected.
+
+## 8.6.4
+* Fix `stretch` prefix in Chrome >= 46.
+
+## 8.6.3
+* Add warnings for unsupported Grid features.
+* Add warnings about wrong Grid properties.
+* Add note about `grid` option for grid properties in `autoprefixer --info`.
+
+## 8.6.2
+* Fix error during adding Grid prefixes in `@media` (by Evgeny Petukhov).
+
+## 8.6.1
+* Fix `grid-template` with media queries (by Evgeny Petukhov).
+
+## 8.6 “Follow Reason”
+* Add `gap` support (by Evgeny Petukhov).
+* Add two values support for `grid-gap` and `gap` (by Evgeny Petukhov).
+* Add `ignoreUnknownVersions` option for Browserslist.
+
+## 8.5.2
+* Fix `grid-template` support wit auto row sizes (by Yury Timofeev).
+
+## 8.5.1
+* Remove unnecessary warning on `-webkit-fill-available`.
+
+## 8.5 “Muito Nobre e Sempre Leal”
+* Add `grid-gap` support (by Evgeny Petukhov).
+* Fix radial gradients direction fix.
+* Fix docs (by Phani Kandula and Huáng Jùnliàng).
+
+## 8.4.1
+* Fix working in old PostCSS versions (by Diablohu).
+
+## 8.4 “Non in aves, sed in angues”
+* Add `/* autoprefixer: ignore next */` control comment (by Pavel Vostrikov).
+
+## 8.3 “Benigno Numine”
+* Add `@media` support to `grid-template` (by Evgeny Petukhov).
+* Fix `radial-gradient` direction warning (by Gustavo Real).
+
+## 8.2 “Ad Astra per Aspera”
+* Add `color-adjust` (by Sergey Lysenko, Stanislav Botev, and Yuriy Alekseyev).
+
+## 8.1 “Rex, Familia et Ultio”
+* Add `overscroll-behavior` support.
+* Add `grid-template` shortcut support (by Evgeny Petukhov).
+* Add better `grid-column-end` and `grid-row-end` support (by Evgeny Petukhov).
+* Fix Grid properties support in `@supports`.
+
+## 8.0 “Excelsior”
+* Use Browserslist 3.0.
+* Rename `autoprefixer-info` CLI tool to `autoprefixer --info`.
+* Remove `break-*` to `page-break-*` conversion for Firefox.
+
 ## 7.2.6
 * Fix `-ms-` prefix for grid cells with same `grid-area` (by Evgeny Petukhov).
 

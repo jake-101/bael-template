@@ -23,11 +23,7 @@ var BreakProps = function (_Declaration) {
      * Change name for -webkit- and -moz- prefix
      */
     BreakProps.prototype.prefixed = function prefixed(prop, prefix) {
-        if (prefix === '-moz-') {
-            return 'page-' + prop;
-        } else {
-            return prefix + 'column-' + prop;
-        }
+        return prefix + 'column-' + prop;
     };
 
     /**
@@ -65,9 +61,7 @@ var BreakProps = function (_Declaration) {
     BreakProps.prototype.insert = function insert(decl, prefix, prefixes) {
         if (decl.prop !== 'break-inside') {
             return _Declaration.prototype.insert.call(this, decl, prefix, prefixes);
-        } else if (decl.value === 'avoid-region') {
-            return undefined;
-        } else if (decl.value === 'avoid-page' && prefix === '-webkit-') {
+        } else if (/region/i.test(decl.value) || /page/i.test(decl.value)) {
             return undefined;
         } else {
             return _Declaration.prototype.insert.call(this, decl, prefix, prefixes);

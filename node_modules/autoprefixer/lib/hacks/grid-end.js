@@ -20,44 +20,42 @@ var GridEnd = function (_Declaration) {
     }
 
     /**
-     * Do not add prefix for unsupported value in IE
-     */
-    GridEnd.prototype.check = function check(decl) {
-        return decl.value.indexOf('span') !== -1;
-    };
-
-    /**
-     * Return a final spec property
-     */
-
-
-    GridEnd.prototype.normalize = function normalize(prop) {
-        return prop.replace(/(-span|-end)/, '');
-    };
-
-    /**
-     * Change property name for IE
-     */
-
-
-    GridEnd.prototype.prefixed = function prefixed(prop, prefix) {
-        var result = _Declaration.prototype.prefixed.call(this, prop, prefix);
-        if (prefix === '-ms-') {
-            result = result.replace('-end', '-span');
-        }
-        return result;
-    };
-
-    /**
      * Change repeating syntax for IE
      */
+    GridEnd.prototype.insert = function insert(decl, prefix, prefixes, result) {
+        if (prefix !== '-ms-') return _Declaration.prototype.insert.call(this, decl, prefix, prefixes);
 
+        var clonedDecl = this.clone(decl);
 
-    GridEnd.prototype.set = function set(decl, prefix) {
-        if (prefix === '-ms-') {
-            decl.value = decl.value.replace(/span\s/i, '');
+        var startProp = decl.prop.replace(/end$/, 'start');
+        var spanProp = prefix + decl.prop.replace(/end$/, 'span');
+
+        if (decl.parent.some(function (i) {
+            return i.prop === spanProp;
+        })) {
+            return undefined;
         }
-        return _Declaration.prototype.set.call(this, decl, prefix);
+
+        clonedDecl.prop = spanProp;
+
+        if (decl.value.includes('span')) {
+            clonedDecl.value = decl.value.replace(/span\s/i, '');
+        } else {
+            var startDecl = void 0;
+            decl.parent.walkDecls(startProp, function (d) {
+                startDecl = d;
+            });
+            if (startDecl) {
+                var value = Number(decl.value) - Number(startDecl.value) + '';
+                clonedDecl.value = value;
+            } else {
+                decl.warn(result, 'Can not prefix ' + decl.prop + ' (' + startProp + ' is not found)');
+            }
+        }
+
+        decl.cloneBefore(clonedDecl);
+
+        return undefined;
     };
 
     return GridEnd;
@@ -66,7 +64,7 @@ var GridEnd = function (_Declaration) {
 Object.defineProperty(GridEnd, 'names', {
     enumerable: true,
     writable: true,
-    value: ['grid-row-end', 'grid-column-end', 'grid-row-span', 'grid-column-span']
+    value: ['grid-row-end', 'grid-column-end']
 });
 
 

@@ -1,8 +1,10 @@
 # tryer
 
-[![Package status](https://img.shields.io/npm/v/tryer.svg?style=flat-square)](https://www.npmjs.com/package/tryer)
-[![Build status](https://img.shields.io/travis/philbooth/tryer.svg?style=flat-square)](https://travis-ci.org/philbooth/tryer)
-[![License](https://img.shields.io/github/license/philbooth/tryer.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Build status](https://gitlab.com/philbooth/tryer/badges/master/pipeline.svg)](https://gitlab.com/philbooth/tryer/pipelines)
+[![Package status](https://img.shields.io/npm/v/tryer.svg)](https://www.npmjs.com/package/tryer)
+[![Downloads](https://img.shields.io/npm/dm/tryer.svg)](https://www.npmjs.com/package/tryer)
+[![License](https://img.shields.io/npm/l/tryer.svg)](https://opensource.org/licenses/MIT)
+
 
 Because everyone loves a tryer!
 Conditional
@@ -78,7 +80,7 @@ npm i tryer --save
 Or if you just want the git repo:
 
 ```
-git clone git@github.com:philbooth/tryer.git
+git clone git@gitlab.com:philbooth/tryer.git
 ```
 
 ## How do I use it?
@@ -294,8 +296,8 @@ npm run minify
 [chai]: http://chaijs.com/
 [jshint]: http://jshint.com/
 [mocha]: http://mochajs.org/
-[please-release-me]: https://github.com/philbooth/please-release-me
-[spooks.js]: https://github.com/philbooth/spooks.js
+[please-release-me]: https://gitlab.com/philbooth/please-release-me
+[spooks.js]: https://gitlab.com/philbooth/spooks.js
 [uglifyjs]: http://lisperator.net/uglifyjs/
 [license]: COPYING
 

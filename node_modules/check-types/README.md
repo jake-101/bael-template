@@ -1,8 +1,9 @@
 # check-types.js
 
-[![Package status](https://img.shields.io/npm/v/check-types.svg?style=flat-square)](https://www.npmjs.com/package/check-types)
-[![Build status](https://img.shields.io/travis/philbooth/check-types.js.svg?style=flat-square)](https://travis-ci.org/philbooth/check-types.js)
-[![License](https://img.shields.io/github/license/philbooth/check-types.js.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Build status](https://gitlab.com/philbooth/check-types.js/badges/master/pipeline.svg)](https://gitlab.com/philbooth/check-types.js/pipelines)
+[![Package status](https://img.shields.io/npm/v/check-types.svg)](https://www.npmjs.com/package/check-types)
+[![Downloads](https://img.shields.io/npm/dm/check-types.svg)](https://www.npmjs.com/package/check-types)
+[![License](https://img.shields.io/npm/l/check-types.svg)](https://opensource.org/licenses/MIT)
 
 A little JavaScript library
 for asserting types
@@ -26,6 +27,7 @@ and values.
         * [Modifiers](#modifiers)
         * [Batch operations](#batch-operations)
         * [Some examples](#some-examples)
+* [Are there TypeScript definitions?](#are-there-typescript-definitions)
 * [Where can I use it?](#where-can-i-use-it)
 * [What changed from 6.x to 7.x?](#what-changed-from-6x-to-7x)
 * [What changed from 5.x to 6.x?](#what-changed-from-5x-to-6x)
@@ -69,7 +71,7 @@ npm i check-types --save
 Or if you just want the git repo:
 
 ```
-git clone git@github.com:philbooth/check-types.js.git
+git clone git@gitlab.com:philbooth/check-types.js.git
 ```
 
 If you're into
@@ -318,7 +320,8 @@ These are implemented by
 
 * `check.between(thing, a, b)`:
   Returns `true` if `thing` is a number
-  between than `a` and `b`,
+  between `a` and `b`
+  (excluding `a` and `b`),
   `false` otherwise.
   The arguments `a` and `b`
   may be in any order,
@@ -327,7 +330,8 @@ These are implemented by
 
 * `check.inRange(thing, a, b)`:
   Returns `true` if `thing` is a number
-  in the range `a` .. `b`,
+  in the range `a` .. `b`
+  (including `a` and `b`),
   `false` otherwise.
   The arguments `a` and `b`
   may be in any order,
@@ -605,7 +609,7 @@ check.all(
     check.map(
         { foo: 0, bar: '' },
         { foo: check.number, bar: check.string }
-    );
+    )
 );
 // Returns true
 ```
@@ -618,6 +622,20 @@ check.any(
     )
 );
 // Returns true
+```
+
+## Are there TypeScript definitions?
+
+[Yes](https://www.npmjs.com/package/@types/check-types)!
+
+Thanks to [@idchlife](https://github.com/idchlife),
+type definitions [were added](https://github.com/DefinitelyTyped/DefinitelyTyped/commit/d19ddb855dea08105a3d7450a98696c7bcd62f60)
+to [DefinitelyTyped].
+You can add them to your project
+via npm:
+
+```
+npm i @types/check-types --save-dev
 ```
 
 ## Where can I use it?
@@ -785,7 +803,8 @@ open `test/check-types.html`.
 
 [MIT][license]
 
-[releases]: https://github.com/philbooth/check-types.js/releases
+[definitelytyped]: https://github.com/DefinitelyTyped/DefinitelyTyped
+[releases]: https://gitlab.com/philbooth/check-types.js/tags
 [history7]: HISTORY.md#70
 [history6]: HISTORY.md#60
 [history5]: HISTORY.md#50
@@ -799,6 +818,6 @@ open `test/check-types.html`.
 [mocha]: http://mochajs.org/
 [chai]: http://chaijs.com/
 [uglifyjs]: https://github.com/mishoo/UglifyJS
-[please-release-me]: https://github.com/philbooth/please-release-me
-[license]: https://github.com/philbooth/check-types.js/blob/master/COPYING
+[please-release-me]: https://gitlab.com/philbooth/please-release-me
+[license]: https://gitlab.com/philbooth/check-types.js/blob/master/COPYING
 

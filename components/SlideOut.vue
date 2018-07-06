@@ -1,8 +1,8 @@
 <template>
 <div class="zap-slideout xs-border"
-       :class="{ isOpen: isOpen }">
+       :class="{ isOpen: $store.state.menuIsActive  }">
     <div class="zap-slideout-opener"
-         @click="toggle"><div class="hamburger hamburger--spin js-hamburger">
+         ><div @click="toggle" class="hamburger hamburger--spin js-hamburger" :class="{'is-active': $store.state.menuIsActive }">
         <div class="hamburger-box">
           <div class="hamburger-inner"></div>
         </div>
@@ -27,6 +27,7 @@
   menuLinks() {
     return this.$store.state.siteInfo.menu
   },
+
     menuSiteName() {
     return this.$store.state.siteInfo.sitename
   }
@@ -40,11 +41,13 @@
     },
     toggle() {
      // Look for .hamburger
+              this.$store.commit('toggleMenuState')
+
   var hamburger = document.querySelector(".hamburger");
   // On click
 
     // Toggle class "is-active"
-    hamburger.classList.toggle("is-active");
+  
      
       if (this.isOpen) {
         this.close();

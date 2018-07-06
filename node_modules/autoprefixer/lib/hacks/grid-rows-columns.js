@@ -9,7 +9,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var Declaration = require('../declaration');
-var shorthand = require('./grid-shorthand');
+
+var _require = require('./grid-utils'),
+    prefixTrackProp = _require.prefixTrackProp,
+    prefixTrackValue = _require.prefixTrackValue;
 
 var GridRowsColumns = function (_Declaration) {
     _inherits(GridRowsColumns, _Declaration);
@@ -25,7 +28,7 @@ var GridRowsColumns = function (_Declaration) {
      */
     GridRowsColumns.prototype.prefixed = function prefixed(prop, prefix) {
         if (prefix === '-ms-') {
-            return prefix + prop.replace('template-', '');
+            return prefixTrackProp({ prop: prop, prefix: prefix });
         } else {
             return _Declaration.prototype.prefixed.call(this, prop, prefix);
         }
@@ -47,7 +50,7 @@ var GridRowsColumns = function (_Declaration) {
 
     GridRowsColumns.prototype.set = function set(decl, prefix) {
         if (prefix === '-ms-' && decl.value.indexOf('repeat(') !== -1) {
-            decl.value = shorthand.changeRepeat(decl.value);
+            decl.value = prefixTrackValue({ value: decl.value });
         }
         return _Declaration.prototype.set.call(this, decl, prefix);
     };

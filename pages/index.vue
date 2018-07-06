@@ -36,6 +36,21 @@ export default {
     return { 
       };
   },
+     methods: {
+     navHeight() {
+            var height = this.$refs.navBar
+            console.log(height);
+           this.$store.commit('SET_NAVHEIGHT', height)
+        }
+  },
+  mounted() {
+
+     
+     
+
+
+    
+  },
     computed: {
   allBlogPosts() {
     return this.$store.state.blogPosts;

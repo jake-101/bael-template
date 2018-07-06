@@ -19,6 +19,7 @@ class BundleAnalyzerPlugin {
       generateStatsFile: false,
       statsFilename: 'stats.json',
       statsOptions: null,
+      excludeAssets: null,
       logLevel: 'info',
       // deprecated
       startAnalyzer: true,
@@ -73,6 +74,7 @@ class BundleAnalyzerPlugin {
 
     try {
       await bfj.write(statsFilepath, stats, {
+        space: 2,
         promises: 'ignore',
         buffers: 'ignore',
         maps: 'ignore',
@@ -100,7 +102,8 @@ class BundleAnalyzerPlugin {
         port: this.opts.analyzerPort,
         bundleDir: this.getBundleDirFromCompiler(),
         logger: this.logger,
-        defaultSizes: this.opts.defaultSizes
+        defaultSizes: this.opts.defaultSizes,
+        excludeAssets: this.opts.excludeAssets
       });
     }
   }
@@ -111,7 +114,8 @@ class BundleAnalyzerPlugin {
       reportFilename: path.resolve(this.compiler.outputPath, this.opts.reportFilename),
       bundleDir: this.getBundleDirFromCompiler(),
       logger: this.logger,
-      defaultSizes: this.opts.defaultSizes
+      defaultSizes: this.opts.defaultSizes,
+      excludeAssets: this.opts.excludeAssets
     });
   }
 

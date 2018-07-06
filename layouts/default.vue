@@ -1,7 +1,7 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
     <SlideOut></SlideOut>
-   <BaelHeader :blogtitle="blogtitle" :posts="allBlogPosts" />
+   <BaelHeader :navheight="navbarheightdefault" :blogtitle="blogtitle" :posts="allBlogPosts" />
     <nuxt/>
   </section>
 </template>
@@ -13,10 +13,14 @@
 export default {
    data() {
     return {
-   navbarheight: '60'
+  
        }
   },
     computed:{
+        navbarheightdefault() {
+    return this.$store.state.navheight;
+  },
+
 allBlogPosts() {
     return this.$store.state.blogPosts;
   },

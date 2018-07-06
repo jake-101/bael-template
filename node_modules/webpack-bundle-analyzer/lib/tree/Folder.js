@@ -94,13 +94,13 @@ var Folder = function (_BaseFolder) {
   }, {
     key: 'parsedSize',
     get: function get() {
-      return this.src ? this.src.length : undefined;
+      return this.src ? this.src.length : 0;
     }
   }, {
     key: 'gzipSize',
     get: function get() {
       if (!_lodash2.default.has(this, '_gzipSize')) {
-        this._gzipSize = this.src ? _gzipSize2.default.sync(this.src) : undefined;
+        this._gzipSize = this.src ? _gzipSize2.default.sync(this.src) : 0;
       }
 
       return this._gzipSize;

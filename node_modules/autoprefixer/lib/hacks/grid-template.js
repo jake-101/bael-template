@@ -9,7 +9,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var Declaration = require('../declaration');
-var shorthand = require('./grid-shorthand');
+
+var _require = require('./grid-utils'),
+    parseTemplate = _require.parseTemplate,
+    insertAreas = _require.insertAreas,
+    getGridGap = _require.getGridGap,
+    warnGridGap = _require.warnGridGap;
 
 var GridTemplate = function (_Declaration) {
     _inherits(GridTemplate, _Declaration);
@@ -21,18 +26,9 @@ var GridTemplate = function (_Declaration) {
     }
 
     /**
-     * Do not add prefix for unsupported value in IE
-     */
-    GridTemplate.prototype.check = function check(decl) {
-        return decl.value.includes('/') && !decl.value.includes('[') && !decl.value.includes('"') && !decl.value.includes('\'');
-    };
-
-    /**
      * Translate grid-template to separate -ms- prefixed properties
      */
-
-
-    GridTemplate.prototype.insert = function insert(decl, prefix, prefixes) {
+    GridTemplate.prototype.insert = function insert(decl, prefix, prefixes, result) {
         if (prefix !== '-ms-') return _Declaration.prototype.insert.call(this, decl, prefix, prefixes);
 
         if (decl.parent.some(function (i) {
@@ -41,22 +37,45 @@ var GridTemplate = function (_Declaration) {
             return undefined;
         }
 
-        var _shorthand$parseTempl = shorthand.parseTemplateShortcut(decl),
-            templateRows = _shorthand$parseTempl[0],
-            templateColumns = _shorthand$parseTempl[1];
+        var gap = getGridGap(decl);
 
-        if (templateRows) {
+        var _parseTemplate = parseTemplate({
+            decl: decl,
+            gap: gap
+        }),
+            rows = _parseTemplate.rows,
+            columns = _parseTemplate.columns,
+            areas = _parseTemplate.areas;
+
+        var hasAreas = Object.keys(areas).length > 0;
+        var hasRows = Boolean(rows);
+        var hasColumns = Boolean(columns);
+
+        warnGridGap({
+            gap: gap,
+            hasColumns: hasColumns,
+            decl: decl,
+            result: result
+        });
+
+        if (hasRows && hasColumns || hasAreas) {
             decl.cloneBefore({
                 prop: '-ms-grid-rows',
-                value: shorthand.changeRepeat(templateRows.join(''))
+                value: rows,
+                raws: {}
             });
         }
 
-        if (templateColumns) {
+        if (hasColumns) {
             decl.cloneBefore({
                 prop: '-ms-grid-columns',
-                value: shorthand.changeRepeat(templateColumns.join(''))
+                value: columns,
+                raws: {}
             });
+        }
+
+        if (hasAreas) {
+            insertAreas(areas, decl, result);
         }
 
         return decl;

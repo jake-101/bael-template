@@ -1,5 +1,23 @@
 # History
 
+## 7.4.0
+
+### New features
+
+* docs: add note about typescript definitions to readme (13c7a90)
+
+### Bug fixes
+
+* docs: remove errant semicolon from example code (9053f95)
+* docs: clarify the behaviour of between and inRange (88a2f61)
+* tests: ensure tests run in non-es6 environments (4bae637)
+
+### Other changes
+
+* deps: update please-release-me (72377bf)
+* project: migrate to gitlab (19919b5)
+* package: update authors (9848df0)
+
 ## 7.3.0
 
 * feature: add primitive predicate (3114d7f)

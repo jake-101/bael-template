@@ -62,6 +62,7 @@ new BundleAnalyzerPlugin(options?: object)
 |**`generateStatsFile`**|`{Boolean}`|Default: `false`. If `true`, webpack stats JSON file will be generated in bundle output directory|
 |**`statsFilename`**|`{String}`|Default: `stats.json`. Name of webpack stats JSON file that will be generated if `generateStatsFile` is `true`. Relative to bundle output directory.|
 |**`statsOptions`**|`null` or `{Object}`|Default: `null`. Options for `stats.toJson()` method. For example you can exclude sources of your modules from stats file with `source: false` option. [See more options here](https://github.com/webpack/webpack/blob/webpack-1/lib/Stats.js#L21). |
+|**`excludeAssets`**|`{null\|pattern\|pattern[]}` where `pattern` equals to `{String\|RegExp\|function}`|Default: `null`. Patterns that will be used to match against asset names to exclude them from the report. If pattern is a string it will be converted to RegExp via `new RegExp(str)`. If pattern is a function it should have the following signature `(assetName: string) => boolean` and should return `true` to *exclude* matching asset. If multiple patterns are provided asset should match at least one of them to be excluded. |
 |**`logLevel`**|One of: `info`, `warn`, `error`, `silent`|Default: `info`. Used to control how much details the plugin outputs.|
 
 <h2 align="center">Usage (as a CLI utility)</h2>
@@ -106,22 +107,21 @@ Directory containing all generated bundles.
 ### `options`
 
 ```
-  -h, --help                  output usage information
   -V, --version               output the version number
   -m, --mode <mode>           Analyzer mode. Should be `server` or `static`.
                               In `server` mode analyzer will start HTTP server to show bundle report.
-                              In `static` mode single HTML file with bundle report will be generated.
-                              Default is `server`.
-  -h, --host <host>           Host that will be used in `server` mode to start HTTP server.
-                              Default is `127.0.0.1`.
-  -p, --port <n>              Port that will be used in `server` mode to start HTTP server.
-                              Default is 8888.
-  -r, --report <file>         Path to bundle report file that will be generated in `static` mode.
-                              Default is `report.html`.
+                              In `static` mode single HTML file with bundle report will be generated. (default: server)
+  -h, --host <host>           Host that will be used in `server` mode to start HTTP server. (default: 127.0.0.1)
+  -p, --port <n>              Port that will be used in `server` mode to start HTTP server. (default: 8888)
+  -r, --report <file>         Path to bundle report file that will be generated in `static` mode. (default: report.html)
   -s, --default-sizes <type>  Module sizes to show in treemap by default.
-                              Possible values: stat, parsed, gzip
-                              Default is `parsed`.
+                              Possible values: stat, parsed, gzip (default: parsed)
   -O, --no-open               Don't open report in default browser automatically.
+  -e, --exclude <regexp>      Assets that should be excluded from the report.
+                              Can be specified multiple times.
+  -l, --log-level <level>     Log level.
+                              Possible values: debug, info, warn, error, silent (default: info)
+  -h, --help                  output usage information
 ```
 
 <h2 align="center" id="size-definitions">Size definitions</h2>
@@ -154,6 +154,14 @@ The way `ModuleConcatenationPlugin` works is that it merges multiple modules int
 `Webpack 3` didn't provide any information about concatenated modules, but `Webpack 4` started including it into a `stats` files and `webpack-bundle-analyzer 2.11.0` learned to show it.
 
 If for some reason you can't update to the latest versions try analyzing your bundle without `ModuleConcatenationPlugin`. See [issue #115](https://github.com/webpack-contrib/webpack-bundle-analyzer/issues/115) for more discussion.
+
+If you are using `Angular CLI < 6.0.0` (which is based on `Webpack 3` and uses `ModuleConcatenationPlugin`) you can build your project using the following command:
+```
+ng build --stats-json --build-optimizer=false --vendor-chunk=true
+```
+The resulting stats.json can be found at `dist/stats.json`
+
+*Please be aware, that this is not a reasonable build for production use, as it increases the build output size considerably.*
 
 <h2 align="center">Maintainers</h2>
 

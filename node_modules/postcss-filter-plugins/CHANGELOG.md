@@ -1,3 +1,7 @@
+# 2.0.3
+
+* Remove vulnerable downstream dependency
+
 # 2.0.2
 
 * Bumped uniqid to `4.0.0`.

@@ -30,6 +30,7 @@ var BundleAnalyzerPlugin = function () {
       generateStatsFile: false,
       statsFilename: 'stats.json',
       statsOptions: null,
+      excludeAssets: null,
       logLevel: 'info',
       // deprecated
       startAnalyzer: true
@@ -97,6 +98,7 @@ var BundleAnalyzerPlugin = function () {
 
         try {
           yield bfj.write(statsFilepath, stats, {
+            space: 2,
             promises: 'ignore',
             buffers: 'ignore',
             maps: 'ignore',
@@ -129,7 +131,8 @@ var BundleAnalyzerPlugin = function () {
             port: this.opts.analyzerPort,
             bundleDir: this.getBundleDirFromCompiler(),
             logger: this.logger,
-            defaultSizes: this.opts.defaultSizes
+            defaultSizes: this.opts.defaultSizes,
+            excludeAssets: this.opts.excludeAssets
           });
         }
       });
@@ -148,7 +151,8 @@ var BundleAnalyzerPlugin = function () {
         reportFilename: path.resolve(this.compiler.outputPath, this.opts.reportFilename),
         bundleDir: this.getBundleDirFromCompiler(),
         logger: this.logger,
-        defaultSizes: this.opts.defaultSizes
+        defaultSizes: this.opts.defaultSizes,
+        excludeAssets: this.opts.excludeAssets
       });
     }
   }, {

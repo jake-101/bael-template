@@ -111,9 +111,8 @@ var BaseFolder = function (_Node) {
     key: 'src',
     get: function get() {
       if (!_lodash2.default.has(this, '_src')) {
-        this._src = this.walk(function (node, src, stop) {
-          if (node.src === undefined) return stop(undefined);
-          return src += node.src;
+        this._src = this.walk(function (node, src) {
+          return src += node.src || '';
         }, '', false);
       }
 

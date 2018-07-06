@@ -1,5 +1,11 @@
 # Changes
 
+## 1.0.1
+
+### Other changes
+
+* project: migrate to gitlab (0046018)
+
 ## 1.0.0
 
 * Update:a83cc21 Update dependencies. (a83cc21)

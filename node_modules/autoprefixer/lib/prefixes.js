@@ -52,8 +52,10 @@ Declaration.hack(require('./hacks/background-size'));
 Declaration.hack(require('./hacks/grid-row-column'));
 Declaration.hack(require('./hacks/grid-rows-columns'));
 Declaration.hack(require('./hacks/grid-column-align'));
+Declaration.hack(require('./hacks/overscroll-behavior'));
 Declaration.hack(require('./hacks/grid-template-areas'));
 Declaration.hack(require('./hacks/text-emphasis-position'));
+Declaration.hack(require('./hacks/color-adjust'));
 
 Value.hack(require('./hacks/gradient'));
 Value.hack(require('./hacks/intrinsic'));

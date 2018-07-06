@@ -14,6 +14,40 @@ _Note: Gaps between patch versions are faulty, broken or test releases._
 
 <!-- Add changelog entries for new changes under this section -->
 
+## 2.13.1
+
+ * **Improvement**
+   * Pretty-format the generated stats.json ([#180](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/180)) [@edmorley](https://github.com/edmorley))
+   
+ * **Bug Fix**
+   * Properly parse Webpack 4 async chunk with `Array.concat` optimization ([#184](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/184), fixes [#183](https://github.com/webpack-contrib/webpack-bundle-analyzer/issues/183))
+  
+ * **Internal**
+   * Refactor bundle parsing logic ([#184](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/184))
+
+## 2.13.0
+
+ * **Improvement**
+   * Loosen bundle parsing logic ([#181](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/181)). Now analyzer will still show parsed sizes even if:
+     * It can't parse some bundle chunks. Those chunks just won't have content in the report. Fixes issues like [#160](https://github.com/webpack-contrib/webpack-bundle-analyzer/issues/160).
+     * Some bundle chunks are missing (it couldn't find files to parse). Those chunks just won't be visible in the report for parsed/gzipped sizes.
+
+## 2.12.0
+
+ * **New Feature**
+   * Add option that allows to exclude assets from the report ([#178](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/178))
+
+## 2.11.3
+
+ * **Bug Fix**
+   * Filter out modules that weren't found during bundles parsing ([#177](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/177))
+
+## 2.11.2
+
+ * **Bug Fix**
+   * Properly process stat files that contain modules inside of `chunks` array ([#175](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/175))
+   * Fix parsing of async chunks that push to `this.webpackJsonp` array ([#176](https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/176))
+
 ## 2.11.1
 
  * **Improvement**
