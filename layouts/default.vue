@@ -3,7 +3,7 @@
 
    <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
     <nuxt/>
-        <SlideOut></SlideOut>
+        <SlideOut/>
         <BaelFooter/>
   </section>
 </template>
