@@ -52,9 +52,9 @@ collections:
       format: 'json'
       file: "content/setup/connect.json"
       fields:
-        - label: Links
-          name: connectlinks
-          widget: list
+        - label: 'Links'
+          name: 'connectlinks'
+          widget: 'list'
           fields:
             - {label: Link Name, name: name, widget: string}
             - {label: URL, name: url, widget: string}
@@ -63,19 +63,19 @@ collections:
     format: 'json'
     file: "content/categories/cats.json"
     fields:
-      - label: Category
-        name: category
-        widget: list
+      - label: 'Category'
+        name: 'category'
+        widget: 'list'
         fields:
-          - {label: Category Name, name: name, widget: string}
-          - {label: Description, name: description, widget: string}  
+          - {label: 'Category Name', name: 'name', widget: 'string'}
+          - {label: 'Description', name: 'description', widget: 'string'}  
   - label: "Blog Tags"
     name: "blogtags"
     format: 'json'
     file: "content/categories/tags.json"
     fields:
-      - label: Tag
-        name: tag
-        widget: list
+      - label: 'Tag'
+        name: 'tag'
+        widget: 'list'
         fields:
-          - {label: Tag Name, name: name, widget: string}    
+          - {label: 'Tag Name', name: 'name', widget: 'string'}    
