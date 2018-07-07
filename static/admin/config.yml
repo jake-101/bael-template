@@ -53,6 +53,9 @@ collections:
       name: "blogcategories"
       file: "content/categories/cats.json"
       fields:
-        - {label: "Name", name: "name", widget: "string"}
-        - {label: "Description", name: "description", widget: "string", required: false}
-        
+        - {label: "Name", name: "name", widget: "list"} 
+    - label: "Blog Tags"
+      name: "blogtags"
+      file: "content/categories/tags.json"
+      fields:
+        - {label: "Name", name: "name", widget: "list"}        
