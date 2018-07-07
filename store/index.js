@@ -8,6 +8,7 @@ const createStore = () =>
       menuIsActive: false,
       menuInitial: true,
       blogPosts: [],
+      allPages: [],
       navheight: 60,
       blogTitle: '',
       siteInfo: [],
@@ -28,9 +29,17 @@ const createStore = () =>
           ...context(key),
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
+
+        const pagectx = await require.context('~/content/page/', false, /\.json$/);
+
+        const pages = await pagectx.keys().map(key => ({
+          ...context(key),
+          _path: `/page/${key.replace('.json', '').replace('./', '')}`
+        }));
     
          commit('SET_POSTS', searchposts)
-      
+         commit('SET_PAGES', pages)
+
       },
        getSiteInfo ({ state, commit }) {
         const info = require('~/content/setup/info.json');
@@ -41,6 +50,8 @@ const createStore = () =>
           ...context(key),
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
+
+    
     
          commit('SET_POSTS', searchposts)
          commit('SET_INFO', info)
@@ -51,6 +62,9 @@ const createStore = () =>
     mutations: {
       SET_POSTS(state, data) {
         state.blogPosts = data
+      },
+      SET_PAGES(state, data) {
+        state.allPages = data
       },
       SET_TITLE(state, data) {
         state.blogTitle = data
