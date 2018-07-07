@@ -30,7 +30,7 @@ const createStore = () =>
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
-        const pagectx = await require.context('~/content/page/', false, /\.json$/);
+        const pagectx = await require.context('~/content/page/posts/', false, /\.json$/);
 
         const pages = await pagectx.keys().map(key => ({
           ...context(key),

@@ -21,7 +21,7 @@ collections:
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "page" # Used in routes, e.g., /admin/collections/blog
     label: "Pages" # Used in the UI
-    folder: "content/page" # The path to the folder where the documents are stored
+    folder: "content/page/posts" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     format: 'json'

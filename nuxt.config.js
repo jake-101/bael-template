@@ -6,7 +6,7 @@ var path = require('path');
 // The Nuxt routes are generate by Nuxt automatically based on the pages folder.
 var dynamicRoutes = getDynamicPaths({
   '/blog': 'blog/posts/*.json',
-  '/page': 'page/*.json'
+  '/page': 'page/posts/*.json'
 });
 
 
