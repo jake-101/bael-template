@@ -1,24 +1,3 @@
 {
-  "blogcategories": [
-    {
-      "name": "Design",
-      "description": ""
-    },
-    {
-      "name": "Art",
-      "description": ""
-    },
-    {
-      "name": "Music",
-      "description": ""
-    },
-    {
-      "name": "Photography",
-      "description": ""
-    },
-    {
-      "name": "Videos",
-      "description": ""
-    }
-  ]
+  "name": "Art"
 }
