@@ -65,11 +65,7 @@ collections:
       name: "blogcategories"
       widget: "list"
       file: "content/categories/cats.json"
-      field:
-        - {label: "Name", name: "name", widget: "string"} 
     - label: "Blog Tags"
       name: "blogtags"
       widget: "list"
-      file: "content/categories/tags.json"
-      field:
-        - {label: "Name", name: "name", widget: "string"}        
+      file: "content/categories/tags.json"       

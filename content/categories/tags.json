@@ -1,3 +1,7 @@
 {
-  "name": "Test"
+  "blogtags": [
+    "Art",
+    "Music",
+    "Design"
+  ]
 }
