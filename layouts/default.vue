@@ -19,6 +19,45 @@ export default {
   
        }
   },
+  methods: {
+
+         navHeight() {
+       if (process.browser) {
+            var height = document.getElementById('navbar').clientHeight
+         
+           this.$store.commit('SET_NAVHEIGHT', height)
+            
+       }
+        }
+  },
+   updated() {
+    if (process.browser) {
+     
+         this.$nextTick(() => { 
+             this.navHeight() 
+       console.log(this.$store.state.navheight)
+      console.log('default updated')
+ })
+   
+     
+}
+  },
+  mounted() {
+
+  if (process.browser) {
+   
+         this.$nextTick(() => { 
+             this.navHeight() 
+                 console.log(this.$store.state.navheight)
+      console.log('default mounted')
+
+         })
+
+   
+     
+}
+    
+  },
     computed:{
 
 
