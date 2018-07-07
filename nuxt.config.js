@@ -41,8 +41,7 @@ module.exports = {
     html: true
   },
   workbox: {
-    fetch: true,
-    dev: true},
+    fetch: true},
 
   /*
   ** Route config for pre-rendering
