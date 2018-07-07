@@ -1,20 +1,22 @@
 {
-  "blogcategories": [
+  "category": [
     {
-      "name": "Instagram",
-      "description": "https://instagram.com/jasperketone"
+      "name": "Art"
     },
     {
-      "name": "Twitter",
-      "description": "https://twitter.com/jasperketone" 
+      "name": "Design"
     },
     {
-      "name": "Github",
-      "description": "https://github.com/jake-101"
+      "name": "Music"
     },
     {
-      "name": "Unsplash",
-      "description": "https://unsplash.com/@jake101"
+      "name": "News"
+    },
+    {
+      "name": "Random"
+    },
+    {
+      "name": "Photos"
     }
   ]
 }
