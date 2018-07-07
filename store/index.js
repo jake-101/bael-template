@@ -21,6 +21,7 @@ const createStore = () =>
       async nuxtServerInit({ dispatch }) {
         await dispatch('getSiteInfo')
         await dispatch('getBlogPosts')
+        await dispatch('getPages')
       },
       async getBlogPosts ({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
@@ -30,14 +31,21 @@ const createStore = () =>
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
-        const pagectx = await require.context('~/content/page/posts/', false, /\.json$/);
+       
+    
+         commit('SET_POSTS', searchposts)
 
-        const pages = await pagectx.keys().map(key => ({
+      },
+      async getPages ({ state, commit }) {
+
+
+        const context = await require.context('~/content/page/posts/', false, /\.json$/);
+
+        const pages = await context.keys().map(key => ({
           ...context(key),
           _path: `/page/${key.replace('.json', '').replace('./', '')}`
         }));
     
-         commit('SET_POSTS', searchposts)
          commit('SET_PAGES', pages)
 
       },

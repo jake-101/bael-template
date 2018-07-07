@@ -12,6 +12,10 @@
        {{menuSiteName}}
       </li>
       <li class="zap-slideout-menu-item--small"><nuxt-link to="/" exact>Home</nuxt-link></li>
+                   <li v-if="myPages" v-for="(pg,i) in myPages" :key="i" class="zap-slideout-menu-item--small"><a :href="pg._path">{{pg.title}}</a></li>
+  <li v-if="menuLinks" class="xs-mt5 zap-slideout-menu-item">
+      Links
+      </li>
              <li v-if="menuLinks" v-for="m in menuLinks" :key="m.position" class="zap-slideout-menu-item--small"><a :href="m.link">{{m.name}}</a></li>
     </ul>
   </div>
@@ -26,6 +30,9 @@
   computed: {
   menuLinks() {
     return this.$store.state.siteInfo.menu
+  },
+    myPages() {
+    return this.$store.state.allPages
   },
 
     menuSiteName() {
