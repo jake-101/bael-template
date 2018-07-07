@@ -48,8 +48,7 @@ export default {
   components: {},
   computed: {
 allPosts() {
-  var a = this.$store.state.blogPosts
-  return objArray.map(a => a.title);
+  return this.$store.state.blogPosts
   
 },
       headerSiteName() {
@@ -72,18 +71,7 @@ allPosts() {
         }
   },  mounted() {
 
-  if (process.browser) {
-  window.onNuxtReady((app) => {
-     this.$nextTick(() => { 
-       this.$on("searchChanged", results => {
-      this.compResults = results;
-
-
-    });
-     })
-
-  })
-}
+ 
 
  
 }

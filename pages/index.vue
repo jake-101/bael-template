@@ -37,11 +37,12 @@ export default {
      methods: {
         onResize(event) {
 this.navHeight()
+    console.log(this.$store.state.navheight)
+      console.log('index resize')
   },
      navHeight() {
        if (process.browser) {
             var height = document.getElementById('navbar').clientHeight
-            console.log(height);
          
            this.$store.commit('SET_NAVHEIGHT', height)
             
@@ -51,6 +52,8 @@ this.navHeight()
     updated() {
          this.$nextTick(() => { 
              this.navHeight() 
+                 console.log(this.$store.state.navheight)
+      console.log('index updated')
          })
   },
   mounted() {
@@ -58,6 +61,8 @@ this.navHeight()
     
              this.$nextTick(() => { 
     this.navHeight() 
+    console.log(this.$store.state.navheight)
+      console.log('index mounted')
   window.addEventListener('resize', this.onResize)
 
 
