@@ -65,8 +65,7 @@ this.navHeight()
      
 }
   },
-     created() { this.navHeight() },
-  mounted() {
+   mounted() {
 
   if (process.browser) {
    

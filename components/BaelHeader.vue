@@ -8,7 +8,7 @@
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2">
         <div class="item xs-flex">
-    
+    <VueFuse placeholder="Search" :compResults="compResults" :keys="keys" :list="allPosts" event-name="searchChanged"/>
          </div>
 
       </div>
@@ -22,7 +22,7 @@
   </nav>
 </template>
 <script>
-
+import VueFuse from '~/components/VueFuse'
 export default {
   props: ['blogtitle','posts'],
     data() {
@@ -45,7 +45,7 @@ export default {
       methodResults: [],
        };
   },
-  components: {},
+  components: {VueFuse},
   computed: {
 allPosts() {
   return this.$store.state.blogPosts
@@ -70,7 +70,11 @@ allPosts() {
            this.$store.commit('SET_NAVHEIGHT', height)
         }
   },  mounted() {
+    this.$on("searchChanged", results => {
+      this.compResults = results;
 
+
+    });
  
 
  

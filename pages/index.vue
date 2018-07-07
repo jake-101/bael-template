@@ -45,7 +45,6 @@ this.navHeight()
        }
         }
   },
-   created() { this.navHeight() },
     updated() {
          this.$nextTick(() => { 
              this.navHeight() 
