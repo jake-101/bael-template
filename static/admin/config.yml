@@ -58,7 +58,7 @@ collections:
           fields:
             - {label: Link Name, name: name, widget: string}
             - {label: URL, name: url, widget: string}
-    - label: "Blog Categories"
+  - label: "Blog Categories"
       name: "blogcategories"
       format: 'json'
       file: "content/categories/cats.json"
@@ -78,4 +78,4 @@ collections:
           name: tag
           widget: list
           fields:
-            - {label: Tag Name, name: name, widget: string}
+            - {label: Tag Name, name: name, widget: string}  
