@@ -111,7 +111,7 @@ allBlogPosts() {
 .single {max-width:1200px;margin: 0 auto;}
 .search:focus {outline:none;}
 .footer__heading {text-transform:uppercase;}
-.no-gap {grid-gap:0;}
+.no-gap {grid-gap:0 !important;}
 nav .r {grid-gap: 0;}
 .r.full-height {grid-gap: 0;}
 @media only screen and (max-width: 40rem) { 

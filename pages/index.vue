@@ -89,7 +89,6 @@ this.navHeight()
 .browse a {width:100%;}
 .search:focus {outline:none;}
 .footer__heading {text-transform:uppercase;}
-.no-gap {grid-gap:0;}
 nav .r {grid-gap: 0;}
 .r.full-height {grid-gap: 0;}
 @media only screen and (max-width: 40rem) { 

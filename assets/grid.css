@@ -3,7 +3,7 @@
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 10px
 }
-
+.no-gap {grid-gap:0 !important;}
 .bcg-item {
     grid-column: span 6;
     padding: 10px
