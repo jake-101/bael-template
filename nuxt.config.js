@@ -55,7 +55,7 @@ module.exports = {
   },
   plugins: [{ssr: false, src:'~/plugins/vuefuse'},{
     src: "~/plugins/moment",
-    ssr: "false"
+    ssr: false
   }],
   /*
   ** Build configuration

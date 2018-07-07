@@ -12,7 +12,7 @@
          </div>
 
       </div>
-         <div v-if="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
+         <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
         <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  &nbsp; - {{blogtitle}}
         </div>
       </div>

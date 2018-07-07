@@ -20,11 +20,7 @@
 <script>
 
 export default {  
-    async asyncData({ params,app,payload,route,store }) {
 
-
-  
-  },  
   components: {
   
   },
