@@ -16,7 +16,8 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
-      - {label: "Category", name: "category", widget: "relation", collection: "categories", searchFields: "name", valueField: "name", displayFields: ["name", "description"], required: false}
+      - {label: "Category", name: "category", widget: "relation", collection: "blogcategories", searchFields: "name", valueField: "name", displayFields: "name", required: false}
+      - {label: "Tags", name: "category", widget: "relation", collection: "blogtags", searchFields: "name", valueField: "name", displayFields: "name", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
   - label: "Setup"
     name: "setup"
