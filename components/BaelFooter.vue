@@ -7,15 +7,14 @@
       </div>
       <div class="c-25 xs-text-left xs-p2 xs-border">
         <div class="item">
-          <div v-if="siteDescription" class="footer__heading xs-mb2">About</div>
-          <p v-if="siteDescription">{{siteDescription}}</p>
+          <div v-show="siteDescription" class="footer__heading xs-mb2">About</div>
+          <p v-show="siteDescription">{{siteDescription}}</p>
         </div>
       </div>
       <div class="c-25 xs-text-left xs-p2 xs-border">
         <div class="item">
-          <div class="footer__heading xs-mb2">Newsletter</div>
-          <form method="post" action="/success" name="mailinglist" data-netlify="true">
-            <label class="form-label form-label--small">Sign up on our newsletter</label>
+          <div class="footer__heading xs-mb2">Newsletter Signup</div>
+          <form name="mailinglist" data-netlify="true">
             <input type="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
             <button type="submit" class="button button--transparent button--small">Submit</button>
           </form>
@@ -23,9 +22,9 @@
       </div>
       <div class="c-25 xs-text-left xs-p2 xs-border">
         <div class="item">
-          <div v-if="connectData" class="footer__heading xs-mb2">Connect</div>
+          <div v-show="connectData" class="footer__heading xs-mb2">Connect</div>
           <ul class="list-unstyled">
-            <li v-if="connectData" v-for="(c,i) in connectData" :key="i">
+            <li v-show="connectData" v-for="(c,i) in connectData" :key="i">
               <a :href="c.url">{{c.name}}</a>
             </li>
           </ul>
@@ -42,9 +41,9 @@
         </div>
       </div>
       <div class="c-12 xs-text-left xs-p2 xs-border">
-        <p class="item xs-text-6">An open source design by
+        <div class="item xs-text-6">An open source design by
           <a href="https://jake101.com">jake101</a>
-        </p>
+        </div>
       </div>
     </div>
   </footer>
