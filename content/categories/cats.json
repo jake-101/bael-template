@@ -1,4 +1,20 @@
 {
-  "name": "Art",
-  "description": "Test"
+  "blogcategories": [
+    {
+      "name": "Instagram",
+      "description": "https://instagram.com/jasperketone"
+    },
+    {
+      "name": "Twitter",
+      "description": "https://twitter.com/jasperketone"
+    },
+    {
+      "name": "Github",
+      "description": "https://github.com/jake-101"
+    },
+    {
+      "name": "Unsplash",
+      "description": "https://unsplash.com/@jake101"
+    }
+  ]
 }
