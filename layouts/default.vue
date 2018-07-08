@@ -16,7 +16,7 @@
 export default {
    data() {
     return {
-  email: "",
+  email: {email:""},
        }
   },
   methods: {
