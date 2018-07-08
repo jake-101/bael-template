@@ -62,12 +62,14 @@ export default {
   },
   methods: {
 async processForm() {
+  try {
  const sendgrid = await this.$axios.post('/.netlify/functions/app', this.emaildata)
-const statuscode = sendgrid.statusCode
-const data = sendgrid.data
+      console.log('Processed!')
+      this.sent=true
+    } catch (e) {
+      console.log(e)
+    }
 
-console.log(statuscode)
-console.log(data)
 }
 
   },
