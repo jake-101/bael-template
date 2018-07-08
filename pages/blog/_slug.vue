@@ -3,9 +3,11 @@
 <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
   <div class="xs-mt2 xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
-       <div v-show="thumbnail"><img class="featured-image" :src="thumbnail" :alt="title"></div>
+       <div v-show="theThumb"><img class="featured-image" :src="theThumb" :alt="title"></div>
   <h1 class="xs-py3 main-title">{{title}}</h1>
-   <no-ssr><div class="xs-mt-5 bold">{{ date | moment('dddd MMMM Do, YYYY') }}</div></no-ssr>
+   <no-ssr><div class="xs-mt-5 bold"><span v-if="category" class="tag">
+  <span class="tag__link">{{category}}</span>
+</span> {{ date | moment('dddd MMMM Do, YYYY') }}</div></no-ssr>
      <div class="xs-py3 post-content"><div v-html="$md.render(body)"></div></div>
         </div>
         </div>
@@ -26,7 +28,10 @@ export default {
 
     let post = await import('~/content/blog/posts/' + params.slug + '.json');
     console.log(post)
+        await store.commit('SET_THUMB', '')
+
     await store.commit('SET_TITLE', post.title)
+    await store.commit('SET_THUMB', post.thumbnail)
     return post;
   },
     head() {
@@ -88,6 +93,9 @@ this.navHeight()
 },
 
   computed:{
+    theThumb() {
+      return this.$store.state.theThumbnail;
+    },
 allBlogPosts() {
     return this.$store.state.blogPosts;
   },

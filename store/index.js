@@ -14,6 +14,7 @@ const createStore = () =>
       siteInfo: [],
       connect: [],
       allTags: [],
+      theThumbnail: '',
       allCats: [],
       results: [],
       menuIsActive: false,
@@ -107,6 +108,9 @@ const createStore = () =>
       },
       SET_TAGS(state, data) {
         state.allTags = data
+      },
+      SET_THUMB(state, data) {
+        state.theThumbnail = data
       },
       SET_TITLE(state, data) {
         state.blogTitle = data
