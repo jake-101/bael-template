@@ -14,7 +14,7 @@
       <div class="c-25 xs-text-left xs-p2 xs-border">
         <div class="item">
           <div class="footer__heading xs-mb2">Newsletter Signup</div>
-          <form method="post" action="/.netlify/functions/mailing-api" name="mailinglist">
+          <form method="post" action="/.netlify/functions/sendgrid" name="mailinglist">
             <input type="email" v-model="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
             <button type="submit" class="button button--transparent button--small">Submit</button>
           </form>
@@ -35,7 +35,7 @@
           <div class="footer__heading xs-mb2">Deploy</div>
 
               <a href="https://app.netlify.com/start/deploy?repository=https://github.com/jake-101/bael-template">
-                <img style="height:29px;width:auto;" src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify">
+                <img style="height:29px;width:auto;" src="~/assets/deploy.svg" title="Deploy to Netlify">
               </a>
            
         </div>
