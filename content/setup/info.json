@@ -3,19 +3,44 @@
   "sitedescription": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js.",
   "menu": [
     {
-      "link": "https://www.jake101.com/",
       "name": "jake101",
-      "position": "1"
+      "position": "1",
+      "link": "https://www.jake101.com/"
     },
     {
-      "link": "https://www.nuxtjs.org/",
       "name": "Nuxt.js",
-      "position": "2"
+      "position": "2",
+      "link": "https://www.nuxtjs.org/"
     },
     {
-      "link": "https://www.netlify.com/",
       "name": "Netlify",
-      "position": "3"
+      "position": "3",
+      "link": "https://www.netlify.com/"
+    }
+  ],
+  "blogcategories": [
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Random"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Instructions"
+    },
+    {
+      "name": "Design"
+    }
+  ],
+  "blogtags": [
+    {
+      "name": "sendgrid"
+    },
+    {
+      "name": ""
     }
   ]
 }
