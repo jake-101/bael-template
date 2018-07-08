@@ -85,7 +85,7 @@ exports.handler = function(event, context, callback) {
           SENDGRID_WELCOME_SENDER_NAME,
           SENDGRID_WELCOME_TEMPLATE_ID
         )
-				.then(response => callback(null, { statusCode: response.statusCode, body: "" }) )
+				.then(response => callback(null, { statusCode: response.statusCode, body: email + " added" }) )
 				.catch(err => callback(err, null));
       } else {
         callback(null, { statusCode: response.statusCode, body: "" });

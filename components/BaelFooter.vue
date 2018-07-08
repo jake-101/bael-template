@@ -12,12 +12,16 @@
         </div>
       </div>
       <div class="c-25 xs-text-left xs-p2 xs-border">
-        <div class="item">
+        <div v-if="!sent" class="item">
           <div class="footer__heading xs-mb2">Newsletter Signup</div>
           <form @submit.prevent="processForm" action="/.netlify/functions/app" name="mailinglist">
             <input type="email" v-model="emaildata.email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
             <button type="submit" class="button button--transparent button--small">Submit</button>
           </form>
+        </div>
+        <div class="item" v-else>
+                    <div class="footer__heading xs-mb2">{{emaildata.email}} has been added to our newsletter.</div>
+
         </div>
       </div>
       <div class="c-25 xs-text-left xs-p2 xs-border">
@@ -53,12 +57,18 @@ export default {
     data() {
     return {
   emaildata: {email:""},
+  sent: false
        }
   },
   methods: {
 async processForm() {
  const sendgrid = await this.$axios.post('/.netlify/functions/app', this.emaildata)
+const status = sendgrid.statusCode
 const data = sendgrid.data
+ if (status = 201) {
+   this.sent=true
+ }
+console.log(status)
 console.log(data)
 }
 
