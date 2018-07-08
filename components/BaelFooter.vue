@@ -14,7 +14,7 @@
       <div class="c-25 xs-text-left xs-p2 xs-border">
         <div class="item">
           <div class="footer__heading xs-mb2">Newsletter Signup</div>
-          <form method="post" action="/.netlify/functions/src/sendgrid" name="mailinglist">
+          <form method="post" action="/.netlify/functions/sendgrid" name="mailinglist">
             <input type="email" v-model="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
             <button type="submit" class="button button--transparent button--small">Submit</button>
           </form>
