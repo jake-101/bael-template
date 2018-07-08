@@ -1,13 +1,10 @@
-"use latest";
 const client = require("@sendgrid/client");
 
-function addSendgridRecipient(client, email, firstName) {
+function addSendgridRecipient(client, email) {
   return new Promise((fulfill, reject) => {
     const data = [
       {
-        email: email,
-        first_name: firstName
-      }
+        email: email      }
     ];
     const request = {
       method: "POST",
@@ -27,7 +24,7 @@ function addSendgridRecipient(client, email, firstName) {
   });
 }
 
-function sendWelcomeEmail(client, email, firstName, senderEmail, senderName, templateID) {
+function sendWelcomeEmail(client, email, senderEmail, senderName, templateID) {
   return new Promise((fulfill, reject) => {
     const data = {
       from: {
@@ -41,13 +38,9 @@ function sendWelcomeEmail(client, email, firstName, senderEmail, senderName, tem
         {
           to: [
             {
-              email: email,
-              name: firstName
+              email: email
             }
-          ],
-          substitutions: {
-            "<%name%>": firstName
-          }
+          ]
         }
       ],
       template_id: templateID
@@ -79,17 +72,15 @@ exports.handler = function(event, context, callback) {
   } = process.env;
   const body = JSON.parse(event.body);
   const email = body.email;
-  const firstName = body.first_name;
   const welcomeEmail = event.queryStringParameters.welcome_email === "true";
 
   client.setApiKey(SENDGRID_API_KEY);
-  addSendgridRecipient(client, email, firstName)
+  addSendgridRecipient(client, email)
     .then((response, body) => {
       if (welcomeEmail) {
         sendWelcomeEmail(
           client,
           email,
-          firstName,
           SENDGRID_WELCOME_SENDER_EMAIL,
           SENDGRID_WELCOME_SENDER_NAME,
           SENDGRID_WELCOME_TEMPLATE_ID
