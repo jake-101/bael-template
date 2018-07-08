@@ -36,7 +36,7 @@ const createStore = () =>
 
        
     
-         commit('SET_POSTS', searchposts)
+         commit('SET_POSTS', searchposts.reverse())
 
       },
       async getPages ({ state, commit }) {

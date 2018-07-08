@@ -103,4 +103,5 @@
     
 }
 
-pre, code {white-space: normal;font-family: monospace;margin-bottom:1rem;background:#f3f3f3;padding:.5rem;}
+pre, code {white-space: normal;font-family: monospace;margin-bottom:1rem;background:#f3f3f3;padding:.5rem;margin: 1rem 0 !important;}
+blockquote {border-left: 3px solid #d6d6d6;padding:0 .5rem !important;margin:0 .5rem !important;}

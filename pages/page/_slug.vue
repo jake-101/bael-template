@@ -5,7 +5,7 @@
     <div class="item xs-block xs-full-height">
        <div v-if="thumbnail"><img class="featured-image" :src="thumbnail" :alt="title"></div>
   <h1 class="xs-py3 main-title">{{title}}</h1>
-     <div class="xs-py3 post-content"><div v-html="$md.render(body)"></div></div>
+     <div class="xs-py3 post-content text-gray"><div v-html="$md.render(body)"></div></div>
         </div>
         </div>
 
@@ -105,7 +105,7 @@ allBlogPosts() {
 .featured-image {max-height:55vh;object-fit:cover;object-position: 50% 50%;width:100%;}
 .container .single .post-content {line-height: 1.618;color:#222;}
 .single .post-content img {max-width:100%;height:auto;border: 1px solid #ccc; padding: 1rem; margin-top: 1.5rem;margin-bottom:1.5rem;}
-.single .post-content p, .single .post-content li {margin-bottom:1rem;}
+.single .post-content ul {margin-bottom:1rem;}
 .post-content h1,.post-content h2,.post-content h3,.post-content h4,.post-content h5,.post-content h6 {color:#000;margin-bottom:.5rem;} 
 .single {max-width:1200px;margin: 0 auto;}
 .search:focus {outline:none;}

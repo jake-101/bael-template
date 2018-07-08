@@ -1,9 +1,9 @@
 <template>
 <div class="searchwrapper xs-relative">
-  <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
-  <img class="xs-absolute searchicon" src="~/assets/bx-search.svg">
+  <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-5 md-text-4 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
+  <img class="xs-absolute searchicon xs-r0 sm-l0" src="~/assets/bx-search.svg">
       <ul class="xs-absolute results">
-            <li class="xs-border xs-p1 fill-white" v-for="(xx,i) in compResults" :key="i">
+            <li class="xs-border xs-p2 fill-white" v-for="(xx,i) in compResults" :key="i">
               <a :href="`${xx._path}/`">
                 {{xx.title}}
               </a>
@@ -189,8 +189,11 @@ export default {
 </script>
 <style>
 .searchwrapper {width:100%;}
-input.search {width:100%;}
-.searchicon { height:18px;top: 0px;
-  right: 0px;}
+input.search {width:100%;text-indent:22px}
+ .results {top:1.35rem;}
+.searchicon { height:18px;top: 0px;}
   .results a {display:block;width:100%;}
+  @media only screen and (max-width: 40rem) { 
+    input.search {text-indent:0;}
+  }
 </style>

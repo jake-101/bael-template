@@ -8,7 +8,7 @@
    <no-ssr><div class="xs-mt-5 bold"><span v-if="category" class="tag">
   <span class="tag__link">{{category}}</span>
 </span> {{ date | moment('dddd MMMM Do, YYYY') }}</div></no-ssr>
-     <div class="xs-py3 post-content"><div v-html="$md.render(body)"></div></div>
+     <div class="xs-py3 post-content text-gray-lighter"><div v-html="$md.render(body)"></div></div>
         </div>
         </div>
 
@@ -110,11 +110,13 @@ allBlogPosts() {
 </script>
 
 <style>
+h1,h2,h3,h4,h5,h6 {margin-top:1rem;}
 .main-title {font-size: 3rem;font-family: "Archivo Black",sans-serif;font-weight:400;}
 .featured-image {max-height:55vh;object-fit:cover;object-position: 50% 50%;width:100%;}
 .container .single .post-content {line-height: 1.618;color:#222;}
 .single .post-content img {max-width:100%;height:auto;border: 1px solid #ccc; padding: 1rem; margin-top: 1.5rem;margin-bottom:1.5rem;}
-.single .post-content p, .single .post-content li {margin-bottom:1rem;}
+.single .post-content p {margin-bottom:.5rem;}
+.single .post-content ul,.single .post-content ol {margin-bottom:1rem;}
 .post-content h1,.post-content h2,.post-content h3,.post-content h4,.post-content h5,.post-content h6 {color:#000;margin-bottom:.5rem;} 
 .single {max-width:1200px;margin: 0 auto;}
 .search:focus {outline:none;}

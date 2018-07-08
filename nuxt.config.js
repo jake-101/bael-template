@@ -42,6 +42,8 @@ module.exports = {
     preset: 'default',
     breaks: true,
     html: true
+
+    
   },
   workbox: {
     fetch: true},
@@ -60,7 +62,7 @@ module.exports = {
   generate: {
     routes: dynamicRoutes
   },
-  plugins: [{ssr: false, src:'~/plugins/vuefuse'},{
+  plugins: ['~/plugins/vuefuse',{
     src: "~/plugins/moment",
     ssr: false
   }],

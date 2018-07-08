@@ -20,7 +20,7 @@
           </form>
         </div>
         <div class="item" v-else>
-                    <div class="footer__heading xs-mb2">{{emaildata.email}} has been added to our newsletter.</div>
+                    <div class="xs-mb2">{{emaildata.email}} has been added to our newsletter.</div>
 
         </div>
       </div>
