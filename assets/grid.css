@@ -102,3 +102,5 @@
     }
     
 }
+
+pre, code {white-space: normal;font-family: monospace;margin-bottom:1rem;background:#f3f3f3;padding:.5rem;}

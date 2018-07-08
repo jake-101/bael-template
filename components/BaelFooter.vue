@@ -14,8 +14,8 @@
       <div class="c-25 xs-text-left xs-p2 xs-border">
         <div class="item">
           <div class="footer__heading xs-mb2">Newsletter Signup</div>
-          <form name="mailinglist">
-            <input type="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
+          <form method="post" action="/.netlify/functions/mailing-api" name="mailinglist">
+            <input type="email" v-model="email" class="text-input text-input--small xs-mb1 xs-mr2" placeholder="you@email.com">
             <button type="submit" class="button button--transparent button--small">Submit</button>
           </form>
         </div>
@@ -50,6 +50,7 @@
 </template>
 <script>
 export default {
+  props: ["email"],
   computed: {
     connectData() {
       return this.$store.state.connect.connectlinks;
@@ -62,6 +63,9 @@ export default {
 </script>
 <style scoped>
 .text-input {
+  max-width: 100%;
+}
+.footer__heading {
   max-width: 100%;
 }
 </style>

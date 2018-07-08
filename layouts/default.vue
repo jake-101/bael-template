@@ -4,7 +4,7 @@
    <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
     <nuxt/>
         <SlideOut/>
-        <BaelFooter/>
+        <BaelFooter :email="email"/>
   </section>
 </template>
 <script>
@@ -16,7 +16,7 @@
 export default {
    data() {
     return {
-  
+  email: "",
        }
   },
   methods: {

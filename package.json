@@ -8,6 +8,7 @@
     "dev": "nuxt",
     "serve": "nuxt",
     "build": "nuxt build",
+    "build:api": "netlify-lambda build functions/sendgrid",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",

@@ -3,7 +3,7 @@
     <div class="r">
 
       <div class="c-4 xs-text-left xs-p2 sm-border-right">
-        <div class="item bold sitename"><nuxt-link to="/" exact>{{headerSiteName}}</nuxt-link></div>
+        <div class="item"><nuxt-link class="sitename" to="/" exact>{{headerSiteName}}</nuxt-link></div>
       </div>
 
       <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2">
@@ -88,7 +88,7 @@ allPosts() {
 .results {padding-left:0;transform:translateY(17px);width:30vw;}
 .results li {list-style-type: none;margin-left:0;}
 nav {position:fixed;background:white;top:0;left:0;right:0;}
-.sitename {text-transform:uppercase;}
+.sitename {color:#000;font-family: 'Archivo Black',sans-serif;text-transform:uppercase;font-weight: 400;font-size:18px;}
 @media only screen and (max-width: 40rem) { 
 .results {width:94vw;}
 

@@ -24,7 +24,8 @@ module.exports = {
 
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black|Barlow:400,700,900' }
     ]
   },
   css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],

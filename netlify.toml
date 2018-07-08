@@ -1,7 +1,13 @@
 [build]
   publish = "dist"
   command = "npm run generate"
+  functions = "functions"
 [build.environment]
   NODE_VERSION = "10"
   YARN_VERSION = "1.7"
   YARN_FLAGS = "--no-ignore-optional"
+[template.environment]
+  SENDGRID_API_KEY = "change me for your secret token"
+  SENDGRID_WELCOME_SENDER_EMAIL = "your@email.com"
+  SENDGRID_WELCOME_SENDER_NAME = "Your Name"
+  SENDGRID_WELCOME_TEMPLATE_ID = "Welcome Email Template ID"

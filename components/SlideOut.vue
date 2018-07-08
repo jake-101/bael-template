@@ -8,12 +8,12 @@
         </div>
       </div></div>
     <ul class="zap-slideout-menu list-unstyled">
-      <li class="zap-slideout-menu-item">
+      <li class="zap-slideout-menu-item black-font">
        {{menuSiteName}}
       </li>
       <li class="zap-slideout-menu-item--small"><nuxt-link to="/" exact>Home</nuxt-link></li>
-                   <li v-if="myPages" v-for="(pg,i) in myPages" :key="i" class="zap-slideout-menu-item--small"><a :href="pg._path">{{pg.title}}</a></li>
-  <li v-if="menuLinks" class="xs-mt5 zap-slideout-menu-item">
+                   <li v-if="myPages" v-for="(pg,i) in myPages" :key="`pg-${i}`" class="zap-slideout-menu-item--small"><nuxt-link :to="pg._path">{{pg.title}}</nuxt-link></li>
+  <li v-if="menuLinks" class="xs-mt5 zap-slideout-menu-item black-font">
       Links
       </li>
              <li v-if="menuLinks" v-for="m in menuLinks" :key="m.position" class="zap-slideout-menu-item--small"><a :href="m.link">{{m.name}}</a></li>
@@ -67,6 +67,7 @@
   }
   </script>
   <style lang="scss">
+  .black-font {text-transform:uppercase;font-weight: 700;}
   .hamburger {
   padding: 15px 15px;
   display: inline-block;

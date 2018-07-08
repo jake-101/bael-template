@@ -5,7 +5,7 @@
     <div class="item xs-block xs-full-height">
        <div v-show="thumbnail"><img class="featured-image" :src="thumbnail" :alt="title"></div>
   <h1 class="xs-py3 main-title">{{title}}</h1>
-   <div class="xs-mt-5 bold">{{ date | moment('dddd MMMM Do, YYYY') }}</div>
+   <no-ssr><div class="xs-mt-5 bold">{{ date | moment('dddd MMMM Do, YYYY') }}</div></no-ssr>
      <div class="xs-py3 post-content"><div v-html="$md.render(body)"></div></div>
         </div>
         </div>
@@ -102,7 +102,7 @@ allBlogPosts() {
 </script>
 
 <style>
-.main-title {font-size: 3rem;}
+.main-title {font-size: 3rem;font-family: "Archivo Black",sans-serif;font-weight:400;}
 .featured-image {max-height:55vh;object-fit:cover;object-position: 50% 50%;width:100%;}
 .container .single .post-content {line-height: 1.618;color:#222;}
 .single .post-content img {max-width:100%;height:auto;border: 1px solid #ccc; padding: 1rem; margin-top: 1.5rem;margin-bottom:1.5rem;}

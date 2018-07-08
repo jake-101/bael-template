@@ -1,6 +1,7 @@
 <template>
-<div>
+<div class="searchwrapper xs-relative">
   <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-6 md-text-5 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
+  <img class="xs-absolute searchicon" src="~/assets/bx-search.svg">
       <ul class="xs-absolute results">
             <li class="xs-border xs-p1 fill-white" v-for="(xx,i) in compResults" :key="i">
               <a :href="`${xx._path}/`">
@@ -186,3 +187,10 @@ export default {
   }
 };
 </script>
+<style>
+.searchwrapper {width:100%;}
+input.search {width:100%;}
+.searchicon { height:18px;top: 0px;
+  right: 0px;}
+  .results a {display:block;width:100%;}
+</style>
