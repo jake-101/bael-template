@@ -13,6 +13,8 @@ const createStore = () =>
       blogTitle: '',
       siteInfo: [],
       connect: [],
+      allTags: [],
+      allCats: [],
       results: [],
       menuIsActive: false,
       menuInitial: true,
@@ -49,6 +51,32 @@ const createStore = () =>
          commit('SET_PAGES', pages)
 
       },
+      async getCats ({ state, commit }) {
+
+
+        const context = await require.context('~/content/categories/posts/', false, /\.json$/);
+
+        const pages = await context.keys().map(key => ({
+          ...context(key),
+          _path: `/category/${key.replace('.json', '').replace('./', '')}`
+        }));
+    
+         commit('SET_CATS', pages)
+
+      },
+      async getTags ({ state, commit }) {
+
+
+        const context = await require.context('~/content/tags/posts/', false, /\.json$/);
+
+        const pages = await context.keys().map(key => ({
+          ...context(key),
+          _path: `/tagged/${key.replace('.json', '').replace('./', '')}`
+        }));
+    
+         commit('SET_TAGS', pages)
+
+      },
        getSiteInfo ({ state, commit }) {
         const info = require('~/content/setup/info.json');
         const connect = require('~/content/setup/connect.json');
@@ -73,6 +101,12 @@ const createStore = () =>
       },
       SET_PAGES(state, data) {
         state.allPages = data
+      },
+      SET_CATS(state, data) {
+        state.allCats = data
+      },
+      SET_TAGS(state, data) {
+        state.allTags = data
       },
       SET_TITLE(state, data) {
         state.blogTitle = data
