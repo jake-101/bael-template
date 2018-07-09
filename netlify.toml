@@ -7,7 +7,7 @@
   YARN_VERSION = "1.7"
   YARN_FLAGS = "--no-ignore-optional"
 [template.environment]
-  SENDGRID_API_KEY = "change me for your secret token"
-  SENDGRID_WELCOME_SENDER_EMAIL = "your@email.com"
-  SENDGRID_WELCOME_SENDER_NAME = "Your Name"
-  SENDGRID_WELCOME_TEMPLATE_ID = "Welcome Email Template ID"
+  SENDGRID_API_KEY = "Your Sendgrid API Key (required for newsletter signup box)"
+  SENDGRID_WELCOME_SENDER_EMAIL = "Sendgrid Welcome Sender Email"
+  SENDGRID_WELCOME_SENDER_NAME = "Sendgrid Welcome Sender Name"
+  SENDGRID_WELCOME_TEMPLATE_ID = "Sendgrid Welcome Email Template ID"

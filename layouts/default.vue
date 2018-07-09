@@ -1,87 +1,69 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
 
-   <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
+    <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
     <nuxt/>
-        <SlideOut/>
-        <BaelFooter/>
+    <SlideOut/>
+    <BaelFooter/>
   </section>
 </template>
 <script>
-  import SlideOut from '~/components/SlideOut'
-  import BaelFooter from '~/components/BaelFooter'
-    import BaelHeader from '~/components/BaelHeader'
-
+import SlideOut from "~/components/SlideOut";
+import BaelFooter from "~/components/BaelFooter";
+import BaelHeader from "~/components/BaelHeader";
 
 export default {
-   data() {
+  data() {
     return {
-  email: {email:""},
-       }
+      email: { email: "" }
+    };
   },
   methods: {
+    navHeight() {
+      if (process.browser) {
+        var height = document.getElementById("navbar").clientHeight;
 
-         navHeight() {
-       if (process.browser) {
-            var height = document.getElementById('navbar').clientHeight
-         
-           this.$store.commit('SET_NAVHEIGHT', height)
-            
-       }
-        }
+        this.$store.commit("SET_NAVHEIGHT", height);
+      }
+    }
   },
-   updated() {
+  updated() {
     if (process.browser) {
-     
-         this.$nextTick(() => { 
-             this.navHeight() 
-       console.log(this.$store.state.navheight)
-      console.log('default updated')
- })
-   
-     
-}
+      this.$nextTick(() => {
+        this.navHeight();
+        console.log(this.$store.state.navheight);
+        console.log("default updated");
+      });
+    }
   },
   mounted() {
-
-  if (process.browser) {
-   
-         this.$nextTick(() => { 
-             this.navHeight() 
-                 console.log(this.$store.state.navheight)
-      console.log('default mounted')
-
-         })
-
-   
-     
-}
-    
+    if (process.browser) {
+      this.$nextTick(() => {
+        this.navHeight();
+        console.log(this.$store.state.navheight);
+        console.log("default mounted");
+      });
+    }
   },
-    computed:{
-
-
-  blogposts() {
-    return this.$store.state.blogPosts;
+  computed: {
+    blogposts() {
+      return this.$store.state.blogPosts;
+    },
+    blogtitle() {
+      return this.$store.state.blogTitle;
+    }
   },
-  blogtitle() {
-    return this.$store.state.blogTitle;
+  components: {
+    SlideOut,
+    BaelHeader,
+    BaelFooter
   }
-  },
-      components: {
-    SlideOut,BaelHeader,BaelFooter
-  }
-}
-
-
+};
 </script>
 
 
 <style>
-html
-{
-
-
+html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }

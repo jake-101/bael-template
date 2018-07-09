@@ -20,7 +20,7 @@
           </form>
         </div>
         <div class="item" v-else>
-                    <div class="xs-mb2">{{emaildata.email}} has been added to our newsletter.</div>
+          <div class="xs-mb2">{{emaildata.email}} has been added to our newsletter.</div>
 
         </div>
       </div>
@@ -38,10 +38,10 @@
         <div class="item">
           <div class="footer__heading xs-mb2">Deploy</div>
 
-              <a href="https://app.netlify.com/start/deploy?repository=https://github.com/jake-101/bael-template">
-                <img style="height:29px;width:auto;" src="~/assets/deploy.svg" title="Deploy to Netlify">
-              </a>
-           
+          <a href="https://app.netlify.com/start/deploy?repository=https://github.com/jake-101/bael-template">
+            <img style="height:29px;width:auto;" src="~/assets/deploy.svg" title="Deploy to Netlify">
+          </a>
+
         </div>
       </div>
       <div class="c-12 xs-text-left xs-p2 xs-border">
@@ -54,35 +54,34 @@
 </template>
 <script>
 export default {
-    data() {
+  data() {
     return {
-  emaildata: {email:""},
-  sent: false
-       }
+      emaildata: { email: "" },
+      sent: false
+    };
   },
   methods: {
-async processForm() {
-  try {
- const sendgrid = await this.$axios.post('/.netlify/functions/app', this.emaildata)
-      console.log('Processed!')
-      this.sent=true
-    } catch (e) {
-      console.log(e)
+    async processForm() {
+      try {
+        const sendgrid = await this.$axios.post(
+          "/.netlify/functions/app",
+          this.emaildata
+        );
+        console.log("Processed!");
+        this.sent = true;
+      } catch (e) {
+        console.log(e);
+      }
     }
-
-},
-       
-
   },
   computed: {
-      signupAboutSize: function () {
-    return {
-       
-      'c-25': this.signupBoolean,
-      'c-4': !this.signupBoolean
-    }
-  },
-  
+    signupAboutSize: function() {
+      return {
+        "c-25": this.signupBoolean,
+        "c-4": !this.signupBoolean
+      };
+    },
+
     connectData() {
       return this.$store.state.connect.connectlinks;
     },
@@ -91,8 +90,7 @@ async processForm() {
     },
     signupBoolean() {
       return this.$store.state.siteInfo.emailsignup;
-    },
- 
+    }
   }
 };
 </script>

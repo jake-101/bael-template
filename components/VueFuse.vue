@@ -1,20 +1,20 @@
 <template>
-<div class="searchwrapper xs-relative">
-  <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-5 md-text-4 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
-  <img class="xs-absolute searchicon xs-r0 sm-l0" src="~/assets/bx-search.svg">
-      <ul class="xs-absolute results">
-            <li class="xs-border xs-p2 fill-white" v-for="(xx,i) in compResults" :key="i">
-              <a :href="`${xx._path}/`">
-                {{xx.title}}
-              </a>
-            </li>
-          </ul>
-          </div>
+  <div class="searchwrapper xs-relative">
+    <input class="search xs-flex-grow-1 text-input xs-border-none xs-fit xs-text-5 md-text-4 xs-m0 xs-p0" type="search" v-model="value" :placeholder="placeholder">
+    <img class="xs-absolute searchicon xs-r0 sm-l0" src="~/assets/bx-search.svg">
+    <ul class="xs-absolute results">
+      <li class="xs-border xs-p2 fill-white" v-for="(xx,i) in compResults" :key="i">
+        <a :href="`${xx._path}/`">
+          {{xx.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 if (process.browser) {
-    var Fuse = require('fuse.js')
+  var Fuse = require("fuse.js");
 }
 export default {
   data() {
@@ -24,7 +24,7 @@ export default {
       result: []
     };
   },
-  name: 'VueFuse',
+  name: "VueFuse",
   computed: {
     options() {
       var options = {
@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     initFuse() {
-
       this.fuse = new Fuse(this.list, this.options);
       if (this.defaultAll) {
         this.result = this.list;
@@ -74,7 +73,6 @@ export default {
       if (this.search) {
         this.value = this.search;
       }
-      
     },
     fuseSearch() {
       if (this.value.trim() === "")
@@ -84,8 +82,7 @@ export default {
           this.result = [];
         }
       else this.result = this.fuse.search(this.value.trim());
-      }
-    
+    }
   },
   /**
    * Vue 1.x
@@ -96,14 +93,12 @@ export default {
    */
   mounted() {
     this.initFuse();
-     this.$on("searchChanged", results => {
+    this.$on("searchChanged", results => {
       this.compResults = results;
-
-
     });
   },
   props: {
-     compResults:  {
+    compResults: {
       type: Array
     },
     placeholder: {
@@ -188,12 +183,27 @@ export default {
 };
 </script>
 <style>
-.searchwrapper {width:100%;}
-input.search {width:100%;text-indent:22px}
- .results {top:1.35rem;}
-.searchicon { height:18px;top: 0px;}
-  .results a {display:block;width:100%;}
-  @media only screen and (max-width: 40rem) { 
-    input.search {text-indent:0;}
+.searchwrapper {
+  width: 100%;
+}
+input.search {
+  width: 100%;
+  text-indent: 22px;
+}
+.results {
+  top: 1.35rem;
+}
+.searchicon {
+  height: 18px;
+  top: 0px;
+}
+.results a {
+  display: block;
+  width: 100%;
+}
+@media only screen and (max-width: 40rem) {
+  input.search {
+    text-indent: 0;
   }
+}
 </style>
