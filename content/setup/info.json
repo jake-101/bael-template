@@ -1,7 +1,7 @@
 {
   "sitename": "Bael",
   "sitedescription": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js.",
-  "emailsignup": true,
+  "emailsignup": false,
   "menu": [
     {
       "name": "jake101",
