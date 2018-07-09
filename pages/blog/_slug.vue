@@ -3,7 +3,7 @@
 <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
   <div class="xs-mt2 xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
-       <div class="fill-gray-lighter" v-show="theThumb"><img class="featured-image" :src="theThumb" :alt="title"></div>
+       <div v-show="theThumb"><img class="featured-image fill-gray-lighter"" :src="theThumb" :alt="title"></div>
   <h1 class="xs-py3 main-title">{{title}}</h1>
    <no-ssr><div class="xs-mt-5 bold"><span v-if="category" class="tag">
   <span class="tag__link">{{category}}</span>
