@@ -5,13 +5,13 @@
       <div class="c-12 xs-text-left xs-p2 xs-border">
         <p class="item bold">&nbsp;</p>
       </div>
-      <div class="c-25 xs-text-left xs-p2 xs-border">
+      <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
         <div class="item">
           <div v-show="siteDescription" class="footer__heading xs-mb2">About</div>
           <p v-show="siteDescription">{{siteDescription}}</p>
         </div>
       </div>
-      <div class="c-25 xs-text-left xs-p2 xs-border">
+      <div v-if="signupBoolean" class="c-25 xs-text-left xs-p2 xs-border">
         <div v-if="!sent" class="item">
           <div class="footer__heading xs-mb2">Newsletter Signup</div>
           <form @submit.prevent="processForm" action="/.netlify/functions/app" name="mailinglist">
@@ -24,7 +24,7 @@
 
         </div>
       </div>
-      <div class="c-25 xs-text-left xs-p2 xs-border">
+      <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
         <div class="item">
           <div v-show="connectData" class="footer__heading xs-mb2">Connect</div>
           <ul class="list-unstyled">
@@ -34,7 +34,7 @@
           </ul>
         </div>
       </div>
-      <div class="c-25 xs-text-left xs-p2 xs-border">
+      <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
         <div class="item">
           <div class="footer__heading xs-mb2">Deploy</div>
 
@@ -70,16 +70,29 @@ async processForm() {
       console.log(e)
     }
 
-}
+},
+       
 
   },
   computed: {
+      signupAboutSize: function () {
+    return {
+       
+      'c-25': this.signupBoolean,
+      'c-4': !this.signupBoolean
+    }
+  },
+  
     connectData() {
       return this.$store.state.connect.connectlinks;
     },
     siteDescription() {
       return this.$store.state.siteInfo.sitedescription;
-    }
+    },
+    signupBoolean() {
+      return this.$store.state.siteInfo.emailsignup;
+    },
+ 
   }
 };
 </script>

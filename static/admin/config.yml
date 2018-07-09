@@ -40,7 +40,8 @@ collections:
       fields:
         - {label: Site Name, name: sitename, widget: string}
         - {label: Site Description, name: sitedescription, widget: string}
-        - label: Menu
+        - {label: Email Newsletter Signup, name: emailsignup, widget: boolean}
+        - label: Menu Links
           name: menu
           widget: list
           fields:
