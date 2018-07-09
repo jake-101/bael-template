@@ -1,0 +1,6 @@
+{
+  "title": "Changelog",
+  "date": "2018-07-08T23:08:53-07:00",
+  "thumbnail": "/images/uploads/changelog.jpg",
+  "body": "0.1.1 - Initial Version\n\n## Roadmap\n\nAdd Categories\\\nAdd Tags\\\nAdd Pagination\\\nPage Transitions\\\nLazy Loaded Images"
+}
