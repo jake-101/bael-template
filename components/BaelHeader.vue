@@ -13,7 +13,7 @@
 
       </div>
          <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
-        <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  <span v-if="blogcat">&nbsp; > {{blogcat}} </span>&nbsp; > {{blogtitle}}
+        <div class="item xs-flex"><nuxt-link to="/" exact>Home</nuxt-link>  <span v-if="blogcat">&nbsp; <span class="text-gray-lightest"> > </span> {{blogcat}} </span> &nbsp; <span class="text-gray-lightest"> > </span> &nbsp; {{blogtitle}}
         </div>
       </div>
  

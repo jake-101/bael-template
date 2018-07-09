@@ -3,11 +3,12 @@
 <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
   <div class="xs-mt2 xs-p2 bcg-item"> 
     <div class="item xs-block xs-full-height">
-       <div v-show="theThumb"><img class="featured-image fill-gray-lighter"" :src="theThumb" :alt="title"></div>
+       <div v-show="theThumb"><img class="featured-image fill-gray-lighter" :src="theThumb" :alt="title"></div>
   <h1 class="xs-py3 main-title">{{title}}</h1>
-   <no-ssr><div class="xs-mt-5 bold"><span v-if="category" class="tag">
-  <span class="tag__link">{{category}}</span>
-</span> {{ date | moment('dddd MMMM Do, YYYY') }}</div></no-ssr>
+   <no-ssr><div class="xs-mt-5 bold">
+      <!-- <span v-if="category" class="tag">
+  <span class="tag__link">{{category}}</span></span> -->
+ {{ date | moment('dddd MMMM Do, YYYY') }}</div></no-ssr>
      <div class="xs-py3 post-content text-gray-lighter"><div v-html="$md.render(body)"></div></div>
         </div>
         </div>
@@ -111,7 +112,7 @@ allBlogPosts() {
 
 <style>
 h1,h2,h3,h4,h5,h6 {margin-top:1rem;}
-.main-title {font-size: 3rem;font-family: "Archivo Black",sans-serif;font-weight:400;}
+.main-title {font-size: 3rem;font-family: "Archivo Black",sans-serif;font-weight:400;line-height: 1;}
 .featured-image {max-height:55vh;object-fit:cover;object-position: 50% 50%;width:100%;}
 .container .single .post-content {line-height: 1.618;color:#222;}
 .single .post-content img {max-width:100%;height:auto;border: 1px solid #ccc; padding: 1rem; margin-top: 1.5rem;margin-bottom:1.5rem;}
@@ -125,6 +126,7 @@ h1,h2,h3,h4,h5,h6 {margin-top:1rem;}
 nav .r {grid-gap: 0;}
 .r.full-height {grid-gap: 0;}
 @media only screen and (max-width: 40rem) { 
+  .main-title {font-size: 2rem;}
 .xs-collapse {visibility: hidden;    visibility: collapse;
     border: 0 !important;
     border-color: none !important;

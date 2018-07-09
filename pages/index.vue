@@ -8,9 +8,7 @@
         </nuxt-link>
         </div>
         </div> 
-          <div class="xs-border xs-p2 bcg-item">
-
-    </div>
+          <div class="xs-border xs-p2 bcg-item"></div>
   
 </div>
 
