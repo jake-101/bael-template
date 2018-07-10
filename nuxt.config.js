@@ -1,3 +1,4 @@
+import siteInfo from '~/content/setup/info.json'
 var glob = require('glob');
 var path = require('path');
 
@@ -31,7 +32,9 @@ module.exports = {
     ]
   },
   css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],
-
+  icon: {
+    iconSrc: `~/static${siteInfo.siteicon}`
+   },
   /*
   ** Customize the progress bar color
   */
