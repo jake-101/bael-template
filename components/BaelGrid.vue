@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ["items", "navbarheight"],
+  props: ["items"],
   methods: {
    onResize(event) {
       this.navHeight();

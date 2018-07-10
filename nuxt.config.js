@@ -20,11 +20,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'Bael',
+    title: siteInfo.sitename,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'A fashionable open source template using netlify cms and nuxt.js.' }
+      { hid: 'description', name: 'description', content: siteInfo.sitedescription }
 
     ],
     link: [
@@ -33,9 +33,9 @@ module.exports = {
     ]
   },
   css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],
-  icon: {
-    iconSrc: `${siteInfo.siteicon}`
-   },
+  // icon: {
+  //   iconSrc: `${siteInfo.siteicon}`
+  //  },
   /*
   ** Customize the progress bar color
   */
