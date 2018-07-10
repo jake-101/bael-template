@@ -7,9 +7,12 @@
         </div>
       </div>
     </div>
-    <ul class="zap-slideout-menu list-unstyled">
-      <li class="zap-slideout-menu-item black-font">
+    <ul class="zap-slideout-menu list-unstyled black-font">
+      <li class="zap-slideout-menu-item">
+        <nuxt-link style="color:#000" class="text-black black-font" to="/" exact>
+        <img style="width:64px;" class="xs-block xs-fit xs-mb2" v-if="this.$store.state.siteInfo.siteicon" :src="this.$store.state.siteInfo.siteicon" :alt="menuSiteName">
         {{menuSiteName}}
+        </nuxt-link>
       </li>
       <li class="zap-slideout-menu-item--small">
         <nuxt-link to="/" exact>Home</nuxt-link>
