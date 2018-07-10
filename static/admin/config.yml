@@ -40,7 +40,7 @@ collections:
       fields:
         - {label: Site Name, name: sitename, widget: string}
         - {label: Site Description, name: sitedescription, widget: string}
-        - {label: Site Icon (Must be 512x512 or larger square PNG), name: siteicon, widget: image,  pattern: ["(.*?)\.png$", "Must be PNG 512x512 or larger"],default: "/icon.png"}
+        - {label: Site Icon (Must be 512x512 or larger square PNG), name: siteicon, widget: image,  pattern: ["(.*?)\.(png)$", "Must be PNG 512x512 or larger"],default: "/icon.png"}
         - {label: Show Icon in Menu, name: showmenu, widget: boolean}
         - {label: Email Newsletter Signup, name: emailsignup, widget: boolean}
         - label: Menu Links
