@@ -1,5 +1,3 @@
-import siteInfo from '/content/setup/info.json'
-console.log(siteInfo)
 var glob = require('glob');
 var path = require('path');
 
