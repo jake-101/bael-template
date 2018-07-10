@@ -1,6 +1,8 @@
 {
   "sitename": "Bael",
   "sitedescription": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js.",
+  "siteicon": "/images/uploads/icon.png",
+  "showmenu": true,
   "emailsignup": true,
   "menu": [
     {
