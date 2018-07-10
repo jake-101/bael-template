@@ -10,7 +10,7 @@
     <ul class="zap-slideout-menu list-unstyled black-font">
       <li class="zap-slideout-menu-item">
         <nuxt-link style="color:#000" class="text-black black-font" to="/" exact>
-        <img style="width:64px;" class="xs-block xs-fit xs-mb2" v-if="this.$store.state.siteInfo.siteicon" :src="this.$store.state.siteInfo.siteicon" :alt="menuSiteName">
+        <img style="width:64px;" class="xs-block xs-fit xs-mb2" v-if="this.$store.state.siteInfo.siteicon  && this.$store.state.siteInfo.showmenu" :src="this.$store.state.siteInfo.siteicon" :alt="menuSiteName">
         {{menuSiteName}}
         </nuxt-link>
       </li>
