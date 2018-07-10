@@ -7,9 +7,13 @@
           <h1 class="xs-py3 main-title">{{title}}</h1>
           <no-ssr>
             <div class="xs-mt-5 bold">
-              <!-- <span v-if="category" class="tag">
-  <span class="tag__link">{{category}}</span></span> -->
-              {{ date | moment('dddd MMMM Do, YYYY') }}</div>
+            <ul class="list-unstyled xs-flex xs-flex-align-center">
+             <li class="xs-inline-block xs-mr1" v-if="category"><div class="tag">
+  <nuxt-link :to="`/category/${category.toLowerCase()}`" class="tag__link">{{category}}</nuxt-link>
+</div></li> 
+<li class="xs-inline-block">{{ date }}</li>
+              </ul> 
+             </div>
           </no-ssr>
           <div class="xs-py3 post-content text-gray-lighter">
             <div v-html="$md.render(body)"></div>
@@ -31,9 +35,11 @@ export default {
     let post = await import("~/content/blog/posts/" + params.slug + ".json");
     console.log(post);
     await store.commit("SET_THUMB", "");
-
+    await store.commit("SET_POSTCAT", "");
     await store.commit("SET_TITLE", post.title);
     await store.commit("SET_THUMB", post.thumbnail);
+    await store.commit("SET_CRUMB", 'Blog');
+    await store.commit("SET_POSTCAT", post.category);
     return post;
   },
   head() {

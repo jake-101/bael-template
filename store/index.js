@@ -15,6 +15,8 @@ const createStore = () =>
       connect: [],
       allTags: [],
       theThumbnail: '',
+      theCategory: '',
+      theCrumb: '',
       allCats: [],
       results: [],
       menuIsActive: false,
@@ -25,6 +27,7 @@ const createStore = () =>
         await dispatch('getSiteInfo')
         await dispatch('getBlogPosts')
         await dispatch('getPages')
+        await dispatch('getCats')
       },
       async getBlogPosts ({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
@@ -105,6 +108,12 @@ const createStore = () =>
       },
       SET_CATS(state, data) {
         state.allCats = data
+      },
+      SET_CRUMB(state, data) {
+        state.theCrumb = data
+      },
+      SET_POSTCAT(state, data) {
+        state.theCategory = data
       },
       SET_TAGS(state, data) {
         state.allTags = data

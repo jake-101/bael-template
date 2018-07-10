@@ -1,19 +1,27 @@
 <template>
-  <BaelGrid :items="allBlogPosts"></BaelGrid>
+  <BaelGrid :items="this.$store.state.allCats"></BaelGrid>
 </template>
 
 <script>
 import BaelGrid from '~/components/BaelGrid'
 export default {
+   async asyncData({ params, app, payload, route, store }) {
+ 
+    await store.commit("SET_TITLE", "Categories");
+
+  
+  },
   components: {BaelGrid},
   data() {
     return {};
   },
-   
+     head() {
+    return {
+      title: "Categories | " + this.$store.state.siteInfo.sitename
+    };
+  },
   computed: {
-    allBlogPosts() {
-      return this.$store.state.blogPosts;
-    }
+   
    
   }
 };

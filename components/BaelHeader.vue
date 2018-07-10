@@ -17,8 +17,8 @@
       <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
         <div class="item xs-flex">
           <nuxt-link to="/" exact>Home</nuxt-link>
-          <span v-if="blogcat">&nbsp;
-            <span class="text-gray-lightest"> > </span> {{blogcat}} </span> &nbsp;
+          <span v-if="thecrumb">&nbsp;
+            <span class="text-gray-lightest"> > </span> {{thecrumb}} </span> &nbsp;
           <span class="text-gray-lightest"> > </span> &nbsp; {{blogtitle}}
         </div>
       </div>
@@ -29,29 +29,28 @@
 <script>
 import VueFuse from "~/components/VueFuse";
 export default {
-  props: ["blogtitle", "posts", "blogcat"],
+  props: ["blogtitle", "posts", "thecrumb"],
   data() {
     return {
       results: [],
-      keys: ["title", "body"],
-      prodsupport: [],
-      allitems: [],
-      query: "",
-      term: "",
-      termtwo: "",
-      type: [],
-      options: {
-        keys: ["title", "body"]
-      },
-      defaultAllToggle: true,
+      keys: [{
+    name: 'title',
+    weight: 0.3
+  }, {
+    name: 'body',
+    weight: 0.7
+  }],
+      
       compResults: [],
-      methodResults: []
     };
   },
   components: { VueFuse },
   computed: {
     allPosts() {
-      return this.$store.state.blogPosts;
+      let posts = this.$store.state.blogPosts;
+      let pages = this.$store.state.allPages;
+      let both = posts.concat(pages)
+      return both;
     },
     headerSiteName() {
       return this.$store.state.siteInfo.sitename;

@@ -1,7 +1,7 @@
 <template>
   <section class="container xs-border xs-text-6 md-text-5">
 
-    <BaelHeader :blogtitle="blogtitle" :posts="blogposts" />
+    <BaelHeader :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
     <nuxt/>
     <SlideOut/>
     <BaelFooter/>

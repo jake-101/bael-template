@@ -138,11 +138,11 @@ export default {
     },
     tokenize: {
       type: Boolean,
-      default: false
+      default: true
     },
     matchAllTokens: {
       type: Boolean,
-      default: false
+      default: true
     },
     findAllMatches: {
       type: Boolean,
@@ -158,7 +158,7 @@ export default {
     },
     threshold: {
       type: Number,
-      default: 0.4
+      default: 0.25
     },
     location: {
       type: Number,
@@ -166,7 +166,7 @@ export default {
     },
     distance: {
       type: Number,
-      default: 100
+      default: 800
     },
     maxPatternLength: {
       type: Number,
