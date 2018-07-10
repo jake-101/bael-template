@@ -34,7 +34,7 @@ module.exports = {
   },
   css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],
   icon: {
-    iconSrc: `~/static${siteInfo.siteicon}`
+    iconSrc: `${siteInfo.siteicon}`
    },
   /*
   ** Customize the progress bar color
