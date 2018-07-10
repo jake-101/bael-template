@@ -46,7 +46,21 @@ module.exports = {
     
   },
   workbox: {
-    fetch: true},
+    fetch: true,
+    runtimeCaching: [
+      {
+        urlPattern: '/images/uploads/.*',
+        handler: 'cacheFirst',
+        strategyOptions: {
+          cacheName: 'image-cache',
+          cacheExpiration: {
+            maxEntries: 100,
+            maxAgeSeconds: 86400
+          }
+        }
+      }
+    ]
+  },
 
   /*
   ** Route config for pre-rendering
