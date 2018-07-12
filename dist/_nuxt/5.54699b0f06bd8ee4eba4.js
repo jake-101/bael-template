@@ -1,1 +1,0 @@
-webpackJsonp([5],{BFYm:function(e,t){e.exports={title:"Zweiter Blog",date:"2018-05-06T21:45:16+02:00",body:"Lorem ipsum Test"}}});

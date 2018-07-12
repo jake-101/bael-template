@@ -63,8 +63,15 @@ export default {
 
 
 <style>
-html {
+html,body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.main-title {
+  font-size: 3rem;
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  line-height: 1;
 }
 </style>

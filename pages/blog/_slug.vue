@@ -8,8 +8,8 @@
           <no-ssr>
             <div class="xs-mt-5 bold">
             <ul class="list-unstyled xs-flex xs-flex-align-center">
-             <li class="xs-inline-block xs-mr1" v-if="this.$store.state.theCategory"><div class="tag">
-  <nuxt-link :to="`/category/${this.$store.state.theCategory.toLowerCase()}`" class="tag__link">{{this.$store.state.theCategory}}</nuxt-link>
+             <li class="xs-inline-block xs-mr1" v-if="this.$store.state.theCategory"><div class="tag fill-gray-darker xs-border">
+  <nuxt-link :to="`/category/${this.$store.state.theCategory.toLowerCase()}`" class="tag__link text-white">{{this.$store.state.theCategory}}</nuxt-link>
 </div></li> 
 <li class="xs-inline-block">{{ date }}</li>
               </ul> 
@@ -110,12 +110,7 @@ h5,
 h6 {
   margin-top: 1rem;
 }
-.main-title {
-  font-size: 3rem;
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  line-height: 1;
-}
+
 .featured-image {
   max-height: 55vh;
   object-fit: cover;
