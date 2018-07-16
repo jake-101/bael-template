@@ -15,7 +15,7 @@
 
       </div>
       <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar">
-        <div class="item xs-flex">
+        <div class="item">
           <nuxt-link to="/" exact>Home</nuxt-link>
           <span v-if="thecrumb">&nbsp;
             <span class="text-gray-lightest"> > </span> {{thecrumb}} </span> &nbsp;
