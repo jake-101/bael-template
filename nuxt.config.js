@@ -78,6 +78,11 @@ module.exports = {
 
   middleware: 'title',
  },
+ render: {
+  static: {
+    cacheControl: 'max-age=60, s-maxage=686400'
+  }
+},
   generate: {
     routes: dynamicRoutes
   },
