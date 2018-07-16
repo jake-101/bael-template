@@ -14,7 +14,7 @@
         </div>
 
       </div>
-      <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2">
+      <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar">
         <div class="item xs-flex">
           <nuxt-link to="/" exact>Home</nuxt-link>
           <span v-if="thecrumb">&nbsp;
@@ -64,7 +64,7 @@ export default {
     navHeight() {
       var height = document.getElementById("navbar").clientHeight;
       console.log(height);
-      this.$store.commit("SET_NAVHEIGHT", height);
+      this.$store.commit("SET_NAVHEIGHT", height - 1);
     }
   },
   mounted() {
@@ -75,6 +75,7 @@ export default {
 };
 </script>
 <style>
+.titlebar .item {overflow-x:none;}
 .results {
   padding-left: 0;
   transform: translateY(17px);

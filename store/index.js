@@ -14,6 +14,10 @@ const createStore = () =>
       siteInfo: [],
       connect: [],
       allTags: [],
+      gridItems: [],
+      gridNumPosts: '11',
+      gridNumCats: '11',
+      gridOffset: '0',
       theThumbnail: '',
       theCategory: '',
       theCrumb: '',
@@ -54,6 +58,16 @@ const createStore = () =>
     
          commit('SET_PAGES', pages)
 
+      },
+      setGridNumPosts({state, commit}){
+        if (state.blogPosts > 13) {  
+              this.$store.commit("SET_GRIDNUMPOSTS", 12); 
+        }
+      },
+      setGridNumCats({state, commit}){
+        if (state.allCats > 13) {  
+              this.$store.commit("SET_GRIDNUMCATS", 12); 
+        }
       },
       async getCats ({ state, commit }) {
 
@@ -111,6 +125,18 @@ const createStore = () =>
       },
       SET_CRUMB(state, data) {
         state.theCrumb = data
+      },
+      SET_GRIDITEMS(state, data) {
+        state.gridItems = data
+      },
+      SET_GRIDNUMPOSTS(state, data) {
+        state.gridNumPosts = data
+      },
+      SET_GRIDNUMCATS(state, data) {
+        state.gridNumCats = data
+      },
+      SET_GRIDOFFSET(state, data) {
+        state.gridOffset = data
       },
       SET_POSTCAT(state, data) {
         state.theCategory = data

@@ -1,5 +1,5 @@
 <template>
-  <BaelGrid :items="findCatPosts"></BaelGrid>
+  <BaelGrid :allitems="findCatPosts"></BaelGrid>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
   
 
     findCatPosts() {
-var posts = this.$store.state.blogPosts;
+var posts = this.allBlogPosts;
 var title = this.title
       return posts.filter(function(obj) {
         return obj.category == title

@@ -1,5 +1,5 @@
 <template>
-  <BaelGrid :items="this.$store.state.allCats"></BaelGrid>
+  <BaelGrid :allitems="allCategories"></BaelGrid>
 </template>
 
 <script>
@@ -21,7 +21,9 @@ export default {
     };
   },
   computed: {
-   
+   allCategories() {
+    return this.$store.state.allCats
+   }
    
   }
 };

@@ -23,7 +23,7 @@ export default {
       if (process.browser) {
         var height = document.getElementById("navbar").clientHeight;
 
-        this.$store.commit("SET_NAVHEIGHT", height);
+        this.$store.commit("SET_NAVHEIGHT", height - 1);
       }
     }
   },
