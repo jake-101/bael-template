@@ -94,7 +94,7 @@ nav {
 }
 .sitename {
   color: #000;
-  font-family: "Archivo Black", sans-serif;
+  font-family: 'Archivo Black', sans-serif;
   text-transform: uppercase;
   font-weight: 400;
   font-size: 18px;
