@@ -17,12 +17,11 @@
       <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar">
         <div class="item">
           <nuxt-link to="/" exact>Home</nuxt-link>
-          <span v-if="thecrumb">&nbsp;
-            <span class="text-gray-lightest"> > </span> {{thecrumb}} </span> &nbsp;
+          <span v-if="thecrumb"> &nbsp;
+            <span class="text-gray-lightest"> > </span> &nbsp; {{thecrumb}} </span> &nbsp;
           <span class="text-gray-lightest"> > </span> &nbsp; {{blogtitle}}
         </div>
       </div>
-
     </div>
   </nav>
 </template>
@@ -33,15 +32,18 @@ export default {
   data() {
     return {
       results: [],
-      keys: [{
-    name: 'title',
-    weight: 0.3
-  }, {
-    name: 'body',
-    weight: 0.7
-  }],
-      
-      compResults: [],
+      keys: [
+        {
+          name: "title",
+          weight: 0.3
+        },
+        {
+          name: "body",
+          weight: 0.7
+        }
+      ],
+
+      compResults: []
     };
   },
   components: { VueFuse },
@@ -49,7 +51,7 @@ export default {
     allPosts() {
       let posts = this.$store.state.blogPosts;
       let pages = this.$store.state.allPages;
-      let both = posts.concat(pages)
+      let both = posts.concat(pages);
       return both;
     },
     headerSiteName() {
@@ -75,7 +77,9 @@ export default {
 };
 </script>
 <style>
-.titlebar .item {overflow-x:none;}
+.titlebar .item {
+  overflow-x: none;
+}
 .results {
   padding-left: 0;
   transform: translateY(17px);
@@ -94,7 +98,7 @@ nav {
 }
 .sitename {
   color: #000;
-  font-family: 'Archivo Black', sans-serif;
+  font-family: "Archivo Black", sans-serif;
   text-transform: uppercase;
   font-weight: 400;
   font-size: 18px;

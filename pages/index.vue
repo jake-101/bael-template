@@ -3,28 +3,29 @@
 </template>
 
 <script>
-import BaelGrid from '~/components/BaelGrid'
+import BaelGrid from "~/components/BaelGrid";
 export default {
-    async asyncData({ params, app, payload, route, store }) {
-  await store.dispatch('setGridNumPosts') 
-await store.dispatch('setGridNumPosts') 
+  async asyncData({ params, app, payload, route, store }) {
+    await store.dispatch("setGridNumPosts");
+    await store.dispatch("setGridNumPosts");
   },
-  name: 'Index',
-  components: {BaelGrid},
+  name: "Index",
+  components: { BaelGrid },
   data() {
     return {};
   },
-   methods: {
+  methods: {},
 
-   },
   computed: {
     allBlogPosts() {
       return this.$store.state.blogPosts;
     },
-          getGridItems() {
-return this.allBlogPosts.slice(this.$store.state.gridOffset,this.$store.state.gridNum);
-  }
-   
+    getGridItems() {
+      return this.allBlogPosts.slice(
+        this.$store.state.gridOffset,
+        this.$store.state.gridNum
+      );
+    }
   }
 };
 </script>

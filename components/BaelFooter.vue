@@ -3,7 +3,20 @@
     <div class="r no-gap">
 
       <div class="c-12 xs-text-left xs-p2 xs-border">
-        <p class="item bold">&nbsp;</p>
+        <div class="item xs-text-center">
+          <div v-if="pagination" class="xs-flex xs-flex-justify-space-between xs-flex-align-center">
+            <div>
+              <nuxt-link v-if="this.prevpage > 0" class="bold button button--secondary button--small" :to="`?page=${prevpage}`">Previous</nuxt-link>
+              <nuxt-link class="bold button button--secondary button--small" :to="`?page=${nextpage}`" v-if="this.queryParam < this.totalpages">Next</nuxt-link>
+            </div>
+            <div>
+              <span class="text-gray-lightest"> Page {{this.queryParam}}/{{this.totalpages}} - {{this.$store.state.resultsnum}} Results &nbsp; </span>
+            </div>
+          </div>
+          <div v-else>&nbsp;</div>
+
+        </div>
+
       </div>
       <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
         <div class="item">
@@ -54,6 +67,7 @@
 </template>
 <script>
 export default {
+  props: ["pagination"],
   data() {
     return {
       emaildata: { email: "" },
@@ -80,6 +94,26 @@ export default {
         "c-25": this.signupBoolean,
         "c-4": !this.signupBoolean
       };
+    },
+    prevpage() {
+      var prev = Number(this.queryParam) - 1;
+      return prev;
+    },
+    totalpages() {
+      var res = this.$store.state.resultsnum;
+      var total = Math.ceil(res / 12);
+      return total;
+    },
+    nextpage() {
+      var next = Number(this.queryParam) + 1;
+      return next;
+    },
+    queryParam() {
+      if (this.$route.query.page == null) {
+        return 1;
+      } else {
+        return Number(this.$route.query.page);
+      }
     },
 
     connectData() {

@@ -23,6 +23,8 @@ const createStore = () =>
       theCrumb: '',
       allCats: [],
       results: [],
+      resultsnum: [],
+      pagination: false,
       menuIsActive: false,
       menuInitial: true,
     },
@@ -33,7 +35,7 @@ const createStore = () =>
         await dispatch('getPages')
         await dispatch('getCats')
       },
-      async getBlogPosts ({ state, commit }) {
+      async getBlogPosts({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
 
         const searchposts = await context.keys().map(key => ({
@@ -41,12 +43,12 @@ const createStore = () =>
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
-       
-    
-         commit('SET_POSTS', searchposts.reverse())
+
+
+        commit('SET_POSTS', searchposts.reverse())
 
       },
-      async getPages ({ state, commit }) {
+      async getPages({ state, commit }) {
 
 
         const context = await require.context('~/content/page/posts/', false, /\.json$/);
@@ -55,21 +57,22 @@ const createStore = () =>
           ...context(key),
           _path: `/page/${key.replace('.json', '').replace('./', '')}`
         }));
-    
-         commit('SET_PAGES', pages)
+
+        commit('SET_PAGES', pages)
 
       },
-      setGridNumPosts({state, commit}){
-        if (state.blogPosts > 13) {  
-              this.$store.commit("SET_GRIDNUMPOSTS", 12); 
+      setGridNumPosts({ state, commit }) {
+        if (state.blogPosts > 13) {
+          this.$store.commit("SET_GRIDNUMPOSTS", 12);
         }
       },
-      setGridNumCats({state, commit}){
-        if (state.allCats > 13) {  
-              this.$store.commit("SET_GRIDNUMCATS", 12); 
+      setGridNumCats({ state, commit }) {
+        if (state.allCats > 13) {
+          this.$store.commit("SET_GRIDNUMCATS", 12);
         }
       },
-      async getCats ({ state, commit }) {
+
+      async getCats({ state, commit }) {
 
 
         const context = await require.context('~/content/categories/posts/', false, /\.json$/);
@@ -78,11 +81,11 @@ const createStore = () =>
           ...context(key),
           _path: `/category/${key.replace('.json', '').replace('./', '')}`
         }));
-    
-         commit('SET_CATS', pages)
+
+        commit('SET_CATS', pages)
 
       },
-      async getTags ({ state, commit }) {
+      async getTags({ state, commit }) {
 
 
         const context = await require.context('~/content/tags/posts/', false, /\.json$/);
@@ -91,11 +94,11 @@ const createStore = () =>
           ...context(key),
           _path: `/tagged/${key.replace('.json', '').replace('./', '')}`
         }));
-    
-         commit('SET_TAGS', pages)
+
+        commit('SET_TAGS', pages)
 
       },
-       getSiteInfo ({ state, commit }) {
+      getSiteInfo({ state, commit }) {
         const info = require('~/content/setup/info.json');
         const connect = require('~/content/setup/connect.json');
         const context = require.context('~/content/blog/posts/', false, /\.json$/);
@@ -105,12 +108,12 @@ const createStore = () =>
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
-    
-    
-         commit('SET_POSTS', searchposts)
-         commit('SET_INFO', info)
-         commit('SET_CONNECT', connect)
-      
+
+
+        commit('SET_POSTS', searchposts)
+        commit('SET_INFO', info)
+        commit('SET_CONNECT', connect)
+
       }
     },
     mutations: {
@@ -162,10 +165,19 @@ const createStore = () =>
       SET_RESULTS(state, data) {
         state.results = data
       },
-
+      paginateOn(state, data) {
+        state.pagination = data
+      },
+      paginateOff(state, data) {
+        state.pagination = data
+      },
+      resultsLength(state, data) {
+        state.resultsnum = data
+      },
       setMenuState(state, menuIsActive) {
         state.menuIsActive = menuIsActive
       },
+
       toggleMenuState(state) {
         state.menuIsActive = !state.menuIsActive
       },

@@ -4,7 +4,7 @@
     <BaelHeader :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
     <nuxt/>
     <SlideOut/>
-    <BaelFooter/>
+    <BaelFooter :pagination="this.$store.state.pagination" />
   </section>
 </template>
 <script>
@@ -18,6 +18,7 @@ export default {
       email: { email: "" }
     };
   },
+
   methods: {
     navHeight() {
       if (process.browser) {
@@ -63,15 +64,37 @@ export default {
 
 
 <style>
-html,body {
+html,
+body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .main-title {
   font-size: 3rem;
   font-family: "Archivo Black", sans-serif;
   font-weight: 400;
   line-height: 1;
+}
+.slide-left-leave-active,
+.slide-left-enter-active {
+  transition: 0.3s ease-in-out;
+}
+.slide-left-enter {
+  transform: translate3D(100%, 0, 0);
+}
+.slide-left-leave-to {
+  transform: translate3D(-100%, 0, 0);
+}
+.slide-right-leave-active,
+.slide-right-enter-active {
+  transition: 0.3s ease-in-out;
+}
+.slide-right-enter {
+  transform: translate3D(-100%, 0, 0);
+}
+.slide-right-leave-to {
+  transform: translate3D(100%, 0, 0);
 }
 </style>
