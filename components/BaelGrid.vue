@@ -76,14 +76,12 @@ export default {
           }
 
           this.busy = false;
-        }, 250);
+        }, 750);
       }
     },
 
     onResize(event) {
       this.navHeight();
-      console.log(this.$store.state.navheight);
-      console.log("index resize");
     },
 
     navHeight() {
@@ -100,16 +98,13 @@ export default {
       if (this.$route.query.page > 1) {
         this.loadMore();
         this.pageCheck();
-        console.log("page > 1");
       } else if (this.$route.query.page == null) {
         this.$route.query.page = 1;
         this.loadMore();
         this.pageCheck();
-        console.log("null page");
       } else {
         this.loadMore();
         this.pageCheck();
-        console.log("else");
       }
     },
     queryParam: function() {
@@ -152,8 +147,6 @@ export default {
     this.$nextTick(() => {
       this.pageCheck();
       this.navHeight();
-      console.log(this.$store.state.navheight);
-      console.log("index updated");
     });
   },
   mounted() {
@@ -163,8 +156,6 @@ export default {
       this.$nextTick(() => {
         this.navHeight();
         this.pageCheck();
-        console.log(this.$store.state.navheight);
-        console.log("index mounted");
         window.addEventListener("resize", this.onResize);
       });
     }
