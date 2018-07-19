@@ -14,10 +14,10 @@
         </div>
 
       </div>
-      <div v-show="blogtitle" class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar">
+      <div v-if="blogtitle" style="z-index:55;" class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar">
         <div class="item">
           <nuxt-link to="/" exact>Home</nuxt-link>
-          <span v-if="thecrumb"> &nbsp;
+          <span v-show="crumb"> &nbsp;
             <span class="text-gray-lightest"> > </span> &nbsp; {{thecrumb}} </span> &nbsp;
           <span class="text-gray-lightest"> > </span> &nbsp; {{blogtitle}}
         </div>
@@ -59,16 +59,22 @@ export default {
     },
     componentResults() {
       return this.$store.state.results;
+    },
+     crumb() {
+      return this.$store.state.theCrumb;
     }
   },
 
   methods: {
+
     navHeight() {
       var height = document.getElementById("navbar").clientHeight;
       console.log(height);
       this.$store.commit("SET_NAVHEIGHT", height - 1);
+ 
     }
   },
+
   mounted() {
     this.$on("searchChanged", results => {
       this.compResults = results;
@@ -77,6 +83,7 @@ export default {
 };
 </script>
 <style>
+#navbar {z-index:999;}
 .titlebar .item {
   overflow-x: none;
 }

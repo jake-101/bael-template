@@ -1,5 +1,5 @@
 <template>
-  <div class="zap-slideout xs-border" :class="{ isOpen: $store.state.menuIsActive  }">
+  <div class="zap-slideout xs-border xs-text-6 md-text-5" :class="{ isOpen: $store.state.menuIsActive  }">
     <div class="zap-slideout-opener">
       <div @click="toggle" class="hamburger hamburger--spin js-hamburger" :class="{'is-active': $store.state.menuIsActive }">
         <div class="hamburger-box">
@@ -171,7 +171,7 @@ export default {
   top: 0;
   width: 34vw;
   height: 100vh;
-  z-index: 99;
+  z-index:1000;
   padding: 30px;
   background-color: #fff;
   transform: translate3D(100%, 0, 0);

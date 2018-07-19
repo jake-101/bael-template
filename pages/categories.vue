@@ -5,11 +5,17 @@
 <script>
 import BaelGrid from '~/components/BaelGrid'
 export default {
+    watchQuery: ['page'],
+
    async asyncData({ params, app, payload, route, store }) {
  
     await store.commit("SET_TITLE", "Categories");
 
   
+  },
+     transition (to, from) {
+    if (!from) return 'fade'
+    return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
   },
   components: {BaelGrid},
   data() {

@@ -10,7 +10,7 @@
               <nuxt-link class="bold button button--secondary button--small" :to="`?page=${nextpage}`" v-if="this.queryParam < this.totalpages">Next</nuxt-link>
             </div>
             <div>
-              <span class="text-gray-lightest"> Page {{this.queryParam}}/{{this.totalpages}} - {{this.$store.state.resultsnum}} Results &nbsp; </span>
+              <span class="text-gray-lightest"> Page {{this.queryParam}} / {{this.totalpages}} - {{this.$store.state.resultsnum}} Results &nbsp; </span>
             </div>
           </div>
           <div v-else>&nbsp;</div>

@@ -1,13 +1,17 @@
 <template>
-  <BaelGrid :items="getGridItems" :allitems="allBlogPosts"></BaelGrid>
+
+    <BaelGrid :allitems="allBlogPosts"></BaelGrid>
 </template>
 
 <script>
 import BaelGrid from "~/components/BaelGrid";
 export default {
-  async asyncData({ params, app, payload, route, store }) {
-    await store.dispatch("setGridNumPosts");
-    await store.dispatch("setGridNumPosts");
+    watchQuery: ['page'],
+
+   transition (to, from) {
+     
+    if (!from) return 'fade'
+    return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
   },
   name: "Index",
   components: { BaelGrid },
@@ -19,18 +23,13 @@ export default {
   computed: {
     allBlogPosts() {
       return this.$store.state.blogPosts;
-    },
-    getGridItems() {
-      return this.allBlogPosts.slice(
-        this.$store.state.gridOffset,
-        this.$store.state.gridNum
-      );
     }
   }
 };
 </script>
 
 <style>
+
 .browse a {
   width: 100%;
 }

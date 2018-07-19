@@ -19,6 +19,7 @@ module.exports = {
   /*
   ** Headers of the page
   */
+transition: { mode: "in-out"},
   head: {
     title: siteInfo.sitename,
     meta: [
@@ -29,10 +30,9 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black|Barlow:400,700,900' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black' }
     ]
   },
-  watchQuery: true,
   css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],
   // icon: {
   //   iconSrc: `${siteInfo.siteicon}`
@@ -74,15 +74,8 @@ module.exports = {
   scrollBehavior: function (to, from, savedPosition) {
     return { x: 0, y: 0 }
   },
-
-
-  middleware: 'title',
+middleware: ['title']
  },
- render: {
-  static: {
-    cacheControl: 'max-age=60, s-maxage=686400'
-  }
-},
   generate: {
     routes: dynamicRoutes
   },

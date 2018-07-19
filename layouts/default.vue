@@ -1,10 +1,10 @@
 <template>
-  <section class="container xs-border xs-text-6 md-text-5">
+  <section class="container xs-border xs-text-5 md-text-4">
 
     <BaelHeader :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
     <nuxt/>
     <SlideOut/>
-    <BaelFooter :pagination="this.$store.state.pagination" />
+    <BaelFooter :pagination="paginate" />
   </section>
 </template>
 <script>
@@ -47,6 +47,9 @@ export default {
     }
   },
   computed: {
+    paginate() {
+return this.$store.state.pagination
+    },
     blogposts() {
       return this.$store.state.blogPosts;
     },
@@ -77,24 +80,37 @@ body {
   font-weight: 400;
   line-height: 1;
 }
+.feat-wrapper {max-height:55vh;width:100%;}
+.slide-left-enter,
+.slide-right-leave-active {
+  transform: translate(50%, 0);
+  opacity:0;
+  transition: all .25s;
+}
 .slide-left-leave-active,
-.slide-left-enter-active {
-  transition: 0.3s ease-in-out;
-}
-.slide-left-enter {
-  transform: translate3D(100%, 0, 0);
-}
-.slide-left-leave-to {
-  transform: translate3D(-100%, 0, 0);
-}
-.slide-right-leave-active,
-.slide-right-enter-active {
-  transition: 0.3s ease-in-out;
-}
 .slide-right-enter {
-  transform: translate3D(-100%, 0, 0);
+  transform: translate(-50%, 0);
+   opacity:0;
+    transition: all .25s;
+
 }
-.slide-right-leave-to {
-  transform: translate3D(100%, 0, 0);
+.slide-down-enter,
+.slide-up-leave-active {
+  transform: translate(0,50%);
+  opacity:1;
+  transition: all .25s;
+}
+.slide-down-leave-active,
+.slide-up-enter {
+  transform: translate(0,-50%);
+   opacity:1;
+    transition: all .25s;
+
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

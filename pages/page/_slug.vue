@@ -3,7 +3,7 @@
     <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
       <div class="xs-mt2 xs-p2 bcg-item">
         <div class="item xs-block xs-full-height">
-          <div v-if="thumbnail"><img class="featured-image" :src="thumbnail" :alt="title"></div>
+          <div v-if="thumbnail" class="fill-gray-lighter feat-wrapper"><transition appear name="fade"><img class="featured-image" :src="thumbnail" :alt="title"></transition></div>
           <h1 class="xs-py3 main-title">{{title}}</h1>
           <div class="xs-py3 post-content text-gray">
             <div v-html="$md.render(body)"></div>
@@ -26,6 +26,9 @@ export default {
     console.log(post);
     await store.commit("SET_TITLE", post.title);
     return post;
+  },
+     transition (to, from) {
+    if (!from) { return 'slide-left' } else {return 'slide-right'}
   },
   head() {
     return {

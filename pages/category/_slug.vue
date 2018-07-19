@@ -1,4 +1,5 @@
 <template>
+
   <BaelGrid :allitems="findCatPosts"></BaelGrid>
 </template>
 
@@ -18,6 +19,10 @@ export default {
     };
   },
   components: {BaelGrid},
+     transition (to, from) {
+    if (!from) return 'slide-right'
+    return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
+  },
   data() {
     return {};
   },

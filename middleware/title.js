@@ -4,7 +4,8 @@ export default function ({ store }) {
   store.commit('SET_NAVHEIGHT', 0)
   store.commit("SET_CRUMB", '')
   store.commit("SET_POSTCAT", '');
-  store.commit("paginateOff", false);
+  store.commit("SET_THUMB", "");
+  store.commit("paginateOn", false);
   if (store.state.menuIsActive === !false) {
     console.log('menu')
 
