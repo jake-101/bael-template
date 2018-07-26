@@ -1,6 +1,6 @@
 # Bael Netlify CMS Template
 
-![Bael](https://bael-cms-template.netlify.com/images/uploads/baeltype.png "Bael CMS Blog Template")
+![Bael](https://i.imgur.com/e1zmiB2.jpg "Bael CMS Blog Template")
 
 > Bael is a free template that gives you an easy way to start a blog that uses modern technologies like static-site JAMstack architecture, CSS grid layout, responsive design, and fuzzy search — all wrapped up in a brutalist aesthetic.
 
