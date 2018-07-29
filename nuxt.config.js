@@ -50,6 +50,12 @@ transition: { mode: "in-out"},
 
     
   },
+  manifest: {
+    name: siteInfo.sitename,
+    short_name: siteInfo.sitename,
+    description: siteInfo.sitedescription,
+    lang: 'en'
+  },
   workbox: {
     fetch: true,
     runtimeCaching: [

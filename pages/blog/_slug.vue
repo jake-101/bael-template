@@ -3,7 +3,7 @@
     <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
       <div class="xs-mt2 xs-p2 bcg-item">
         <div class="item xs-block xs-full-height">
-          <div class="fill-gray-lighter feat-wrapper" v-if="theThumb"><transition appear name="fade"><img class="featured-image" :src="thumbnail" :alt="title"></transition></div>
+          <div class="feat-wrapper" v-if="theThumb"><transition appear name="fade"><img class="featured-image" :src="thumbnail" :alt="title"></transition></div>
           <h1 class="xs-py3 main-title">{{title}}</h1>
           <no-ssr>
             <div class="xs-mt-5 bold">

@@ -172,7 +172,7 @@ export default {
   width: 34vw;
   height: 100vh;
   z-index:1000;
-  padding: 30px;
+  padding: 16px;
   background-color: #fff;
   transform: translate3D(100%, 0, 0);
   transition: transform 0.6s;
