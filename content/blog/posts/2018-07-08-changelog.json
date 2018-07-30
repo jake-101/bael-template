@@ -1,6 +1,0 @@
-{
-  "title": "Changelog",
-  "date": "Sunday July 8th, 2018",
-  "thumbnail": "/images/uploads/changelog.jpg",
-  "body": "## 0.1.2 - July 16, 2018\n#### New Features\n- Categories\n- Pagination\n- Loading State w/ SVG spinner\n- Show Icon in Menu\n\n#### Fixes\n- Breadcrumb flexbox fix\n- Upgraded dependencies\n- Compressed included images\n- Blockquote appearance\n- Paragraph margin-bottom\n\n\n\n## 0.1.1 - Initial Version\n- CSS Grid based layout\n- Responsive design\n- Featured Image\n- Blog collection type\n- Page collection type\n- Client-side fuzzy search\n- Newsletter signup Netlify Function\n\n\n## Roadmap\n\n~~Add Categories~~\\\n~~Add Pagination~~\\\nAdd Tags\\\nPage Transitions\\\nLazy Loaded Images"
-}
