@@ -1,0 +1,7 @@
+{
+  "title": "0.1.3 Update",
+  "date": "Thursday March 28th, 2019",
+  "thumbnail": "/images/uploads/bael-0.1.3update.jpg",
+  "category": "Setup",
+  "body": "**Bael has been upgraded to use NetlifyCMS 2.0+, Nuxt 2.5.1, and has other small fixes.** Check the [changelog](https://bael-theme.jake101.com/page/changelog) for more info.\n\nIt's been awhile since I've put some work into the theme and thanks to [BRS999](https://github.com/BRS999) and [andresmrm](https://github.com/andresmrm) for their contributions."
+}

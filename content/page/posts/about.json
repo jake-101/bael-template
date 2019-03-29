@@ -1,5 +1,6 @@
 {
   "title": "About",
   "date": "2018-07-07T03:00:50-07:00",
+  "thumbnail": "/images/uploads/bael-big.jpg",
   "body": "# Bael is a free blogging theme to use with Netlify CMS. It has a utilitarian, brutalist design that lends itself to written content and full width images.\n\nAvailable on [Github](https://github.com/jake-101/bael-template)\\\nMIT Open Source License"
 }
