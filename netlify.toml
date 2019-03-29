@@ -1,12 +1,12 @@
 [build]
   publish = "dist"
-  command = "npm run generate && npm run build:api"
+  command = "yarn run generate && yarn run build:api"
   functions = "./functions"
 [build.environment]
-  NODE_VERSION = "10"
-  YARN_VERSION = "1.7"
+  NODE_VERSION = "9" 
   YARN_FLAGS = "--no-ignore-optional"
 [template.environment]
+  API_URL = "https://bael-theme.jake101.com"
   SENDGRID_API_KEY = "Your Sendgrid API Key (required for newsletter signup box)"
   SENDGRID_WELCOME_SENDER_EMAIL = "Sendgrid Welcome Sender Email"
   SENDGRID_WELCOME_SENDER_NAME = "Sendgrid Welcome Sender Name"

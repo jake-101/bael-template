@@ -66,6 +66,9 @@
   </footer>
 </template>
 <script>
+  const {
+    API_URL
+  } = process.env;
 export default {
   props: ["pagination"],
   data() {
@@ -78,7 +81,7 @@ export default {
     async processForm() {
       try {
         const sendgrid = await this.$axios.post(
-          "/.netlify/functions/app",
+          `${API_URL}/.netlify/functions/app`,
           this.emaildata
         );
         console.log("Processed!");
