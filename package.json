@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxt",
     "serve": "nuxt",
-    "build": "nuxt build",
+    "build": "nuxt build --no-lock",
     "build:api": "netlify-lambda build src/sendgrid",
     "start": "nuxt start",
     "generate": "nuxt generate",
