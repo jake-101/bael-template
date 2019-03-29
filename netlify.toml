@@ -4,7 +4,6 @@
   functions = "./functions"
 [build.environment]
   NODE_VERSION = "9"
-  YARN_VERSION = "1.7"
   YARN_FLAGS = "--no-ignore-optional"
 [template.environment]
   API_URL = "https://bael-theme.jake101.com"
