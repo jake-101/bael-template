@@ -25,6 +25,7 @@ export default {
     let post = await import("~/content/page/posts/" + params.slug + ".json");
     console.log(post);
     await store.commit("SET_TITLE", post.title);
+    
     return post;
   },
      transition (to, from) {
@@ -52,6 +53,8 @@ export default {
   updated() {
     if (process.browser) {
       this.$nextTick(() => {
+           this.$store.commit("paginateOff", false);
+
         this.navHeight();
         console.log(this.$store.state.navheight);
         console.log("slug updated");
@@ -62,6 +65,8 @@ export default {
     if (process.browser) {
       this.$nextTick(() => {
         this.navHeight();
+                   this.$store.commit("paginateOff", false);
+
         window.addEventListener("resize", this.onResize);
         console.log(this.$store.state.navheight);
         console.log("slug mounted");
