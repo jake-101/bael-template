@@ -1,6 +1,6 @@
 [build]
   publish = "dist"
-  command = "npm run generate && npm run build:api"
+  command = "yarn run generate && yarn run build:api"
   functions = "./functions"
 [build.environment]
   NODE_VERSION = "9" 
