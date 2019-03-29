@@ -102,6 +102,7 @@ export default {
     }
   },
   computed: {
+
     offset() {
       if (this.queryParam > 1) {
         return Number(this.queryParam - 1) * 11;
@@ -137,6 +138,7 @@ export default {
     this.$nextTick(() => {
       this.pageCheck();
       this.navHeight();
+      this.$store.commit("SET_GRIDOFFSET", this.offset);
     });
   },
   mounted() {

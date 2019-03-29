@@ -4,14 +4,26 @@
 
       <div class="c-12 xs-text-left xs-p2 xs-border">
         <div class="item xs-text-center">
-          <div v-if="pagination" class="xs-flex xs-flex-justify-space-between xs-flex-align-center">
-            <div>
-              <nuxt-link v-if="this.prevpage > 0" class="bold button button--secondary button--small" :to="`?page=${prevpage}`">Previous</nuxt-link>
-              <nuxt-link class="bold button button--secondary button--small" :to="`?page=${nextpage}`" v-if="this.queryParam < this.totalpages">Next</nuxt-link>
-            </div>
-            <div>
-              <span class="text-gray-lightest"> Page {{this.queryParam}} / {{this.totalpages}} - {{this.$store.state.resultsnum}} Results &nbsp; </span>
-            </div>
+          <div v-if="pagination" class="xs-flex xs-flex-justify-center xs-flex-align-center">
+<span class="xs-absolute xs-l1 xs-text-6 text-gray-lighter xs-mr2 "> <span class="bold">&nbsp; {{ 1 + this.$store.state.gridOffset}} - {{this.pageCount}}</span> of {{this.$store.state.resultsnum}} </span>
+
+<div class="pagination">
+
+  <nuxt-link :to="`?page=${prevpage}`" tag="button" :class="{ 'pagination__button--disabled': this.prevpage <= 0 }" class="pagination__button pagination__button--prev">
+    <svg class="pagination__button--prev-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M368.619 16.892l24.485 24.449c2.938 2.934 4.897 7.335 4.897 11.246 0 3.912-1.959 8.313-4.897 11.246l-192.448 192.168 192.448 192.168c2.938 2.934 4.897 7.335 4.897 11.246 0 4.401-1.959 8.313-4.897 11.246l-24.485 24.449c-2.938 2.934-7.345 4.89-11.263 4.89s-8.325-1.956-11.263-4.89l-228.196-227.864c-2.938-2.934-4.897-7.335-4.897-11.246 0-3.912 1.959-8.313 4.897-11.246l228.196-227.864c2.938-2.934 7.345-4.89 11.263-4.89s8.325 1.956 11.263 4.89v.002z"/>
+    </svg>
+  </nuxt-link>
+  <nuxt-link :to="`?page=${nextpage}`" no-prefetch tag="button" :class="{ 'pagination__button--disabled': this.queryParam >= this.totalpages }" class="pagination__button pagination__button--next">
+    <svg class="pagination__button--next-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M142.382 16.892l-24.485 24.449c-2.938 2.934-4.897 7.335-4.897 11.246 0 3.912 1.959 8.313 4.897 11.246l192.448 192.168-192.448 192.168c-2.938 2.934-4.897 7.335-4.897 11.246 0 4.401 1.959 8.313 4.897 11.246l24.485 24.449c2.938 2.934 7.345 4.89 11.263 4.89s8.325-1.956 11.263-4.89l228.196-227.864c2.938-2.934 4.897-7.335 4.897-11.246 0-3.912-1.959-8.313-4.897-11.246l-228.196-227.864c-2.938-2.934-7.345-4.89-11.263-4.89s-8.325 1.956-11.263 4.89v.002z"/>
+    </svg>
+  </nuxt-link>
+</div>
+
+<div></div>
+
+            
           </div>
           <div v-else>&nbsp;</div>
 
@@ -68,6 +80,7 @@
 <script>
 export default {
   props: ["pagination"],
+   watchQuery: ['page'],
   data() {
     return {
       emaildata: { email: "" },
@@ -75,6 +88,9 @@ export default {
     };
   },
   methods: {
+
+
+    
     async processForm() {
       try { 
         const sendgrid = await this.$axios.post(
@@ -89,6 +105,23 @@ export default {
     }
   },
   computed: {
+    nextCheck() {
+  if (this.nextpage > this.queryParam) {
+    return true
+  } else {
+    return false
+  }
+},
+     pageCount() {
+       var tp = (this.$store.state.gridNumPosts*1) + (this.$store.state.gridOffset*1)
+       if (tp > this.$store.state.resultsnum) {
+         return this.$store.state.resultsnum
+
+       } else {
+         return tp
+
+       }
+    },
     signupAboutSize: function() {
       return {
         "c-25": this.signupBoolean,
