@@ -20,6 +20,9 @@ module.exports = {
   ** Headers of the page
   */
 transition: { mode: "in-out"},
+env: {
+  API_URL: process.env.API_URL,
+},
   head: {
     title: siteInfo.sitename,
     meta: [
