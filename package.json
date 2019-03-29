@@ -21,7 +21,7 @@
     "bf-solid": "^2.10.6",
     "fuse.js": "^3.2.1",
     "hoek": "^4.2.1",
-    "netlify-lambda": "^0.4.0",
+    "netlify-lambda": "^1.4.3",
     "node-sass": "^4.9.2",
     "nuxt": "^2.0.0",
     "sass-loader": "^7.0.3",
@@ -36,6 +36,6 @@
     "glob": "^7.1.2"
   },
   "engines": {
-    "node": ">10.x.x"
+    "node": "^9.0.0"
   }
 }

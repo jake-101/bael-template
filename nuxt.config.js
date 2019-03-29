@@ -33,7 +33,7 @@ transition: { mode: "in-out"},
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black' }
     ]
   },
-  css: ["~/assets/grid.css","bf-solid/dist/solid.2.10.6.css"],
+  css: ["@/assets/grid.css","bf-solid/dist/solid.latest.css"],
   // icon: {
   //   iconSrc: `${siteInfo.siteicon}`
   //  },
