@@ -9,7 +9,7 @@
     "build": "nuxt build --no-lock",
     "build:api": "netlify-lambda build src/sendgrid",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate --no-lock",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
