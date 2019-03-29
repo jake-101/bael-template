@@ -66,6 +66,9 @@
   </footer>
 </template>
 <script>
+  const {
+    API_URL
+  } = process.env;
 export default {
   props: ["pagination"],
   data() {
