@@ -4,6 +4,7 @@
   "siteicon": "/images/uploads/icon.png",
   "showmenu": true,
   "emailsignup": true,
+  "altlayout": true,
   "menu": [
     {
       "name": "jake101",

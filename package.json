@@ -25,6 +25,7 @@
     "node-sass": "^4.9.2",
     "nuxt": "^2.0.0",
     "sass-loader": "^7.0.3",
+    "vue-lazyload": "^1.2.6",
     "vue-moment": "^4.0.0"
   },
   "devDependencies": {

@@ -1,10 +1,11 @@
 <template>
 
-    <BaelGrid :allitems="allBlogPosts"></BaelGrid>
+    <component :is="getLayout" :allitems="allBlogPosts"></component>
 </template>
 
 <script>
 import BaelGrid from "~/components/BaelGrid";
+import FullGrid from "~/components/FullGrid";
 export default {
     watchQuery: ['page'],
 
@@ -14,7 +15,7 @@ export default {
     return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
   },
   name: "Index",
-  components: { BaelGrid },
+  components: { BaelGrid,FullGrid },
   data() {
     return {};
   },
@@ -23,6 +24,14 @@ export default {
   computed: {
     allBlogPosts() {
       return this.$store.state.blogPosts;
+    },
+    getLayout() {
+if (this.$store.state.siteInfo.altlayout == false ) {
+  return 'BaelGrid'
+} else if (this.$store.state.siteInfo.altlayout == true ) {
+  return 'FullGrid'
+}
+
     }
   }
 };

@@ -43,6 +43,7 @@ collections:
         - {label: Site Icon (Must be 512x512 or larger square PNG), name: siteicon, widget: image,default: "/icon.png"}
         - {label: Show Icon in Menu, name: showmenu, widget: boolean}
         - {label: Email Newsletter Signup, name: emailsignup, widget: boolean}
+        - {label: Full Page Alt Layout, name: altlayout, widget: boolean}
         - label: Menu Links
           name: menu
           widget: list

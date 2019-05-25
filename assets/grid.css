@@ -9,6 +9,11 @@
     padding: 10px
 }
 
+.full-item {
+  grid-column: span 12;
+  padding: 10px;
+}
+
 [class*="c-"] {
     grid-column: span 12;
     padding: 10px

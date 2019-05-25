@@ -60,7 +60,6 @@ env: {
     lang: 'en'
   },
   workbox: {
-    fetch: true,
     runtimeCaching: [
       {
         urlPattern: '/images/uploads/.*',
@@ -90,6 +89,9 @@ middleware: ['title']
   },
   plugins: ['~/plugins/vuefuse',{
     src: "~/plugins/moment",
+    ssr: false
+  },{
+    src: "~/plugins/lazyload",
     ssr: false
   }],
   /*
