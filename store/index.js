@@ -62,12 +62,12 @@ const createStore = () =>
 
       },
       setGridNumPosts({ state, commit }) {
-        if (state.blogPosts > 13) {
+        if (state.blogPosts > 12) {
           this.$store.commit("SET_GRIDNUMPOSTS", 12);
         }
       },
       setGridNumCats({ state, commit }) {
-        if (state.allCats > 13) {
+        if (state.allCats > 12) {
           this.$store.commit("SET_GRIDNUMCATS", 12);
         }
       },

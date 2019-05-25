@@ -118,7 +118,7 @@ export default {
                 return this.$store.state.resultsnum
 
             } else {
-                return tp
+                return tp + 1
 
             }
         },
