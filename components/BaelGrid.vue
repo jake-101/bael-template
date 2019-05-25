@@ -105,7 +105,7 @@ export default {
 
     offset() {
       if (this.queryParam > 1) {
-        return Number(this.queryParam - 1) * 11;
+        return Number(this.queryParam - 1) * 12;
       } else {
         return 0;
       }
