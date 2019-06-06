@@ -6,7 +6,7 @@ date: 2019-06-06T17:07:39.338Z
 update: 2019-06-06T17:07:39.350Z
 thumbnail: /images/uploads/fling.jpg
 ---
-A couple have a hard time finding the "right" spot.
+A couple have a hard time finding the "right" spot. 
 
 Starring:
 
