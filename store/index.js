@@ -24,9 +24,7 @@ const createStore = () =>
       allCats: [],
       results: [],
       resultsnum: [],
-      pagination: false,
-      menuIsActive: false,
-      menuInitial: true,
+      pagination: false
     },
     actions: {
       async nuxtServerInit({ dispatch }) {
