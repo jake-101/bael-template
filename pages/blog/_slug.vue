@@ -6,27 +6,26 @@
     >
       <div class="xs-mt2 xs-p2 bcg-item">
         <div class="item xs-block xs-full-height">
-          <div class="feat-wrapper" v-if="post.thumbnail">
-            <transition appear name="fade">
-              <img class="featured-image" :src="post.thumbnail" :alt="post.title" />
-            </transition>
-          </div>
+          <lazy-featured-image
+            v-if="post.thumbnail"
+            :title="post.title"
+            :thumbnail="post.thumbnail"
+          />
+
           <h1 class="xs-py3 main-title">{{post.title}}</h1>
-          <no-ssr>
-            <div class="xs-mt-5 bold">
-              <ul class="list-unstyled xs-flex xs-flex-align-center">
-                <li class="xs-inline-block xs-mr1" v-if="this.$store.state.theCategory">
-                  <div class="tag fill-gray-darker xs-border">
-                    <nuxt-link
-                      :to="`/category/${this.$store.state.theCategory.toLowerCase()}`"
-                      class="tag__link text-white"
-                    >{{this.$store.state.theCategory}}</nuxt-link>
-                  </div>
-                </li>
-                <li class="xs-inline-block">{{ date }}</li>
-              </ul>
-            </div>
-          </no-ssr>
+          <div class="xs-mt-5 bold">
+            <ul class="list-unstyled xs-flex xs-flex-align-center">
+              <li class="xs-inline-block xs-mr1" v-if="post.category">
+                <div class="tag fill-gray-darker xs-border">
+                  <nuxt-link
+                    :to="`/category/${post.category.toLowerCase()}`"
+                    class="tag__link text-white"
+                  >{{post.category}}</nuxt-link>
+                </div>
+              </li>
+              <li class="xs-inline-block">{{ post.date }}</li>
+            </ul>
+          </div>
           <div class="xs-py3 post-content text-gray-lighter">
             <nuxt-content :document="post" />
           </div>
@@ -39,11 +38,13 @@
 
 
 <script>
-import MdWrapper from "~/components/MdWrapper";
-
 export default {
-  async asyncData({ $content, params, app, payload, route, store }) {
-    const post = await $content("blog", params.slug).fetch();
+  async asyncData({ $content, params, error }) {
+    const post = await $content("blog", params.slug)
+      .fetch()
+      .catch((err) => {
+        error({ statusCode: 404, message: "Page not found" });
+      });
 
     return {
       post,
@@ -74,53 +75,6 @@ export default {
 
   data() {
     return {};
-  },
-  methods: {
-    onResize(event) {
-      this.navHeight();
-      console.log(this.$store.state.navheight);
-      console.log("slug resize");
-    },
-    navHeight() {
-      var height = document.getElementById("navbar").clientHeight;
-      this.$store.commit("SET_NAVHEIGHT", height);
-    },
-  },
-  updated() {
-    if (process.browser) {
-      this.$nextTick(() => {
-        this.navHeight();
-        console.log(this.$store.state.navheight);
-        console.log("slug updated");
-      });
-    }
-  },
-  mounted() {
-    if (process.browser) {
-      this.$nextTick(() => {
-        this.navHeight();
-        window.addEventListener("resize", this.onResize);
-        console.log(this.$store.state.navheight);
-        console.log("slug mounted");
-      });
-    }
-  },
-  beforeDestroy() {
-    // Unregister the event listener before destroying this Vue instance
-    window.removeEventListener("resize", this.onResize);
-  },
-
-  computed: {
-    theThumb() {
-      return this.$store.state.theThumbnail;
-    },
-    allBlogPosts() {
-      return this.$store.state.blogPosts;
-    },
-
-  },
-  components: {
-    MdWrapper,
   },
 };
 </script>

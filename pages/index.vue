@@ -6,8 +6,14 @@
 import BaelGrid from "~/components/BaelGrid";
 import FullGrid from "~/components/FullGrid";
 export default {
-  async asyncData({ $content, params }) {
-    const blogPosts = await $content("blog").fetch();
+  async asyncData({ $content, params, error }) {
+    const blogPosts = await $content("blog")
+      .sortBy("createdAt", "desc")
+      .only(["title", "path"])
+      .fetch()
+      .catch((err) => {
+        error({ statusCode: 404, message: "Page not found" });
+      });
 
     return {
       blogPosts,

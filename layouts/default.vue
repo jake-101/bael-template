@@ -1,9 +1,9 @@
 <template>
   <section class="container xs-border xs-text-5 md-text-4">
-    <BaelHeader :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
+    <bael-header :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" />
     <nuxt />
-    <SlideOut />
-    <BaelFooter :pagination="paginate" />
+    <lazy-slide-out />
+    <bael-footer :pagination="paginate" />
   </section>
 </template>
 <script>
@@ -16,40 +16,12 @@ export default {
     };
   },
 
-  methods: {
-    navHeight() {
-      if (process.browser) {
-        var height = document.getElementById("navbar").clientHeight;
 
-        this.$store.commit("SET_NAVHEIGHT", height - 1);
-      }
-    },
-  },
-  updated() {
-    if (process.browser) {
-      this.$nextTick(() => {
-        this.navHeight();
-        console.log(this.$store.state.navheight);
-        console.log("default updated");
-      });
-    }
-  },
-  mounted() {
-    if (process.browser) {
-      this.$nextTick(() => {
-        this.navHeight();
-        console.log(this.$store.state.navheight);
-        console.log("default mounted");
-      });
-    }
-  },
   computed: {
     paginate() {
       return this.$store.state.pagination;
     },
-    blogposts() {
-      return this.$store.state.blogPosts;
-    },
+
     blogtitle() {
       return this.$store.state.blogTitle;
     },

@@ -3,9 +3,11 @@ title: Changelog
 date: 2019-03-28T21:15:57.000Z
 thumbnail: /images/uploads/changelog.jpg
 ---
-## 0.2.1 - May 24, 2018#### New Features
+## 0.2.1 - May 24, 2018
 
-* Added Full Page \"Alt\" Layout (In the /admin panel, go to Setup>Site Info and set 'Full Page Alt Layout' to true to turn it on.) Check out the [example blog](https://bael-template-alt-layout.netlify.com/) to see how it looks.
+#### New Features
+
+* Added Full Page "Alt" Layout (In the /admin panel, go to Setup>Site Info and set 'Full Page Alt Layout' to true to turn it on.) Check out the [example blog](https://bael-template-alt-layout.netlify.com/) to see how it looks.
 
 #### Fixes
 
@@ -62,8 +64,8 @@ thumbnail: /images/uploads/changelog.jpg
 
 ## Roadmap
 
-~~Add Categories~~\\
-~~Add Pagination~~\\
-~~Page Transitions~~\\
-Add Tags\\
+~~Add Categories~~  
+~~Add Pagination~~  
+~~Page Transitions~~  
+Add Tags  
 Lazy Loaded Images

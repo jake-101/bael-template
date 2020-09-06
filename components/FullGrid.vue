@@ -85,17 +85,9 @@ export default {
       }
     },
 
-    onResize(event) {
-      this.navHeight();
-    },
 
-    navHeight() {
-      if (process.browser) {
-        var height = document.getElementById("navbar").clientHeight;
 
-        this.$store.commit("SET_NAVHEIGHT", height - 1);
-      }
-    }
+
   },
   watch: {
     // whenever question changes, this function will run
@@ -150,28 +142,9 @@ export default {
     }
   },
 
-  updated() {
-    this.$nextTick(() => {
-      this.pageCheck();
-      this.navHeight();
-      this.$store.commit("SET_GRIDOFFSET", this.offset);
-    });
-  },
-  mounted() {
-    if (process.browser) {
-      this.loadMore();
 
-      this.$nextTick(() => {
-        this.navHeight();
-        this.pageCheck();
-        window.addEventListener("resize", this.onResize);
-      });
-    }
-  },
-  beforeDestroy() {
-    // Unregister the event listener before destroying this Vue instance
-    window.removeEventListener("resize", this.onResize);
-  }
+
+
 };
 </script>
 

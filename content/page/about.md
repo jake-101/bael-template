@@ -5,5 +5,5 @@ thumbnail: /images/uploads/bael-big.jpg
 ---
 # Bael is a free blogging theme to use with Netlify CMS. It has a utilitarian, brutalist design that lends itself to written content and full width images.
 
-Available on [Github](https://github.com/jake-101/bael-template)\\
+Available on [Github](https://github.com/jake-101/bael-template)   
 MIT Open Source License

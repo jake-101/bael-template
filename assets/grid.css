@@ -1,3 +1,6 @@
+:root{
+  --nav-height: 54px;
+}
 .r {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -17,6 +20,9 @@
 [class*="c-"] {
     grid-column: span 12;
     padding: 10px
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 
  /* 600px */
@@ -171,6 +177,9 @@ nav .r {
   grid-gap: 0;
 }
 @media only screen and (max-width: 40rem) {
+  :root{
+    --nav-height: 104px;
+  }
   .main-title {
     font-size: 2rem;
   }

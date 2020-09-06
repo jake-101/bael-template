@@ -6,7 +6,7 @@ export const state = () => {
         fontsLoaded: false,
         fontsFailed: false,
         docHeight: 675,
-        navHeight: 0,
+        navHeight: 54,
         winHeight: 1080,
         winWidth: 1920,
         sTop: 0,

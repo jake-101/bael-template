@@ -67,17 +67,9 @@ export default {
     //   }
     // },
 
-    onResize(event) {
-      this.navHeight();
-    },
 
-    navHeight() {
-      if (process.browser) {
-        var height = document.getElementById("navbar").clientHeight;
 
-        this.$store.commit("SET_NAVHEIGHT", height - 1);
-      }
-    }
+
   },
   watch: {
     // whenever question changes, this function will run
@@ -102,7 +94,9 @@ export default {
     // }
   },
   computed: {
-
+navHeight() {
+  return this.$store.state.browser.navHeight
+}
     // offset() {
     //   if (this.queryParam > 1) {
     //     return Number(this.queryParam - 1) * 12;
@@ -134,11 +128,11 @@ export default {
     // }
   },
 
-  updated() {
-    this.$nextTick(() => {
-      this.$store.commit("SET_GRIDOFFSET", this.offset);
-    });
-  },
+  // updated() {
+  //   this.$nextTick(() => {
+  //     this.$store.commit("SET_GRIDOFFSET", this.offset);
+  //   });
+  // },
 
 
 };
