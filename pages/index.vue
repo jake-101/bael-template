@@ -34,11 +34,7 @@ export default {
 
   computed: {
     getLayout() {
-      if (this.$store.state.siteInfo.altlayout == false) {
-        return "BaelGrid";
-      } else if (this.$store.state.siteInfo.altlayout == true) {
-        return "FullGrid";
-      }
+      return this.$store.state.info.altlayout ? "FullGrid" : "BaelGrid";
     },
   },
 };

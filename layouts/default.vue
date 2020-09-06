@@ -1,6 +1,6 @@
 <template>
   <section class="container xs-border xs-text-5 md-text-4">
-    <bael-header :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" />
+    <bael-header />
     <nuxt />
     <lazy-slide-out />
     <bael-footer :pagination="paginate" />
@@ -15,15 +15,12 @@ export default {
       email: { email: "" },
     };
   },
-
-
+  async middleware({ store, $content }) {
+    await store.dispatch('fetchInfo', $content)
+  },
   computed: {
     paginate() {
       return this.$store.state.pagination;
-    },
-
-    blogtitle() {
-      return this.$store.state.blogTitle;
     },
   }
 };

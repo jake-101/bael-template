@@ -1,5 +1,10 @@
 /sw.js
   Cache-Control: no-cache
-/assets/*
-   # Headers for that path:
-   Cache-Control: public, max-age=360000 
+/images/*
+   Cache-Control: public, max-age=3600000
+/favicon.ico
+   Cache-Control: public, max-age=3600000
+/icon.png
+   Cache-Control: public, max-age=3600000
+/_nuxt/*
+   Cache-Control: public, immutable, max-age=36000000 

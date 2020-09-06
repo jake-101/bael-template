@@ -30,14 +30,14 @@
       <li class="zap-slideout-menu-item--small">
         <nuxt-link to="/" exact>Home</nuxt-link>
       </li>
-      <li v-if="this.$store.state.allCats" class="zap-slideout-menu-item--small">
+      <li v-if="categories.length" class="zap-slideout-menu-item--small">
         <nuxt-link to="/categories" exact>Categories</nuxt-link>
       </li>
       <li v-for="(p,i) in pages" :key="`pg-${i}`" class="zap-slideout-menu-item--small">
         <nuxt-link :to="p.path">{{p.title}}</nuxt-link>
       </li>
-      <li v-if="links" class="xs-mt5 zap-slideout-menu-item black-font">Links</li>
-      <li v-for="m in links" :key="m.position" class="zap-slideout-menu-item--small">
+      <li v-if="info.menu" class="xs-mt5 zap-slideout-menu-item black-font">Links</li>
+      <li v-for="m in info.menu" :key="m.position" class="zap-slideout-menu-item--small">
         <a :href="m.link">{{m.name}}</a>
       </li>
     </ul>
@@ -48,21 +48,25 @@
 export default {
   fetchOnServer: true,
   async fetch() {
-    const info = await this.$content("setup", "info").fetch();
     const pages = await this.$content("page").fetch();
-    this.links = info.menu;
     this.pages = pages;
-    this.info = info;
   },
   data() {
     return {
-      info: null,
       isOpen: false,
       links: null,
       pages: null,
     };
   },
-  computed: {},
+  computed: {
+    info() {
+      return this.$store.state.info
+    },
+    categories() {
+            return this.$store.state.categories
+
+    }
+  },
   methods: {
     open() {
       this.isOpen = true;

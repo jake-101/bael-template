@@ -1,6 +1,6 @@
 <template>
 <div class="xs-text-6 md-text-5">
-    <div v-if="posts[0]" class="r full-height browse" :style="`height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)`">
+    <div v-if="posts.length" class="r full-height browse" :style="`height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)`">
 
       <div  v-for="(p,i) in posts" :key="i" class="xs-border xs-p2 bcg-item">
         <div class="item xs-block xs-full-height xs-flex">

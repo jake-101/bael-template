@@ -6,33 +6,49 @@ export const state = () => {
   return {
     menuIsActive: false,
     menuInitial: true,
-    blogPosts: [],
-    allPages: [],
-    navheight: 60,
-    blogTitle: '',
-    siteInfo: [],
-    connect: [],
-    allTags: [],
-    gridItems: [],
-    gridNumPosts: '11',
-    gridNumCats: '11',
-    gridOffset: '0',
-    theThumbnail: '',
-    theCategory: '',
-    theCrumb: '',
-    allCats: [],
-    results: [],
-    resultsnum: [],
-    pagination: false,
+    info: {},
+    current: {},
+    categories: [],
+    // blogPosts: [],
+    // allPages: [],
+    // navheight: 60,
+    // blogTitle: '',
+    // siteInfo: [],
+    // connect: [],
+    // allTags: [],
+    // gridItems: [],
+    // gridNumPosts: '11',
+    // gridNumCats: '11',
+    // gridOffset: '0',
+    // theThumbnail: '',
+    // theCategory: '',
+    // theCrumb: '',
+    // allCats: [],
+    // results: [],
+    // resultsnum: [],
+    // pagination: false,
     settings: {},
 
   }
 }
 export const actions = {
-  async nuxtServerInit({ dispatch }) {
-    await dispatch('getSiteInfo')
 
-  },
+  async fetchInfo({ commit }, $content) {
+    try {
+      const info = await $content("setup", "info").fetch();
+      const connect = await $content("setup", "connect").fetch();
+      const categories = await $content("category").fetch();
+      commit('SET_INFO', info)
+      commit('SET_CONNECT', connect.connectlinks)
+      commit('SET_CATEGORIES', categories)
+    } catch (e) {
+      const error = 'Initial Setup Error: ' + e.message + e
+      console.warning(error)
+      commit('SET_ERROR', error);
+    }
+  }
+
+
   // setGridNumPosts({ state, commit }) {
   //   if (state.blogPosts > 12) {
   //     this.$store.commit("SET_GRIDNUMPOSTS", 12);
@@ -44,25 +60,34 @@ export const actions = {
   //   }
   // },
 
-  getSiteInfo({ state, commit }) {
-    const info = require('~/content/setup/info.json');
-    const connect = require('~/content/setup/connect.json');
-    commit('SET_INFO', info)
-    commit('SET_CONNECT', connect)
 
-  }
 }
 
 export const mutations = {
+  // NEW MUTATIONS
+  SET_INFO(state, info) {
+    state.info = info
+  },
+  SET_ERROR(state, error) {
+    state.info = error
+  },
+  SET_CONNECT(state, data) {
+    state.connect = data
+  },
+  SET_CURRENT(state, data) {
+   state.current = data
+  },
+  SET_CATEGORIES(state, data) {
+    state.categories = data
+  },
+  // OLD MUTATIONS
   SET_POSTS(state, data) {
     state.blogPosts = data
   },
   SET_PAGES(state, data) {
     state.allPages = data
   },
-  SET_CATS(state, data) {
-    state.allCats = data
-  },
+
   SET_CRUMB(state, data) {
     state.theCrumb = data
   },
@@ -93,12 +118,10 @@ export const mutations = {
   SET_NAVHEIGHT(state, data) {
     state.navheight = data
   },
-  SET_INFO(state, data) {
-    state.siteInfo = data
-  },
-  SET_CONNECT(state, data) {
-    state.connect = data
-  },
+  // SET_INFO(state, data) {
+  //   state.siteInfo = data
+  // },
+
   SET_RESULTS(state, data) {
     state.results = data
   },

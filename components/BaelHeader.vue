@@ -1,9 +1,9 @@
 <template>
-  <nav ref="navBar" id="navbar" class="sm-border-bottom">
+  <nav ref="navBar" :data-nav="pagetitle" id="navbar" class="sm-border-bottom">
     <div class="r">
       <div class="c-4 xs-text-left xs-p2 sm-border-right">
         <div class="item">
-          <nuxt-link class="sitename" to="/" exact>{{headerSiteName}}</nuxt-link>
+          <nuxt-link class="sitename" to="/" exact>{{$store.state.info.sitename}}</nuxt-link>
         </div>
       </div>
 
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div
-        v-if="blogtitle"
+        v-if="pagetitle"
         style="z-index:55;"
         class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar"
       >
@@ -27,7 +27,7 @@
             &nbsp; {{thecrumb}}
           </span> &nbsp;
           <span class="text-gray-lightest">></span>
-          &nbsp; {{blogtitle}}
+          &nbsp; {{pagetitle}}
         </div>
       </div>
     </div>
@@ -37,23 +37,18 @@
 export default {
   props: ["blogtitle", "posts", "thecrumb"],
   data() {
-    return {
-
-    };
+    return {};
   },
 
   computed: {
-
-
-    headerSiteName() {
-      return this.$store.state.siteInfo.sitename;
+    pagetitle() {
+      return this.$store.state.current.title;
     },
+
     crumb() {
       return this.$store.state.theCrumb;
     },
   },
-
-
 };
 </script>
 <style>

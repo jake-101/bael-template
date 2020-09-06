@@ -36,15 +36,7 @@ module.exports = {
   loading: { color: '#3B8070' },
   modules: ['@nuxt/content', '@nuxtjs/pwa', '@nuxtjs/axios'],
   content: {
-    // Options
-  },
-  markdownit: {
-    injected: true,
-    preset: 'default',
-    breaks: true,
-    html: true
-
-
+    fullTextSearchFields: ['title', 'description', 'category']
   },
   manifest: {
     name: siteInfo.sitename,
@@ -81,8 +73,7 @@ module.exports = {
     {
       src: "~/plugins/browser",
       mode: 'client'
-    },
-    '~/plugins/vuefuse', {
+    }, {
     src: "~/plugins/moment",
     mode: 'client'
   }, {

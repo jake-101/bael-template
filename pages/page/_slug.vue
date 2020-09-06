@@ -35,12 +35,9 @@ export default {
     return {
       page,
     };
-
-    // let post = await import("~/content/page/posts/" + params.slug + ".json");
-    // console.log(post);
-    // await store.commit("SET_TITLE", post.title);
-
-    // return post;
+  },
+  mounted() {
+    this.$store.commit("SET_CURRENT", this.page);
   },
   transition(to, from) {
     if (!from) {
@@ -51,7 +48,7 @@ export default {
   },
   head() {
     return {
-      title: this.title + " | " + this.$store.state.siteInfo.sitename,
+      title: this.page.title + " | " + this.$store.state.info.sitename,
     };
   },
   data() {
