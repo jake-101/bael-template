@@ -1,21 +1,18 @@
 <template>
   <section class="container xs-border xs-text-5 md-text-4">
-
     <BaelHeader :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
-    <nuxt/>
-    <SlideOut/>
+    <nuxt />
+    <SlideOut />
     <BaelFooter :pagination="paginate" />
   </section>
 </template>
 <script>
-import SlideOut from "~/components/SlideOut";
-import BaelFooter from "~/components/BaelFooter";
-import BaelHeader from "~/components/BaelHeader";
+
 
 export default {
   data() {
     return {
-      email: { email: "" }
+      email: { email: "" },
     };
   },
 
@@ -26,7 +23,7 @@ export default {
 
         this.$store.commit("SET_NAVHEIGHT", height - 1);
       }
-    }
+    },
   },
   updated() {
     if (process.browser) {
@@ -48,19 +45,14 @@ export default {
   },
   computed: {
     paginate() {
-return this.$store.state.pagination
+      return this.$store.state.pagination;
     },
     blogposts() {
       return this.$store.state.blogPosts;
     },
     blogtitle() {
       return this.$store.state.blogTitle;
-    }
-  },
-  components: {
-    SlideOut,
-    BaelHeader,
-    BaelFooter
+    },
   }
 };
 </script>
@@ -80,39 +72,43 @@ body {
   font-weight: 400;
   line-height: 1;
 }
-.feat-wrapper {max-height:55vh;width:100%;}
+.feat-wrapper {
+  max-height: 55vh;
+  width: 100%;
+}
 .slide-left-enter,
 .slide-right-leave-active {
   transform: translate(50%, 0);
-  opacity:0;
-  transition: all .25s;
+  opacity: 0;
+  transition: all 0.25s;
 }
 .slide-left-leave-active,
 .slide-right-enter {
   transform: translate(-50%, 0);
-   opacity:0;
-    transition: all .25s;
-
+  opacity: 0;
+  transition: all 0.25s;
 }
 .slide-down-enter,
 .slide-up-leave-active {
-  transform: translate(0,50%);
-  opacity:1;
-  transition: all .25s;
+  transform: translate(0, 50%);
+  opacity: 1;
+  transition: all 0.25s;
 }
 .slide-down-leave-active,
 .slide-up-enter {
-  transform: translate(0,-50%);
-   opacity:1;
-    transition: all .25s;
-
+  transform: translate(0, -50%);
+  opacity: 1;
+  transition: all 0.25s;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-  transition-delay: .3s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+  transition-delay: 0.3s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-.post-content {max-width:75ch;}
+.post-content {
+  max-width: 75ch;
+}
 </style>

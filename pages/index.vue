@@ -1,44 +1,44 @@
 <template>
-
-    <component :is="getLayout" :allitems="allBlogPosts"></component>
+  <component :is="getLayout" :posts="blogPosts"></component>
 </template>
 
 <script>
 import BaelGrid from "~/components/BaelGrid";
 import FullGrid from "~/components/FullGrid";
 export default {
-    watchQuery: ['page'],
+  async asyncData({ $content, params }) {
+    const blogPosts = await $content("blog").fetch();
 
-   transition (to, from) {
-     
-    if (!from) return 'fade'
-    return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
+    return {
+      blogPosts,
+    };
+  },
+  watchQuery: ["page"],
+
+  transition(to, from) {
+    if (!from) return "fade";
+    return +to.query.page > +from.query.page ? "slide-right" : "slide-left";
   },
   name: "Index",
-  components: { BaelGrid,FullGrid },
+  components: { BaelGrid, FullGrid },
   data() {
     return {};
   },
   methods: {},
 
   computed: {
-    allBlogPosts() {
-      return this.$store.state.blogPosts;
-    },
     getLayout() {
-if (this.$store.state.siteInfo.altlayout == false ) {
-  return 'BaelGrid'
-} else if (this.$store.state.siteInfo.altlayout == true ) {
-  return 'FullGrid'
-}
-
-    }
-  }
+      if (this.$store.state.siteInfo.altlayout == false) {
+        return "BaelGrid";
+      } else if (this.$store.state.siteInfo.altlayout == true) {
+        return "FullGrid";
+      }
+    },
+  },
 };
 </script>
 
 <style>
-
 .browse a {
   width: 100%;
 }

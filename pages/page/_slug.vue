@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
+    <div class="full-height single xs-border-left xs-border-right" style="min-height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)">
       <div class="xs-mt2 xs-p2 bcg-item">
         <div class="item xs-block xs-full-height">
           <div v-if="thumbnail" class="fill-gray-lighter feat-wrapper"><transition appear name="fade"><img class="featured-image" :src="thumbnail" :alt="title"></transition></div>
@@ -22,11 +22,11 @@ import MdWrapper from "~/components/MdWrapper";
 
 export default {
   async asyncData({ params, app, payload, route, store }) {
-    let post = await import("~/content/page/posts/" + params.slug + ".json");
-    console.log(post);
-    await store.commit("SET_TITLE", post.title);
+    // let post = await import("~/content/page/posts/" + params.slug + ".json");
+    // console.log(post);
+    // await store.commit("SET_TITLE", post.title);
     
-    return post;
+    // return post;
   },
      transition (to, from) {
     if (!from) { return 'slide-left' } else {return 'slide-right'}
@@ -82,9 +82,7 @@ export default {
     allBlogPosts() {
       return this.$store.state.blogPosts;
     },
-    navbarheight() {
-      return this.$store.state.navheight;
-    }
+
   },
   components: {
     MdWrapper

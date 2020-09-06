@@ -46,8 +46,19 @@ export default {
       compResults: []
     };
   },
+
   components: { VueFuse },
   computed: {
+        navHeight() {
+      var height = this.$refs.navBar.clientHeight;
+      // console.log(height);
+      // this.$store.commit("SET_NAVHEIGHT", height - 1);
+    
+return height ? height - 1 : 0
+
+      
+ 
+    },
     allPosts() {
       let posts = this.$store.state.blogPosts;
       let pages = this.$store.state.allPages;
@@ -65,15 +76,7 @@ export default {
     }
   },
 
-  methods: {
 
-    navHeight() {
-      var height = document.getElementById("navbar").clientHeight;
-      console.log(height);
-      this.$store.commit("SET_NAVHEIGHT", height - 1);
- 
-    }
-  },
 
   mounted() {
     this.$on("searchChanged", results => {

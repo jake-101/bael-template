@@ -1,7 +1,14 @@
 <template>
-  <div class="zap-slideout xs-border xs-text-6 md-text-5" :class="{ isOpen: $store.state.menuIsActive  }">
+  <div
+    class="zap-slideout xs-border xs-text-6 md-text-5"
+    :class="{ isOpen: $store.state.menuIsActive  }"
+  >
     <div class="zap-slideout-opener">
-      <div @click="toggle" class="hamburger hamburger--spin js-hamburger" :class="{'is-active': $store.state.menuIsActive }">
+      <div
+        @click="toggle"
+        class="hamburger hamburger--spin js-hamburger"
+        :class="{'is-active': $store.state.menuIsActive }"
+      >
         <div class="hamburger-box">
           <div class="hamburger-inner"></div>
         </div>
@@ -10,23 +17,27 @@
     <ul class="zap-slideout-menu list-unstyled black-font">
       <li class="zap-slideout-menu-item">
         <nuxt-link style="color:#000" class="text-black black-font" to="/" exact>
-        <img style="width:64px;" class="xs-block xs-fit xs-mb2" v-if="this.$store.state.siteInfo.siteicon  && this.$store.state.siteInfo.showmenu" :src="this.$store.state.siteInfo.siteicon" :alt="menuSiteName">
-        {{menuSiteName}}
+          <img
+            style="width:64px;"
+            class="xs-block xs-fit xs-mb2"
+            v-if="info.siteicon  && info.showmenu"
+            :src="info.siteicon"
+            :alt="info.sitename"
+          />
+          {{info.sitename}}
         </nuxt-link>
       </li>
       <li class="zap-slideout-menu-item--small">
         <nuxt-link to="/" exact>Home</nuxt-link>
       </li>
-         <li v-if="this.$store.state.allCats" class="zap-slideout-menu-item--small">
+      <li v-if="this.$store.state.allCats" class="zap-slideout-menu-item--small">
         <nuxt-link to="/categories" exact>Categories</nuxt-link>
       </li>
-      <li v-if="myPages" v-for="(pg,i) in myPages" :key="`pg-${i}`" class="zap-slideout-menu-item--small">
-        <nuxt-link :to="pg._path">{{pg.title}}</nuxt-link>
+      <li v-for="(p,i) in pages" :key="`pg-${i}`" class="zap-slideout-menu-item--small">
+        <nuxt-link :to="p.path">{{p.title}}</nuxt-link>
       </li>
-      <li v-if="menuLinks" class="xs-mt5 zap-slideout-menu-item black-font">
-        Links
-      </li>
-      <li v-if="menuLinks" v-for="m in menuLinks" :key="m.position" class="zap-slideout-menu-item--small">
+      <li v-if="links" class="xs-mt5 zap-slideout-menu-item black-font">Links</li>
+      <li v-for="m in links" :key="m.position" class="zap-slideout-menu-item--small">
         <a :href="m.link">{{m.name}}</a>
       </li>
     </ul>
@@ -35,23 +46,23 @@
 
   <script>
 export default {
+  fetchOnServer: true,
+  async fetch() {
+    const info = await this.$content("setup", "info").fetch();
+    const pages = await this.$content("page").fetch();
+    this.links = info.menu;
+    this.pages = pages;
+    this.info = info;
+  },
   data() {
     return {
-      isOpen: false
+      info: null,
+      isOpen: false,
+      links: null,
+      pages: null,
     };
   },
-  computed: {
-    menuLinks() {
-      return this.$store.state.siteInfo.menu;
-    },
-    myPages() {
-      return this.$store.state.allPages;
-    },
-
-    menuSiteName() {
-      return this.$store.state.siteInfo.sitename;
-    }
-  },
+  computed: {},
   methods: {
     open() {
       this.isOpen = true;
@@ -73,8 +84,8 @@ export default {
       } else {
         this.open();
       }
-    }
-  }
+    },
+  },
 };
 </script>
   <style lang="scss">
@@ -171,7 +182,7 @@ export default {
   top: 0;
   width: 34vw;
   height: 100vh;
-  z-index:1000;
+  z-index: 1000;
   padding: 16px;
   background-color: #fff;
   transform: translate3D(100%, 0, 0);

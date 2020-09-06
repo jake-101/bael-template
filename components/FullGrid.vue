@@ -1,8 +1,8 @@
 <template>
 <div class="xs-text-6 md-text-5">
-    <div v-if="items2[0]" class="r browse full-height" :style="`margin-top:${navbarheight}px;`">
+    <div v-if="items2[0]" class="r browse full-height" :style="`margin-top:var(--nav-height);`">
 
-      <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p.pi" class="xs-border xs-p2 full-item" :style="`height:calc(100vh - ${navbarheight}px);`">
+      <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p.pi" class="xs-border xs-p2 full-item" :style="`height:calc(100vh - var(--nav-height);`">
         <div v-if="p.thumbnail" class="item xs-block xs-full-height xs-flex xs-relative xs-flex-align-start xs-flex-justify-end xs-text-left">
                     <div class="xs-text-left xs-flex xs-full-height xs-flex-justify-end xs-flex-align-end xs-width-auto">
       <nuxt-link class="full-bg-link" :to="p._path">
@@ -29,7 +29,7 @@
 
     </div>
     <div v-else class="r full-height browse">
-      <div class="xs-p2 c-100 xs-flex xs-flex-align-center xs-flex-justify-center xs-text-center" :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
+      <div class="xs-p2 c-100 xs-flex xs-flex-align-center xs-flex-justify-center xs-text-center" :style="`height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)`">
 
         
         <div v-if="total < 1 && !busy">No Results.</div>
@@ -42,7 +42,7 @@
 <script>
 
 export default {
-  props: ["items", "allitems"],
+  props: ["items", "allitems", "posts"],
   data() {
     return {
       currentPage: null,
@@ -136,9 +136,7 @@ export default {
       var next = Number(this.queryParam) + 1;
       return next;
     },
-    navbarheight() {
-      return this.$store.state.navheight;
-    },
+
     total() {
       return this.allitems.length;
     },
