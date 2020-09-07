@@ -44,6 +44,7 @@ collections:
         - {label: Show Icon in Menu, name: showmenu, widget: boolean}
         - {label: Email Newsletter Signup, name: emailsignup, widget: boolean}
         - {label: Full Page Alt Layout, name: altlayout, widget: boolean}
+        - {label: Link Color, name: linkcolor, widget: color, picker: chrome }
         - label: Menu Links
           name: menu
           widget: list

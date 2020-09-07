@@ -78,9 +78,9 @@ nav {
 }
 .sitename {
   color: #000;
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Inter", sans-serif;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 800;
   font-size: 18px;
 }
 @media only screen and (max-width: 40rem) {

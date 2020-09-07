@@ -16,15 +16,19 @@
     </div>
     <ul class="zap-slideout-menu list-unstyled black-font">
       <li class="zap-slideout-menu-item">
-        <nuxt-link style="color:#000" class="text-black black-font" to="/" exact>
+        <nuxt-link
+          v-if="info.siteicon  && info.showmenu"
+          style="color:#000"
+          class="text-black black-font site--name"
+          to="/"
+          exact
+        >
           <img
             style="width:64px;"
             class="xs-block xs-fit xs-mb2"
-            v-if="info.siteicon  && info.showmenu"
             :src="info.siteicon"
             :alt="info.sitename"
           />
-          {{info.sitename}}
         </nuxt-link>
       </li>
       <li class="zap-slideout-menu-item--small">
@@ -60,12 +64,11 @@ export default {
   },
   computed: {
     info() {
-      return this.$store.state.info
+      return this.$store.state.info;
     },
     categories() {
-            return this.$store.state.categories
-
-    }
+      return this.$store.state.categories;
+    },
   },
   methods: {
     open() {
@@ -95,7 +98,7 @@ export default {
   <style lang="scss">
 .black-font {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 400;
 }
 .hamburger {
   padding: 15px 15px;
@@ -184,7 +187,8 @@ export default {
   position: fixed;
   right: 0;
   top: 0;
-  width: 34vw;
+  width: auto;
+  min-width: 180px;
   height: 100vh;
   z-index: 1000;
   padding: 16px;
@@ -222,12 +226,7 @@ export default {
 
 .zap-slideout-menu-item,
 .zap-slideout-menu-item--small {
-  cursor: pointer;
   text-transform: uppercase;
-
-  &:hover {
-    text-decoration: underline;
-  }
 
   & + & {
     margin-top: 20px;
@@ -241,9 +240,15 @@ export default {
 }
 
 .zap-slideout-menu-item--small {
-  font-weight: normal;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+}
+
+.zap-slideout-menu-item--small a {
+  cursor: pointer;
+}
+.zap-slideout-menu-item--small a:hover {
+  text-decoration: underline;
 }
 
 /* The famed Zap agency logo (TM) */

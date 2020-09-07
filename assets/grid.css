@@ -13,7 +13,7 @@
     padding: 10px
 }
 .bael-grid .bcg-item {
-  
+
 }
 
 .full-item {
@@ -28,7 +28,7 @@
 .cursor-pointer {
   cursor: pointer;
 }
-iframe {max-width: 100%;}
+iframe {max-width: 100%;margin: 1rem auto;}
 
  /* 600px */
 @media only screen and (min-width: 40rem) { 
@@ -190,9 +190,7 @@ nav .r {
   :root{
     --nav-height: 104px;
   }
-  .main-title {
-    font-size: 2rem;
-  }
+
   .xs-collapse {
     visibility: hidden;
     visibility: collapse;

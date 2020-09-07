@@ -18,10 +18,6 @@ export default {
   async middleware({ store, $content }) {
     await store.dispatch('fetchInfo', $content)
   },
-  computed: {
-
-
-  }
 };
 </script>
 
@@ -31,14 +27,20 @@ html,
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  font-family: "Inter",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    letter-spacing: -.3px;
+    text-rendering: optimizeLegibility;
+
 }
 .main-title {
   font-size: 3rem;
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  line-height: 1;
+  font-size: clamp(2.75rem, 4vw, 4.5rem);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: calc(-.2rem + -.05vw);
+  line-height: 1.1;
+  max-width: 48rem;
 }
 .feat-wrapper {
   max-height: 55vh;
