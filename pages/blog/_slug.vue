@@ -67,6 +67,7 @@ export default {
       return "slide-right";
     }
   },
+
   mounted() {
     this.$store.commit("SET_CURRENT", this.post);
   },

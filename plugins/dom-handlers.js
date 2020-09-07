@@ -1,6 +1,10 @@
 
 // window resize handler
 export const resizeHandler = store => {
+    const navbar = document.getElementById('navbar');
+    const navHeight = navbar.clientHeight;
+    store.commit('browser/SET_NAVHEIGHT', navHeight  )
+    document.documentElement.style.setProperty('--nav-height', store.state.browser.navHeight  + "px");
 
     store.commit('browser/SET_WIN_WIDTH', window.innerWidth)
     store.commit('browser/SET_WIN_HEIGHT', window.innerHeight)
@@ -16,12 +20,26 @@ export const resizeHandler = store => {
 }
 
 export const mutationHandler = (store,mutation) => {
-    let root = document.documentElement;
     const navHeight = mutation.target.clientHeight;
-    root.style.setProperty('--nav-height', navHeight - 1 + "px");
-    store.commit('browser/SET_NAVHEIGHT', navHeight - 1)
+    store.commit('browser/SET_NAVHEIGHT', navHeight  )
+    document.documentElement.style.setProperty('--nav-height', store.state.browser.navHeight  + "px");
+   
 }
 
+export const addObserverIfNavBarAvailable = mutObserver => {
+    const node = document.getElementById('navbar');
+    if (!node) {
+        //The node we need does not exist yet.
+        //Wait 250ms and try again
+        window.setTimeout(addObserverIfNavBarAvailable, 250);
+        return;
+    }
+
+    const mutOptions = {
+        attributes: true
+    }
+    mutObserver.observe(node, mutOptions);
+}
 
 
 

@@ -21,6 +21,12 @@ export default {
       title: "Categories | " + this.$store.state.info.sitename,
     };
   },
+  mounted() {
+    this.$store.commit("SET_CURRENT", {
+      title: "Categories",
+      dir: ''
+    });
+  },
   computed: {
     categories() {
       return this.$store.state.categories;

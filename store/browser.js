@@ -1,4 +1,3 @@
-import Vue from 'vue'
 
 export const state = () => {
     return {
@@ -9,10 +8,7 @@ export const state = () => {
         navHeight: 54,
         winHeight: 1080,
         winWidth: 1920,
-        sTop: 0,
         referredFrom: null,
-        mouseX: 0,
-        mouseY: 0,
     }
 }
 
@@ -26,9 +22,6 @@ export const mutations = {
     SET_WIN_WIDTH: (state, width) => {
         state.winWidth = width
     },
-    SET_SCROLL_TOP: (state, sTop) => {
-        state.sTop = sTop
-    },
     SET_DOC_HEIGHT: (state, height) => {
         state.docHeight = height
     },
@@ -37,10 +30,6 @@ export const mutations = {
     },
     SET_REFERRED: (state, ref) => {
         state.referredFrom = ref
-    },
-    SET_RELATIVE_MOUSE_POS: (state, { x, y }) => {
-        state.mouseX = x
-        state.mouseY = y
     },
 }
 

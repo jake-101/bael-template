@@ -1,5 +1,6 @@
 :root{
   --nav-height: 54px;
+  --textcolor: #000;
 }
 .r {
     display: grid;
@@ -10,6 +11,9 @@
 .bcg-item {
     grid-column: span 6;
     padding: 10px
+}
+.bael-grid .bcg-item {
+  
 }
 
 .full-item {
@@ -24,6 +28,7 @@
 .cursor-pointer {
   cursor: pointer;
 }
+iframe {max-width: 100%;}
 
  /* 600px */
 @media only screen and (min-width: 40rem) { 
@@ -175,6 +180,11 @@ nav .r {
 }
 .r.full-height {
   grid-gap: 0;
+  height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)
+}
+.paginated .r.full-height {
+  grid-gap: 0;
+  height:calc(100vh - var(--nav-height) - 70px);margin-top:var(--nav-height)
 }
 @media only screen and (max-width: 40rem) {
   :root{

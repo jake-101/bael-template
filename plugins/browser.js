@@ -1,4 +1,4 @@
-import { resizeHandler, mutationHandler } from '~/plugins/dom-handlers'
+import { resizeHandler, mutationHandler, addObserverIfNavBarAvailable } from '~/plugins/dom-handlers'
 import Intersect from '~/directives/intersect'
 import _throttle from 'lodash/throttle'
 import Vue from 'vue'
@@ -19,36 +19,17 @@ export default async ({ store, route }, inject) => {
     )
 
     // setup navigation mutation observer
-    let mutObserver = new MutationObserver(mCallback);
+    // @link: https://stackoverflow.com/questions/40398054/observe-on-mutationobserver-parameter-1-is-not-of-type-node
 
+    let mutObserver = new MutationObserver(mCallback);
 
     function mCallback(mutations) {
         for (let mutation of mutations) {
-            console.log(mutation)
             mutationHandler(store, mutation)
         }
     }
-    function addObserverIfNavBarAvailable(mutObserver) {
-        const node = document.getElementById('navbar');
-        if (!node) {
-            //The node we need does not exist yet.
-            //Wait 500ms and try again
-            window.setTimeout(addObserverIfNavBarAvailable, 250);
-            return;
-        }
-        const mutOptions = {
-            attributes: true
-        }
-        mutObserver.observe(node, mutOptions);
-    }
 
-
-    // window.addEventListener(
-    //     'scroll',
-    //     _throttle(() => scrollHandler(store), 16)
-    // )
-
-    // kick
+    // start
     resizeHandler(store)
     addObserverIfNavBarAvailable(mutObserver)
 

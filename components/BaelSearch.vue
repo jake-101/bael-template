@@ -10,7 +10,7 @@
     <ul class="xs-absolute results">
       <li
         @click="onClick(article.path)"
-        class="xs-border xs-p2 fill-white cursor-pointer"
+        class="xs-border xs-p2 cursor-pointer"
         v-for="article of articles"
         :key="article.path"
       >{{article.title}}</li>
@@ -58,15 +58,24 @@ input.search {
   text-indent: 22px;
 }
 .results {
-  top: 1.35rem;
+  top: 1.4rem;
+  z-index: 9999;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  background: #fff;
 }
 .searchicon {
   height: 18px;
   top: 0px;
 }
-.results a {
+.results li {
   display: block;
   width: 100%;
+}
+.results li:hover {
+  background: #f1f1f1;
+}
+.results li:active {
+  background: #dbdbdb;
 }
 @media only screen and (max-width: 40rem) {
   input.search {

@@ -1,4 +1,6 @@
-var siteInfo = require('./content/setup/info.json');
+const siteInfo = require('./content/setup/info.json');
+const webpack = require('webpack')
+
 console.log(siteInfo)
 
 
@@ -23,7 +25,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black&display=swap' }
     ]
   },
   css: ["@/assets/grid.css", "bf-solid/dist/solid.latest.css"],
@@ -83,13 +85,19 @@ module.exports = {
   /*
   ** Build configuration
   */
-  build: {
-    extractCSS: true
-    /*
-    ** Run ESLint on save
-    */
 
-  }
+  build: {
+    extractCSS: false,
+    plugins: [
+        new webpack.ProvidePlugin({
+            _get: 'lodash/get',
+        })
+            ],
+    /** Uncomment this if you need to use the full Vue build */
+    // extend(config) {
+    //     config.resolve.alias['vue'] = 'vue/dist/vue.common'
+    // }
+},
 }
 
 

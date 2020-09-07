@@ -3,7 +3,7 @@
     <bael-header />
     <nuxt />
     <lazy-slide-out />
-    <bael-footer :pagination="paginate" />
+    <bael-footer />
   </section>
 </template>
 <script>
@@ -19,9 +19,8 @@ export default {
     await store.dispatch('fetchInfo', $content)
   },
   computed: {
-    paginate() {
-      return this.$store.state.pagination;
-    },
+
+
   }
 };
 </script>

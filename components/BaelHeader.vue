@@ -21,10 +21,10 @@
       >
         <div class="item">
           <nuxt-link to="/" exact>Home</nuxt-link>
-          <span v-show="crumb">
+          <span v-if="path">
             &nbsp;
             <span class="text-gray-lightest">></span>
-            &nbsp; {{thecrumb}}
+            &nbsp; {{path}}
           </span> &nbsp;
           <span class="text-gray-lightest">></span>
           &nbsp; {{pagetitle}}
@@ -34,8 +34,8 @@
   </nav>
 </template>
 <script>
+import _capitalize from "lodash/capitalize";
 export default {
-  props: ["blogtitle", "posts", "thecrumb"],
   data() {
     return {};
   },
@@ -45,8 +45,10 @@ export default {
       return this.$store.state.current.title;
     },
 
-    crumb() {
-      return this.$store.state.theCrumb;
+    path() {
+      const split = _get(this.$store, 'state.current.dir').split("/");
+
+      return split.length && split[1] !== "page" ? _capitalize(split[1]) : null;
     },
   },
 };
