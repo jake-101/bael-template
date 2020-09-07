@@ -3,7 +3,7 @@
   command = "yarn run generate --no-lock && yarn run build:api"
   functions = "./functions"
 [build.environment]
-  NODE_VERSION = "9" 
+  NODE_VERSION = "12" 
   YARN_FLAGS = "--no-ignore-optional"
 [template.environment]
   API_URL = "https://bael-theme.jake101.com"
