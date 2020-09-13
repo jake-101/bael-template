@@ -1,5 +1,5 @@
 <template>
-  <section class="container xs-border xs-text-5 md-text-4">
+  <section class="container xs-text-5 md-text-4">
     <bael-header />
     <nuxt />
     <lazy-slide-out />
@@ -35,17 +35,14 @@ body {
 }
 .main-title {
   font-size: 3rem;
-  font-size: clamp(2.75rem, 4vw, 4.5rem);
+  font-size: clamp(3.75rem, 7vw, 5.5rem);
   font-family: "Inter", sans-serif;
   font-weight: 600;
   letter-spacing: calc(-.2rem + -.05vw);
   line-height: 1.1;
   max-width: 48rem;
 }
-.feat-wrapper {
-  max-height: 55vh;
-  width: 100%;
-}
+
 .slide-left-enter,
 .slide-right-leave-active {
   transform: translate(50%, 0);

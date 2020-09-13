@@ -1,7 +1,7 @@
 <template>
   <main>
     <div
-      class="full-height single xs-border-left xs-border-right"
+      class="full-height single"
       style="min-height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)"
     >
       <div class="xs-mt2 xs-p2 bcg-item">

@@ -72,10 +72,10 @@ input.search {
   width: 100%;
 }
 .results li:hover {
-  background: #f1f1f1;
+  background: var(--hover-bg);
 }
 .results li:active {
-  background: #dbdbdb;
+  background: var(--active-bg);
 }
 @media only screen and (max-width: 40rem) {
   input.search {

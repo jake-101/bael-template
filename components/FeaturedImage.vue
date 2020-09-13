@@ -1,5 +1,5 @@
 <template>
-  <div class="fill-gray-lighter feat-wrapper" :key="`${title}-featimage`">
+  <div class="feat-wrapper" :key="`${title}-featimage`">
     <transition appear name="fade">
       <img draggable="false" class="featured-image" loading="lazy" :src="thumbnail" :alt="title" />
     </transition>

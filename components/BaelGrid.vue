@@ -8,7 +8,7 @@
       <div
         v-for="(p,i) in posts"
         :key="i"
-        class="xs-border xs-p2 bcg-item"
+        class="xs-border xs-border-top-none xs-border-left-none xs-p2 bcg-item"
         :style="`transition-delay:0.${i * .5}s`"
       >
         <div class="item xs-block xs-full-height xs-flex">
@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style>
+
 .bael-grid .bcg-item {
   opacity: 0;
   transition: 0.1s opacity;
@@ -55,4 +56,5 @@ export default {
   opacity: 1;
   transition: 0.2s opacity;
 }
+
 </style>

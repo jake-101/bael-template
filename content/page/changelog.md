@@ -3,6 +3,27 @@ title: Changelog
 date: 2019-03-28T21:15:57.000Z
 thumbnail: /images/uploads/changelog.jpg
 ---
+
+## 1.0 beta - September 2020
+
+#### New Features
+
+* Upgraded to Nuxt 2.14.4 and [@nuxt/content](https://content.nuxtjs.org/) module. Static deployment, automatically imported components, and use of new fetch hook.
+* Responsive text using root font size inspired by [Every Layout](https://every-layout.dev/rudiments/units/).
+* Much easier to read and better functioning code
+* Improved Component Structure
+* Use of CSS variables instead of JS/CSS workarounds
+* Site search engine now uses built-in Loki.js DB from @nuxt/content and no longer uses Fuse.js
+* Improvements to content area styling
+* [Inter](https://rsms.me/inter) is now the default font
+* Content can be edited by using @nuxt/content's built-in editor in dev env and not use NetlifyCMS at all.
+* Intersection Observer mix-in available for use + polyfill
+* Full-width featured image with no margins
+
+#### Breaking Changes
+
+* Blog and Page content are no longer JSON files and have been converted into Markdown.
+
 ## 0.2.1 - May 24, 2018
 
 #### New Features
@@ -64,8 +85,12 @@ thumbnail: /images/uploads/changelog.jpg
 
 ## Roadmap
 
-~~Add Categories~~  
-~~Add Pagination~~  
-~~Page Transitions~~  
-Add Tags  
-Lazy Loaded Images
+* Different sorting options  
+* More styling settings  
+* Deploy with Vercel   
+* More CSS Variables  
+* Dark Mode  
+* RSS Feed  
+* Share buttons  
+* New starter content for blank template
+* and more?

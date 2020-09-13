@@ -1,5 +1,5 @@
 Arguments: 
-  /home/jake/.nvm/versions/node/v12.18.2/bin/node /usr/share/yarn/bin/yarn.js dev
+  /home/jake/.nvm/versions/node/v12.18.2/bin/node /usr/share/yarn/bin/yarn.js add vue-smooth-reflow
 
 PATH: 
   /home/jake/.nvm/versions/node/v12.18.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/jake1/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jake1/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/jake1/AppData/Local/GitHubDesktop/bin
@@ -14,17 +14,13 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /home/jake/WSL Sites/bael-template/package.json: Unexpected token } in JSON at position 1169
-      at JSON.parse (<anonymous>)
-      at /usr/share/yarn/lib/cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (/usr/share/yarn/lib/cli.js:310:30)
-      at /usr/share/yarn/lib/cli.js:321:13
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
 
 npm manifest: 
   {
     "name": "bael-cms-template",
-    "version": "0.1.2",
+    "version": "1.0",
     "description": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js",
     "author": "jake101 <hello@jake101.com>",
     "scripts": {
@@ -40,29 +36,26 @@ npm manifest:
     "dependencies": {
       "@nuxt/content": "^1.8.1",
       "@nuxtjs/axios": "^5.3.1",
-      "@nuxtjs/markdownit": "github:syffs/nuxtv2-markdownit",
       "@nuxtjs/pwa": "^3.0.2",
       "@sendgrid/client": "^6.3.0",
       "bf-solid": "^2.10.6",
-      "fuse.js": "^3.2.1",
-      "hoek": "^4.2.1",
+      "intersection-observer": "^0.11.0",
+      "lodash": "^4.17.20",
       "netlify-lambda": "^1.4.3",
       "node-sass": "^4.9.2",
       "nuxt": "^2.0.0",
-      "sass-loader": "^7.0.3",
-      "vue-lazyload": "^1.2.6",
+      "sass-loader": "^7.0.0",
+      "string.prototype.includes": "^2.0.0",
+      "vue-lazyload": "^1.3.0",
       "vue-moment": "^4.0.0"
     },
     "devDependencies": {
-      "prettier": "^2.1.1",
       "babel-eslint": "^8.2.6",
       "eslint": "^4.15.0",
       "eslint-friendly-formatter": "^3.0.0",
       "eslint-loader": "^1.7.1",
       "eslint-plugin-vue": "^4.7.0",
-    },
-    "engines": {
-      "node": "^12.0.0"
+      "prettier": "^2.1.1"
     }
   }
 
@@ -5630,6 +5623,11 @@ Lockfile:
       strip-ansi "^6.0.0"
       through "^2.3.6"
   
+  intersection-observer@^0.11.0:
+    version "0.11.0"
+    resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.11.0.tgz#f4ea067070326f68393ee161cc0a2ca4c0040c6f"
+    integrity sha512-KZArj2QVnmdud9zTpKf279m2bbGfG+4/kn16UU0NL3pTVl52ZHiJ9IRNSsnn6jaHrL9EGLFM5eWjTx2fz/+zoQ==
+  
   invariant@^2.2.0, invariant@^2.2.2, invariant@^2.2.4:
     version "2.2.4"
     resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -9462,6 +9460,14 @@ Lockfile:
       emoji-regex "^8.0.0"
       is-fullwidth-code-point "^3.0.0"
       strip-ansi "^6.0.0"
+  
+  string.prototype.includes@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/string.prototype.includes/-/string.prototype.includes-2.0.0.tgz#8986d57aee66d5460c144620a6d873778ad7289f"
+    integrity sha512-E34CkBgyeqNDcrbU76cDjL5JLcVrtSdYq0MEh/B10r17pRP4ciHLwTgnuLV8Ay6cgEMLkcBkFCKyFZ43YldYzg==
+    dependencies:
+      define-properties "^1.1.3"
+      es-abstract "^1.17.5"
   
   string.prototype.trimend@^1.0.1:
     version "1.0.1"

@@ -1,19 +1,30 @@
 <template>
   <footer class="fill-gray-lighter xs-text-6 md-text-5">
     <div class="r no-gap">
-      <div v-if="pagination.active" class="c-12 xs-text-left xs-p2 xs-border">
-        <lazy-bael-pagination :pagination="pagination" />
-      </div>
-      <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
+      <SmoothReflow
+        class="c-12 xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
+      >
+        <lazy-bael-pagination  v-if="pagination.active" :pagination="pagination" />
+      </SmoothReflow>
+      <div
+        class="xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
+        :class="signupAboutSize"
+      >
         <div class="item">
           <div v-if="siteDescription" class="footer__heading xs-mb2">About</div>
           <p v-if="siteDescription">{{siteDescription}}</p>
         </div>
       </div>
-      <div v-if="signupBoolean" class="c-25 xs-text-left xs-p2 xs-border">
-        <lazy-send-grid />
+      <div
+        v-if="signupBoolean"
+        class="c-25 xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
+      >
+        <send-grid />
       </div>
-      <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
+      <div
+        class="xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
+        :class="signupAboutSize"
+      >
         <div class="item">
           <div v-if="connectData" class="footer__heading xs-mb2">Connect</div>
           <ul v-if="connectData" class="list-unstyled">
@@ -23,7 +34,10 @@
           </ul>
         </div>
       </div>
-      <div class="xs-text-left xs-p2 xs-border" :class="signupAboutSize">
+      <div
+        class="xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
+        :class="signupAboutSize"
+      >
         <div class="item">
           <div class="footer__heading xs-mb2">Deploy</div>
 
@@ -38,7 +52,7 @@
           </a>
         </div>
       </div>
-      <div class="c-12 xs-text-left xs-p2 xs-border">
+      <div class="c-12 xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none">
         <div class="item xs-text-6">
           <a href="https://github.com/jake-101/bael-template">Bael</a>, An open source design by
           <a href="https://jake101.com">jake101</a>
@@ -87,15 +101,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .text-input {
   max-width: 100%;
 }
 
 .footer__heading {
   max-width: 100%;
+  color: rgba(119, 119, 119, 0.4);
+  font-weight: 800;
+  font-size: 85%;
 }
 .pagination__button--disabled {
-    pointer-events: none;
+  pointer-events: none;
 }
 </style>

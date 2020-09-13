@@ -28,7 +28,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700;800&display=swap' }
     ]
   },
-  css: ["@/assets/grid.css", "bf-solid/dist/solid.latest.css"],
+  css: ["@/assets/grid.css","@/assets/prose.scss", "bf-solid/dist/solid.latest.css"],
   // icon: {
   //   iconSrc: `${siteInfo.siteicon}`
   //  },
@@ -80,6 +80,10 @@ module.exports = {
     mode: 'client'
   }, {
       src: "~/plugins/lazyload",
+      mode: 'client'
+    },
+    {
+      src: "~/plugins/reflow",
       mode: 'client'
     }],
   /*

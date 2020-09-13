@@ -1,9 +1,9 @@
 <template>
   <div
-    class="zap-slideout xs-border xs-text-6 md-text-5"
+    class="bael-slideout xs-border xs-text-6 md-text-5"
     :class="{ isOpen: $store.state.menuIsActive  }"
   >
-    <div class="zap-slideout-opener">
+    <div class="bael-slideout-opener">
       <div
         @click="toggle"
         class="hamburger hamburger--spin js-hamburger"
@@ -14,8 +14,8 @@
         </div>
       </div>
     </div>
-    <ul class="zap-slideout-menu list-unstyled black-font">
-      <li class="zap-slideout-menu-item">
+    <ul class="bael-slideout-menu list-unstyled">
+      <li class="bael-slideout-menu-item menu-logo">
         <nuxt-link
           v-if="info.siteicon  && info.showmenu"
           style="color:#000"
@@ -31,17 +31,17 @@
           />
         </nuxt-link>
       </li>
-      <li class="zap-slideout-menu-item--small">
+      <li class="bael-slideout-menu-item--small">
         <nuxt-link to="/" exact>Home</nuxt-link>
       </li>
-      <li v-if="categories.length" class="zap-slideout-menu-item--small">
+      <li v-if="categories.length" class="bael-slideout-menu-item--small">
         <nuxt-link to="/categories" exact>Categories</nuxt-link>
       </li>
-      <li v-for="(p,i) in pages" :key="`pg-${i}`" class="zap-slideout-menu-item--small">
+      <li v-for="(p,i) in pages" :key="`pg-${i}`" class="bael-slideout-menu-item--small">
         <nuxt-link :to="p.path">{{p.title}}</nuxt-link>
       </li>
-      <li v-if="info.menu" class="xs-mt5 zap-slideout-menu-item black-font">Links</li>
-      <li v-for="m in info.menu" :key="m.position" class="zap-slideout-menu-item--small">
+      <li v-if="info.menu" class="xs-mt5 bael-slideout-menu-item heading-font">Links</li>
+      <li v-for="m in info.menu" :key="m.position" class="bael-slideout-menu-item--small">
         <a :href="m.link">{{m.name}}</a>
       </li>
     </ul>
@@ -96,9 +96,13 @@ export default {
 };
 </script>
   <style lang="scss">
-.black-font {
+.heading-font {
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 800;
+  border-top: 2px solid rgba(119, 119, 119, 0.4);
+  color: rgba(119, 119, 119, 0.4);
+  padding: 0.5rem 0.3rem;
+  font-size: 85%;
 }
 .hamburger {
   padding: 15px 15px;
@@ -183,7 +187,7 @@ export default {
   transition: bottom 0.1s ease-out,
     transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-.zap-slideout {
+.bael-slideout {
   position: fixed;
   right: 0;
   top: 0;
@@ -191,7 +195,6 @@ export default {
   min-width: 180px;
   height: 100vh;
   z-index: 1000;
-  padding: 16px;
   background-color: #fff;
   transform: translate3D(100%, 0, 0);
   transition: transform 0.6s;
@@ -202,7 +205,7 @@ export default {
   }
 }
 
-.zap-slideout-opener {
+.bael-slideout-opener {
   position: absolute;
   top: -4px;
   right: 100%;
@@ -219,40 +222,39 @@ export default {
   }
 }
 
-.zap-slideout-menu {
+.bael-slideout-menu {
   font-weight: 600;
   transition: transform 1.6s ease(out-cubic);
+  .menu-logo {
+    padding: 0.5rem 0.3rem;
+  }
 }
 
-.zap-slideout-menu-item,
-.zap-slideout-menu-item--small {
+.bael-slideout-menu-item,
+.bael-slideout-menu-item--small {
   text-transform: uppercase;
-
-  & + & {
-    margin-top: 20px;
-  }
 }
 
-.zap-slideout-menu-item {
-  & + .zap-slideout-menu-item--small {
-    margin-top: 30px;
-  }
-}
 
-.zap-slideout-menu-item--small {
+
+.bael-slideout-menu-item--small {
   font-weight: 800;
   text-transform: uppercase;
 }
 
-.zap-slideout-menu-item--small a {
+.bael-slideout-menu-item--small a {
   cursor: pointer;
+  border-top: 1px solid #666;
+  display: block;
+  padding: 0.5rem 0.3rem;
+  &:hover {
+    background: var(--hover-bg);
+  }
+    &:focus, :active {
+    background: var(--active-bg);
+  }
 }
-.zap-slideout-menu-item--small a:hover {
-  text-decoration: underline;
-}
-
-/* The famed Zap agency logo (TM) */
-.zap-emoji {
-  height: 120px;
+.bael-slideout-menu-item--small a:hover {
+  text-decoration: none;
 }
 </style>
