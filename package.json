@@ -1,6 +1,6 @@
 {
   "name": "bael-cms-template",
-  "version": "1.0",
+  "version": "1.0 dev",
   "description": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js",
   "author": "jake101 <hello@jake101.com>",
   "scripts": {

@@ -1,4 +1,5 @@
 const siteInfo = require('./content/setup/info.json');
+const pkginfo = require('./package.json')
 const webpack = require('webpack')
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
   transition: { mode: "in-out" },
   env: {
     API_URL: process.env.API_URL,
+    BAEL_VERSION: pkginfo.version
   },
   head: {
     title: siteInfo.sitename,
