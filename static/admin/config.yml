@@ -11,7 +11,7 @@ collections:
     folder: "content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    format: 'markdown'
+    format: 'frontmatter'
     sort: "date:desc" # Default is title:asc
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
@@ -24,7 +24,7 @@ collections:
     folder: "content/page" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    format: 'markdown'
+    format: 'frontmatter'
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
