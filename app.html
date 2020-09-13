@@ -1,6 +1,15 @@
+<!--
+       _         __         ___ ____  ___
+      (_)____ _ / /__ ___  <  // __ \<  /
+     / // __ `// //_// _ \ / // / / // / 
+    / // /_/ // ,<  /  __// // /_/ // /  
+ __/ / \__,_//_/|_| \___//_/ \____//_/   
+/___/      
+BAEL THEME FOR JAMSTACK + NETLIFY CMS
+https://jake101.com | https://github.com/jake-101
+-->
 <!DOCTYPE html>
-<html {{ HTML_ATTRS }}>
-
+<html {{ HTML_ATTRS }}>                              
 <head>
   {{ HEAD }}
   <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -9,7 +18,7 @@
 <body {{ BODY_ATTRS }}>
   {{ APP }}
 </body>
-<script>
+<script defer>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
       if (!user) {

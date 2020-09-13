@@ -16,8 +16,9 @@ export default {
         },
         options: Object,
     },
-    mounted () {
-        this.$smoothReflow(this.options)
-    }
+     mounted () {
+         this.$smoothReflow(this.options)
+
+    },
 }
 </script>

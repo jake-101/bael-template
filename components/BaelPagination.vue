@@ -13,6 +13,7 @@
                 class="pagination__button pagination__button--prev"
         >-->
         <nuxt-link
+        exact
           :to="backButton"
           tag="button"
           class="pagination__button pagination__button--prev"
@@ -58,7 +59,7 @@ export default {
   },
   computed: {
     backButton() {
-      return this.pagination.page - 1 == 1 ? '/' : `/p/${parseInt(this.pagination.page) - 1}`;
+      return this.pagination.page - 1 == 1 ||this.pagination.page - 1 == 0  ? '/' : `/p/${parseInt(this.pagination.page) - 1}`;
     },
     fwdButton() {
       return `/p/${parseInt(this.pagination.page) + 1}`;

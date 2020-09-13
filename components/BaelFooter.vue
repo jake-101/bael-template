@@ -1,11 +1,11 @@
 <template>
   <footer class="fill-gray-lighter xs-text-6 md-text-5">
     <div class="r no-gap">
-      <SmoothReflow
-        class="c-12 xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
+      <div v-if="pagination.active"
+        class="c-12 xs-text-left xs-p2"
       >
-        <lazy-bael-pagination  v-if="pagination.active" :pagination="pagination" />
-      </SmoothReflow>
+        <lazy-bael-pagination :pagination="pagination" />
+      </div>
       <div
         class="xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
         :class="signupAboutSize"
@@ -19,7 +19,7 @@
         v-if="signupBoolean"
         class="c-25 xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
       >
-        <send-grid />
+        <lazy-send-grid />
       </div>
       <div
         class="xs-text-left xs-p2 xs-border xs-border-right-none xs-border-bottom-none"
@@ -78,16 +78,6 @@ export default {
         "c-4": !this.signupBoolean,
       };
     },
-    // prevpage() {
-    //   var prev = Number(this.queryParam) - 1;
-    //   return prev;
-    // },
-    // totalpages() {
-    //   var res = this.$store.state.resultsnum;
-    //   var total = Math.ceil(res / 12);
-    //   return total;
-    // },
-
     connectData() {
       return this.$store.state.connect;
     },

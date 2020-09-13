@@ -9,24 +9,6 @@ export const state = () => {
     categories: [],
     pagination: false,
     totalPages: null,
-    // blogPosts: [],
-    // allPages: [],
-    // navheight: 60,
-    // blogTitle: '',
-    // siteInfo: [],
-    // connect: [],
-    // allTags: [],
-    // gridItems: [],
-    // gridNumPosts: '11',
-    // gridNumCats: '11',
-    // gridOffset: '0',
-    // theThumbnail: '',
-    // theCategory: '',
-    // theCrumb: '',
-    // allCats: [],
-    // results: [],
-    // resultsnum: [],
-   
     settings: {},
 
   }
@@ -66,7 +48,7 @@ export const mutations = {
     state.connect = data
   },
   SET_CURRENT(state, data) {
-   state.current = data
+    state.current = data
   },
   SET_CATEGORIES(state, data) {
     state.categories = data
@@ -77,7 +59,7 @@ export const mutations = {
   SET_TOTALPAGES(state, data) {
     state.totalPages = data
   },
-  
+
   setMenuState(state, menuIsActive) {
     state.menuIsActive = menuIsActive
   },

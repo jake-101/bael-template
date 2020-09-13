@@ -7,14 +7,14 @@
       autocomplete="off"
     />
     <img class="xs-absolute searchicon xs-r0 sm-l0" src="~/assets/bx-search.svg" />
-    <ul class="xs-absolute results">
+    <smooth-reflow tag="ul" class="xs-absolute results">
       <li
         @click="onClick(article.path)"
         class="xs-border xs-p2 cursor-pointer"
         v-for="article of articles"
         :key="article.path"
       >{{article.title}}</li>
-    </ul>
+    </smooth-reflow>
   </div>
 </template>
 

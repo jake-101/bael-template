@@ -1,9 +1,6 @@
 const siteInfo = require('./content/setup/info.json');
 const webpack = require('webpack')
 
-console.log(siteInfo)
-
-
 module.exports = {
   target: 'static',
   components: true,
@@ -28,7 +25,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700;800&display=swap' }
     ]
   },
-  css: ["@/assets/grid.css","@/assets/prose.scss", "bf-solid/dist/solid.latest.css"],
+  css: ["@/assets/grid.css", "@/assets/content.scss", "bf-solid/dist/solid.latest.css"],
   // icon: {
   //   iconSrc: `${siteInfo.siteicon}`
   //  },
@@ -76,16 +73,13 @@ module.exports = {
       src: "~/plugins/browser",
       mode: 'client'
     }, {
-    src: "~/plugins/moment",
-    mode: 'client'
-  }, {
+      src: "~/plugins/moment",
+      mode: 'client'
+    }, {
       src: "~/plugins/lazyload",
       mode: 'client'
-    },
-    {
-      src: "~/plugins/reflow",
-      mode: 'client'
-    }],
+    }
+  ],
   /*
   ** Build configuration
   */
@@ -93,15 +87,15 @@ module.exports = {
   build: {
     extractCSS: false,
     plugins: [
-        new webpack.ProvidePlugin({
-            _get: 'lodash/get',
-        })
-            ],
+      new webpack.ProvidePlugin({
+        _get: 'lodash/get',
+      })
+    ],
     /** Uncomment this if you need to use the full Vue build */
     // extend(config) {
     //     config.resolve.alias['vue'] = 'vue/dist/vue.common'
     // }
-},
+  },
 }
 
 

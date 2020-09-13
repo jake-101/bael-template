@@ -235,8 +235,6 @@ export default {
   text-transform: uppercase;
 }
 
-
-
 .bael-slideout-menu-item--small {
   font-weight: 800;
   text-transform: uppercase;
@@ -250,7 +248,8 @@ export default {
   &:hover {
     background: var(--hover-bg);
   }
-    &:focus, :active {
+  &:focus,
+  :active {
     background: var(--active-bg);
   }
 }

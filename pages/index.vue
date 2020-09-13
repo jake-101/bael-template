@@ -1,5 +1,5 @@
 <template>
-  <component :is="getLayout" :posts="posts[0]"></component>
+  <component :is="getLayout" :posts="posts[0]" />
 </template>
 
 <script>
@@ -38,7 +38,6 @@ export default {
       count: blogPosts.length,
     };
   },
-  watchQuery: ["page"],
 
   transition(to, from) {
     if (!from) return "fade";
@@ -46,10 +45,6 @@ export default {
   },
   name: "Index",
   components: { BaelGrid, FullGrid },
-  data() {
-    return {};
-  },
-
   computed: {
     getLayout() {
       return this.$store.state.info.altlayout ? "FullGrid" : "BaelGrid";

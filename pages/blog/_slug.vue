@@ -2,7 +2,7 @@
   <main>
     <div
       class="full-height single"
-      :style="`min-height:calc(100vh - var(--nav-height));margin-top:var(--nav-height)`"
+      :style="`min-height:calc(85vh - var(--nav-height));margin-top:var(--nav-height)`"
     >
       <div class="xs-mt2 xs-p2 bcg-item">
         <div class="item xs-block xs-full-height">
@@ -49,16 +49,6 @@ export default {
     return {
       post,
     };
-
-    //   let post = await import("~/content/blog/posts/" + params.slug + ".json");
-    //   console.log(post);
-
-    //  await store.commit("SET_TITLE", post.title);
-    //    await store.commit("SET_THUMB", post.thumbnail);
-    //    await store.commit("SET_CRUMB", 'Blog');
-    //  await   store.commit("SET_POSTCAT", post.category);
-    //   await store.commit("paginateOff", false);
-    //   return post;
   },
   transition(to, from) {
     if (!from) {
@@ -67,18 +57,26 @@ export default {
       return "slide-right";
     }
   },
-
-  mounted() {
-    this.$store.commit("SET_CURRENT", this.post);
-  },
   head() {
     return {
       title: this.post.title + " | " + this.$store.state.info.sitename,
+      meta: [
+        // { hid: 'description', name: 'description', content: this.article.description },
+        // Open Graph
+        { hid: "og:title", property: "og:title", content: this.post.title },
+        // { hid: 'og:description', property: 'og:description', content: this.article.description },
+        // Twitter Card
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: this.post.title,
+        },
+        // { hid: 'twitter:description', name: 'twitter:description', content: this.page.description }
+      ],
     };
   },
-
-  data() {
-    return {};
+  mounted() {
+    this.$store.commit("SET_CURRENT", this.post);
   },
 };
 </script>

@@ -1,15 +1,11 @@
 
 export const state = () => {
     return {
-        fontsLoading: true,
-        fontsLoaded: false,
-        fontsFailed: false,
         docHeight: 675,
         navHeight: 54,
         winHeight: 1080,
-        winWidth: 1920,
-        referredFrom: null,
-    }
+        winWidth: 1920
+        }
 }
 
 export const mutations = {
@@ -24,13 +20,7 @@ export const mutations = {
     },
     SET_DOC_HEIGHT: (state, height) => {
         state.docHeight = height
-    },
-    WINDOW_LOADED: (state) => {
-        state.windowLoading = false
-    },
-    SET_REFERRED: (state, ref) => {
-        state.referredFrom = ref
-    },
+    }
 }
 
 export const actions = {
