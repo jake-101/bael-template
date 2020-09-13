@@ -13,11 +13,11 @@
   </head>
   <body>
     <!-- Include the script that builds the page and powers Netlify CMS -->
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.js"></script>
-    <script src="https://unpkg.com/netlify-cms-widget-color@^0.1.0"></script>
+    <script src="https://unpkg.com/netlify-cms-extended"></script>
+    <script src="https://unpkg.com/netlify-cms-widget-color"></script>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
-      CMS.registerWidget("color", ColorControl);
+      CMS.registerWidget(color, NetlifyCMSColorWidget);
     </script>
   </body>
 </html>
