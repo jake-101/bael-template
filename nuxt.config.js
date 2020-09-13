@@ -86,6 +86,12 @@ module.exports = {
 
   build: {
     extractCSS: false,
+    html: {
+      minify: {
+       minifyCSS: false,
+       minifyJS: false
+      }
+    },
     plugins: [
       new webpack.ProvidePlugin({
         _get: 'lodash/get',
