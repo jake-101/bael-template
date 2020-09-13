@@ -1,0 +1,162 @@
+.post-content .nuxt-content {
+  line-height: 1.85;
+
+  @media print {
+    *,
+    *:before,
+    *:after {
+      background: transparent !important;
+      color: #000 !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+      text-decoration: underline;
+    }
+
+    a[href]:after {
+      content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+      content: " (" attr(title) ")";
+    }
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+      content: "";
+    }
+
+    pre,
+    blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+
+    tr,
+    img {
+      page-break-inside: avoid;
+    }
+
+    img {
+      max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+  }
+
+  p,
+  ul,
+  ol {
+    font-size: 1rem;
+    margin-bottom: 1.3rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 1.618rem 0 1rem;
+    font-weight: inherit;
+    color: var(--textcolor);
+    line-height: 1.1;
+    letter-spacing: -0.15rem;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 2.827rem;
+  }
+
+  h2 {
+    font-size: 2.827rem;
+  }
+
+  h3 {
+    font-size: 1.999rem;
+  }
+
+  h4,
+  .splendor-h4 {
+    font-size: 1.414rem;
+  }
+
+  h5 {
+    font-size: 1.121rem;
+  }
+
+  h6,
+  .splendor-h6 {
+    font-size: 0.88rem;
+  }
+
+  small {
+    font-size: 0.707em;
+  }
+
+  /* https://github.com/mrmrs/fluidity */
+
+  img,
+  canvas,
+  iframe,
+  video,
+  svg,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+
+  div {
+    width: 100%;
+  }
+
+  div img {
+    width: 100%;
+  }
+  blockquote {
+    padding: 0.5rem 1.5rem;
+  }
+
+  blockquote p {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin: 1rem auto 1rem;
+  }
+
+  li {
+    margin-left: 0;
+  }
+
+  p {
+    height: auto;
+    line-height: 1.618;
+  }
+
+  pre,
+  code {
+    font-family: Menlo, Monaco, "Courier New", monospace;
+  }
+
+  pre {
+    background-color: #fafafa;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    padding: 1.125em;
+  }
+}

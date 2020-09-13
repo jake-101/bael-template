@@ -12,4 +12,6 @@ dist
 
 # Nuxt generate
 sw.*
+sw.js
 
+/static/sw.js

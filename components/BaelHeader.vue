@@ -1,89 +1,57 @@
 <template>
-  <nav ref="navBar" id="navbar" class="sm-border-bottom">
-    <div class="r">
-
+  <nav ref="navBar" :data-nav="`${pagetitle}`" id="navbar">
+    <div class="r xs-border-bottom">
       <div class="c-4 xs-text-left xs-p2 sm-border-right">
         <div class="item">
-          <nuxt-link class="sitename" to="/" exact>{{headerSiteName}}</nuxt-link>
+          <nuxt-link class="sitename" to="/" exact>{{$store.state.info.sitename}}</nuxt-link>
         </div>
       </div>
 
-      <div class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2">
+      <div
+        class="c-4 xs-border-top xs-border-bottom sm-border-bottom-none sm-border-top-none sm-border-left-none sm-border-right xs-p2"
+      >
         <div class="item xs-flex">
-          <VueFuse placeholder="Search" :compResults="compResults" :keys="keys" :list="allPosts" event-name="searchChanged" />
+          <lazy-bael-search />
         </div>
-
       </div>
-      <div v-if="blogtitle" style="z-index:55;" class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar">
+      <div v-if="pagetitle" style="z-index:55;" class="c-12 sm-border-top xs-p2 xs-text-6 titlebar">
         <div class="item">
           <nuxt-link to="/" exact>Home</nuxt-link>
-          <span v-show="crumb"> &nbsp;
-            <span class="text-gray-lightest"> > </span> &nbsp; {{thecrumb}} </span> &nbsp;
-          <span class="text-gray-lightest"> > </span> &nbsp; {{blogtitle}}
+          <span v-if="path">
+            &nbsp;
+            <span class="text-gray-lightest">></span>
+            &nbsp; {{path}}
+          </span> &nbsp;
+          <span class="text-gray-lightest">></span>
+          &nbsp; {{pagetitle}}
         </div>
       </div>
     </div>
   </nav>
 </template>
 <script>
-import VueFuse from "~/components/VueFuse";
+import _capitalize from "lodash/capitalize";
 export default {
-  props: ["blogtitle", "posts", "thecrumb"],
   data() {
-    return {
-      results: [],
-      keys: [
-        {
-          name: "title",
-          weight: 0.3
-        },
-        {
-          name: "body",
-          weight: 0.7
-        }
-      ],
-
-      compResults: []
-    };
+    return {};
   },
-  components: { VueFuse },
   computed: {
-    allPosts() {
-      let posts = this.$store.state.blogPosts;
-      let pages = this.$store.state.allPages;
-      let both = posts.concat(pages);
-      return both;
+    pagetitle() {
+      return this.$store.state.current.title;
     },
-    headerSiteName() {
-      return this.$store.state.siteInfo.sitename;
+
+    path() {
+      const split = _get(this.$store, "state.current.dir").split("/");
+
+      return split.length && split[1] !== "page" ? _capitalize(split[1]) : null;
     },
-    componentResults() {
-      return this.$store.state.results;
-    },
-     crumb() {
-      return this.$store.state.theCrumb;
-    }
   },
-
-  methods: {
-
-    navHeight() {
-      var height = document.getElementById("navbar").clientHeight;
-      console.log(height);
-      this.$store.commit("SET_NAVHEIGHT", height - 1);
- 
-    }
-  },
-
-  mounted() {
-    this.$on("searchChanged", results => {
-      this.compResults = results;
-    });
-  }
 };
 </script>
 <style>
-#navbar {z-index:999;}
+#navbar {
+  z-index: 999;
+}
 .titlebar .item {
   overflow-x: none;
 }
@@ -105,9 +73,9 @@ nav {
 }
 .sitename {
   color: #000;
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Inter", sans-serif;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 800;
   font-size: 18px;
 }
 @media only screen and (max-width: 40rem) {

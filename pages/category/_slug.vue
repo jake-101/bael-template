@@ -1,52 +1,38 @@
 <template>
-
-  <BaelGrid :allitems="findCatPosts"></BaelGrid>
+  <bael-grid :posts="posts" />
 </template>
 
 <script>
-import BaelGrid from '~/components/BaelGrid'
 export default {
-    async asyncData({ params, app, payload, route, store }) {
-    let post = await import("~/content/categories/posts/" + params.slug + ".json");
-    console.log(post);
-    await store.commit("SET_TITLE", post.title);
-    await store.commit("SET_CRUMB", 'Categories');
-    return post;
+  async asyncData({ $content, params, store, error }) {
+    const category = await $content("category", params.slug)
+      .fetch()
+      .catch((err) => {
+        error({ statusCode: 404, message: "Page not found" });
+      });
+
+    const posts = await $content("blog")
+      .sortBy("createdAt", "desc")
+      .where({ category: category.title })
+      .fetch();
+
+    return {
+      category,
+      posts,
+    };
   },
   head() {
     return {
-      title: this.title + " | " + this.$store.state.siteInfo.sitename
+      title: this.category.title + " | " + this.$store.state.info.sitename,
     };
   },
-  components: {BaelGrid},
-     transition (to, from) {
-    if (!from) return 'slide-right'
-    return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
+  transition(to, from) {
+    if (!from) return "slide-right";
+    return +to.query.page > +from.query.page ? "slide-right" : "slide-left";
   },
-  data() {
-    return {};
+  mounted() {
+    this.$store.commit("SET_CURRENT", this.category);
   },
-  methods: {
-      theSlug() {
-      return this.$route.params.slug
-    },
-  },
-   
-  computed: {
-    allBlogPosts() {
-      return this.$store.state.blogPosts;
-    },
-  
-
-    findCatPosts() {
-var posts = this.allBlogPosts;
-var title = this.title
-      return posts.filter(function(obj) {
-        return obj.category == title
-      });
-    }
-   
-  }
 };
 </script>
 

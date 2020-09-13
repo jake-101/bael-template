@@ -8,10 +8,10 @@ public_folder: "/images/uploads" # The src attribute for uploaded media will beg
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
-    folder: "content/blog/posts" # The path to the folder where the documents are stored
+    folder: "content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    format: 'json'
+    format: 'frontmatter'
     sort: "date:desc" # Default is title:asc
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
@@ -21,10 +21,10 @@ collections:
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "page" # Used in routes, e.g., /admin/collections/blog
     label: "Pages" # Used in the UI
-    folder: "content/page/posts" # The path to the folder where the documents are stored
+    folder: "content/page" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    format: 'json'
+    format: 'frontmatter'
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
@@ -44,6 +44,7 @@ collections:
         - {label: Show Icon in Menu, name: showmenu, widget: boolean}
         - {label: Email Newsletter Signup, name: emailsignup, widget: boolean}
         - {label: Full Page Alt Layout, name: altlayout, widget: boolean}
+        - {label: Link Color, name: linkcolor, widget: color}
         - label: Menu Links
           name: menu
           widget: list
@@ -64,11 +65,12 @@ collections:
             - {label: URL, name: url, widget: string}
   - label: 'Categories'
     name: 'blogcategories'
-    folder: "content/categories/posts" # The path to the folder where the documents are stored
+    folder: "content/category" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     format: 'json'
     fields:
       - {label: Title, name: title, widget: string}
+      - {label: Position, name: position, widget: string}
       - {label: Description, name: description, widget: string, required: false}
  

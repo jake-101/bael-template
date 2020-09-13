@@ -1,16 +1,22 @@
 <template>
   <main>
-    <div class="full-height single xs-border-left xs-border-right" :style="`min-height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
+    <div
+      class="full-height single"
+      style="min-height:calc(85vh - var(--nav-height));margin-top:var(--nav-height)"
+    >
       <div class="xs-mt2 xs-p2 bcg-item">
         <div class="item xs-block xs-full-height">
-          <div v-if="thumbnail" class="fill-gray-lighter feat-wrapper"><transition appear name="fade"><img class="featured-image" :src="thumbnail" :alt="title"></transition></div>
-          <h1 class="xs-py3 main-title">{{title}}</h1>
+          <lazy-featured-image
+            v-if="page.thumbnail"
+            :title="page.title"
+            :thumbnail="page.thumbnail"
+          />
+          <h1 class="xs-py3 main-title">{{page.title}}</h1>
           <div class="xs-py3 post-content text-gray">
-            <div v-html="$md.render(body)"></div>
+            <nuxt-content :document="page" />
           </div>
         </div>
       </div>
-
     </div>
   </main>
 </template>
@@ -18,76 +24,45 @@
 
 
 <script>
-import MdWrapper from "~/components/MdWrapper";
-
 export default {
-  async asyncData({ params, app, payload, route, store }) {
-    let post = await import("~/content/page/posts/" + params.slug + ".json");
-    console.log(post);
-    await store.commit("SET_TITLE", post.title);
-    
-    return post;
-  },
-     transition (to, from) {
-    if (!from) { return 'slide-left' } else {return 'slide-right'}
+  async asyncData({ $content, error, params }) {
+    const page = await $content("page", params.slug)
+      .fetch()
+      .catch((err) => {
+        error({ statusCode: 404, message: "Page not found" });
+      });
+
+    return {
+      page,
+    };
   },
   head() {
     return {
-      title: this.title + " | " + this.$store.state.siteInfo.sitename
+      title: this.page.title + " | " + this.$store.state.info.sitename,
+      meta: [
+        // { hid: 'description', name: 'description', content: this.article.description },
+        // Open Graph
+        { hid: "og:title", property: "og:title", content: this.page.title },
+        // { hid: 'og:description', property: 'og:description', content: this.article.description },
+        // Twitter Card
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: this.page.title,
+        },
+        // { hid: 'twitter:description', name: 'twitter:description', content: this.page.description }
+      ],
     };
   },
-  data() {
-    return {};
-  },
-  methods: {
-    onResize(event) {
-      this.navHeight();
-      console.log(this.$store.state.navheight);
-      console.log("slug resize");
-    },
-    navHeight() {
-      var height = document.getElementById("navbar").clientHeight;
-      this.$store.commit("SET_NAVHEIGHT", height);
-    }
-  },
-  updated() {
-    if (process.browser) {
-      this.$nextTick(() => {
-           this.$store.commit("paginateOff", false);
-
-        this.navHeight();
-        console.log(this.$store.state.navheight);
-        console.log("slug updated");
-      });
-    }
-  },
   mounted() {
-    if (process.browser) {
-      this.$nextTick(() => {
-        this.navHeight();
-                   this.$store.commit("paginateOff", false);
-
-        window.addEventListener("resize", this.onResize);
-        console.log(this.$store.state.navheight);
-        console.log("slug mounted");
-      });
+    this.$store.commit("SET_CURRENT", this.page);
+  },
+  transition(to, from) {
+    if (!from) {
+      return "slide-left";
+    } else {
+      return "slide-right";
     }
   },
-  beforeDestroy() {
-    // Unregister the event listener before destroying this Vue instance
-    window.removeEventListener("resize", this.onResize);
-  },
-
-  computed: {
-    allBlogPosts() {
-      return this.$store.state.blogPosts;
-    },
-    navbarheight() {
-      return this.$store.state.navheight;
-    }
-  },
-  components: {
-    MdWrapper
-  }
 };
 </script>

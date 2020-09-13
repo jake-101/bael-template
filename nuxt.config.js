@@ -1,28 +1,19 @@
-var siteInfo = require('./content/setup/info.json');
-console.log(siteInfo)
-var glob = require('glob');
-var path = require('path');
-
-// Enhance Nuxt's generate process by gathering all content files from Netifly CMS
-// automatically and match it to the path of your Nuxt routes.
-// The Nuxt routes are generate by Nuxt automatically based on the pages folder.
-var dynamicRoutes = getDynamicPaths({
-  '/blog': 'blog/posts/*.json',
-  '/page': 'page/posts/*.json',
-  '/category': 'categories/posts/*.json',
-  '/tagged': 'tags/posts/*.json'
-});
-
+const siteInfo = require('./content/setup/info.json');
+const pkginfo = require('./package.json')
+const webpack = require('webpack')
 
 module.exports = {
+  target: 'static',
+  components: true,
   mode: "universal",
   /*
   ** Headers of the page
   */
-transition: { mode: "in-out"},
-env: {
-  API_URL: process.env.API_URL,
-},
+  transition: { mode: "in-out" },
+  env: {
+    API_URL: process.env.API_URL,
+    BAEL_VERSION: pkginfo.version
+  },
   head: {
     title: siteInfo.sitename,
     meta: [
@@ -33,10 +24,10 @@ env: {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Archivo+Black' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700;800&display=swap' }
     ]
   },
-  css: ["@/assets/grid.css","bf-solid/dist/solid.latest.css"],
+  css: ["@/assets/grid.css", "@/assets/content.scss", "bf-solid/dist/solid.latest.css"],
   // icon: {
   //   iconSrc: `${siteInfo.siteicon}`
   //  },
@@ -44,14 +35,9 @@ env: {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
-  modules: ['@nuxtjs/markdownit', '@nuxtjs/pwa','@nuxtjs/axios'],
-  markdownit: {
-    injected: true,
-    preset: 'default',
-    breaks: true,
-    html: true
-
-    
+  modules: ['@nuxt/content', '@nuxtjs/pwa', '@nuxtjs/axios'],
+  content: {
+    fullTextSearchFields: ['title', 'description', 'category']
   },
   manifest: {
     name: siteInfo.sitename,
@@ -78,45 +64,46 @@ env: {
   /*
   ** Route config for pre-rendering
   */
- router: {
-  scrollBehavior: function (to, from, savedPosition) {
-    return { x: 0, y: 0 }
+  router: {
+    scrollBehavior: function (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    },
+    middleware: ['title']
   },
-middleware: ['title']
- },
-  generate: {
-    routes: dynamicRoutes
-  },
-  plugins: ['~/plugins/vuefuse',{
-    src: "~/plugins/moment",
-    ssr: false
-  },{
-    src: "~/plugins/lazyload",
-    ssr: false
-  }],
+  plugins: [
+    {
+      src: "~/plugins/browser",
+      mode: 'client'
+    }, {
+      src: "~/plugins/moment",
+      mode: 'client'
+    }, {
+      src: "~/plugins/lazyload",
+      mode: 'client'
+    }
+  ],
   /*
   ** Build configuration
   */
+
   build: {
-    extractCSS: true
-    /*
-    ** Run ESLint on save
-    */
-
-  }
+    extractCSS: false,
+    html: {
+      minify: {
+       minifyCSS: false,
+       minifyJS: false
+      }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        _get: 'lodash/get',
+      })
+    ],
+    /** Uncomment this if you need to use the full Vue build */
+    // extend(config) {
+    //     config.resolve.alias['vue'] = 'vue/dist/vue.common'
+    // }
+  },
 }
 
-/**
- * Create an array of URLs from a list of files
- * @param {*} urlFilepathTable
- */
-function getDynamicPaths(urlFilepathTable) {
-  return [].concat(
-    ...Object.keys(urlFilepathTable).map(url => {
-      var filepathGlob = urlFilepathTable[url];
-      return glob
-        .sync(filepathGlob, { cwd: 'content' })
-        .map(filepath => `${url}/${path.basename(filepath, '.json')}`);
-    })
-  );
-}
+

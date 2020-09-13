@@ -1,37 +1,37 @@
 <template>
-  <BaelGrid :allitems="allCategories"></BaelGrid>
+  <bael-grid :posts="categories" />
 </template>
 
 <script>
-import BaelGrid from '~/components/BaelGrid'
 export default {
-    watchQuery: ['page'],
+  watchQuery: ["page"],
 
-   async asyncData({ params, app, payload, route, store }) {
- 
+  async asyncData({ params, app, payload, route, store }) {
     await store.commit("SET_TITLE", "Categories");
-
-  
   },
-     transition (to, from) {
-    if (!from) return 'fade'
-    return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
+  transition(to, from) {
+    if (!from) return "fade";
+    return +to.query.page > +from.query.page ? "slide-right" : "slide-left";
   },
-  components: {BaelGrid},
   data() {
     return {};
   },
-     head() {
+  head() {
     return {
-      title: "Categories | " + this.$store.state.siteInfo.sitename
+      title: "Categories | " + this.$store.state.info.sitename,
     };
   },
+  mounted() {
+    this.$store.commit("SET_CURRENT", {
+      title: "Categories",
+      dir: ''
+    });
+  },
   computed: {
-   allCategories() {
-    return this.$store.state.allCats
-   }
-   
-  }
+    categories() {
+      return this.$store.state.categories;
+    },
+  },
 };
 </script>
 
